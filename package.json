@@ -1,0 +1,24 @@
+{
+  "name": "@innei/bump-version",
+  "bin": {
+    "bump": "dist/index.js",
+    "bp": "dist/index.js",
+    "bv": "dist/index.js",
+    "vv": "dist/index.js"
+  },
+  "version": "0.1.2",
+  "files": [
+    "dist/index.js",
+    "package.json"
+  ],
+  "scripts": {
+    "watch": "ncc build --watch src/index.js -o dist",
+    "build": "ncc build --minify src/index.js -o dist"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.31.1",
+    "inquirer": "^8.1.5",
+    "semver": "^7.3.5",
+    "zx": "^4.2.0"
+  }
+}
