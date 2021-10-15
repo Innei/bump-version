@@ -6,7 +6,7 @@
     "bv": "dist/index.js",
     "vv": "dist/index.js"
   },
-  "version": "0.1.3",
+  "version": "0.1.4",
   "files": [
     "dist/index.js",
     "package.json"
