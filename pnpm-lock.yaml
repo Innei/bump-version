@@ -2,13 +2,13 @@ lockfileVersion: 5.3
 
 specifiers:
   '@vercel/ncc': ^0.31.1
-  inquirer: ^8.1.5
+  inquirer: ^8.2.0
   semver: ^7.3.5
   zx: ^4.2.0
 
 devDependencies:
   '@vercel/ncc': 0.31.1
-  inquirer: 8.1.5
+  inquirer: 8.2.0
   semver: 7.3.5
   zx: 4.2.0
 
@@ -320,8 +320,8 @@ packages:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
     dev: true
 
-  /inquirer/8.1.5:
-    resolution: {integrity: sha512-G6/9xUqmt/r+UvufSyrPpt84NYwhKZ9jLsgMbQzlx804XErNupor8WQdBnBRrXmBfTPpuwf1sV+ss2ovjgdXIg==}
+  /inquirer/8.2.0:
+    resolution: {integrity: sha512-0crLweprevJ02tTuA6ThpoAERAGyVILC4sS74uib58Xf/zSr1/ZWtmm7D5CI+bSQEaA04f0K7idaHpQbSWgiVQ==}
     engines: {node: '>=8.0.0'}
     dependencies:
       ansi-escapes: 4.3.2
@@ -334,7 +334,7 @@ packages:
       mute-stream: 0.0.8
       ora: 5.4.1
       run-async: 2.4.1
-      rxjs: 7.3.1
+      rxjs: 7.4.0
       string-width: 4.2.3
       strip-ansi: 6.0.1
       through: 2.3.8
@@ -540,8 +540,8 @@ packages:
       queue-microtask: 1.2.3
     dev: true
 
-  /rxjs/7.3.1:
-    resolution: {integrity: sha512-vNenx7gqjPyeKpRnM6S5Ksm/oFTRijWWzYlRON04KaehZ3YjDwEmVjGUGo0TKWVjeNXOujVRlh0K1drUbcdPkw==}
+  /rxjs/7.4.0:
+    resolution: {integrity: sha512-7SQDi7xeTMCJpqViXh8gL/lebcwlp3d831F05+9B44A4B0WfsEwUQHR64gsH1kvJ+Ep/J9K2+n1hVl1CsGN23w==}
     dependencies:
       tslib: 2.1.0
     dev: true
