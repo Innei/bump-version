@@ -4,6 +4,9 @@ const { chalk, $ } = require('zx')
 
 const inquirer = require('inquirer')
 const semver = require('semver')
+
+require('./error-handle')
+
 const PKG_PATH = join(String(process.cwd()), '/package.json')
 const PKG = JSON.parse(readFileSync(PKG_PATH))
 
@@ -60,4 +63,5 @@ async function main() {
   console.log(chalk.green('Running after hooks.'))
   await execCmd(afterHooks)
 }
+
 main()
