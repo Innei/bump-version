@@ -15,6 +15,17 @@
     "watch": "ncc build --watch src/index.js -o dist",
     "build": "ncc build --minify src/index.js -o dist"
   },
+  "bump": {
+    "before": [
+      "git pull --rebase",
+      "pnpm i",
+      "npm run build"
+    ],
+    "after": [
+      "sh ./scripts/create-tags.sh",
+      "npm publish --access=public"
+    ]
+  },
   "devDependencies": {
     "@vercel/ncc": "^0.31.1",
     "inquirer": "^8.2.0",

@@ -8,7 +8,8 @@ const semver = require('semver')
 require('./error-handle')
 
 const PKG_PATH = join(String(process.cwd()), '/package.json')
-const PKG = JSON.parse(readFileSync(PKG_PATH))
+const originFile = readFileSync(PKG_PATH, 'utf-8')
+const PKG = JSON.parse(originFile)
 
 const beforeHooks = PKG.bump?.before || []
 const afterHooks = PKG.bump?.after || []
@@ -61,7 +62,13 @@ async function main() {
   writeFileSync(PKG_PATH, JSON.stringify(PKG, null, 2))
 
   console.log(chalk.green('Running after hooks.'))
-  await execCmd(afterHooks)
+  try {
+    await execCmd(afterHooks)
+  } catch (e) {
+    console.error(chalk.yellow('Hook running failed, rollback.'))
+
+    writeFileSync(PKG_PATH, originFile)
+  }
 }
 
 main()
