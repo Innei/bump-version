@@ -1,3 +1,4 @@
+// @ts-check
 import { join } from 'path'
 import { chalk, $ } from 'zx'
 
@@ -9,10 +10,15 @@ import './error-handle.mjs'
 
 const PKG_PATH = join(String(process.cwd()), '/package.json')
 const originFile = readFileSync(PKG_PATH, 'utf-8')
+const tabIntent = originFile.match(/^\s+/)?.length
 const PKG = JSON.parse(originFile)
 
 const beforeHooks = PKG.bump?.before || []
 const afterHooks = PKG.bump?.after || []
+const doPublish = PKG.bump?.publish || false
+const createGitTag = PKG.bump?.tag || true
+
+const doGitPush = PKG.bump?.push || true
 
 const releaseTypes = [
   'patch',
@@ -34,6 +40,10 @@ function generateReleaseTypes(currentVersion, types, pried = 'alpha') {
   })
 }
 
+/**
+ *
+ * @param {string[]} cmds
+ */
 async function execCmd(cmds) {
   for (const cmd of cmds) {
     await $([cmd])
@@ -59,7 +69,7 @@ async function main() {
 
   await execCmd(beforeHooks)
 
-  writeFileSync(PKG_PATH, JSON.stringify(PKG, null, 2))
+  writeFileSync(PKG_PATH, JSON.stringify(PKG, null, tabIntent || 2))
 
   console.log(chalk.green('Running after hooks.'))
   try {
@@ -68,6 +78,25 @@ async function main() {
     console.error(chalk.yellow('Hook running failed, rollback.'))
 
     writeFileSync(PKG_PATH, originFile)
+
+    process.exit(1)
+  }
+
+  const branch = await $`git rev-parse --abbrev-ref HEAD`
+  const isMasterBranch = ['master', 'main'].includes(branch.stdout.trim())
+
+  if (createGitTag && isMasterBranch) {
+    await $`git add .`
+    await $`git commit -a -m "release: ${newVersion}"`
+    await $`git tag -a ${newVersion} -m "Release ${newVersion}"`
+    if (doGitPush) {
+      await $`git push`
+      await $`git push --tags`
+    }
+  }
+
+  if (doPublish) {
+    await $`npm publish --access=public`
   }
 }
 

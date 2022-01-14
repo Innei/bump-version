@@ -13,8 +13,8 @@
     "package.json"
   ],
   "scripts": {
-    "watch": "ncc build --watch src/index.js -o dist",
-    "build": "ncc build --minify src/index.js -o dist"
+    "watch": "ncc build --watch src/index.mjs -o dist",
+    "build": "ncc build --minify src/index.mjs -o dist"
   },
   "bump": {
     "before": [
@@ -25,7 +25,8 @@
     "after": [
       "sh ./scripts/create-tags.sh",
       "npm publish --access=public"
-    ]
+    ],
+    "publish": true
   },
   "devDependencies": {
     "@vercel/ncc": "^0.33.1",
