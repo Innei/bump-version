@@ -1,11 +1,11 @@
-const { readFileSync, writeFileSync } = require('fs')
-const { join } = require('path')
-const { chalk, $ } = require('zx')
+import { join } from 'path'
+import { chalk, $ } from 'zx'
 
-const inquirer = require('inquirer')
-const semver = require('semver')
+import { readFileSync, writeFileSync } from 'fs'
+import inquirer from 'inquirer'
+import semver from 'semver'
 
-require('./error-handle')
+import './error-handle.mjs'
 
 const PKG_PATH = join(String(process.cwd()), '/package.json')
 const originFile = readFileSync(PKG_PATH, 'utf-8')

@@ -1,13 +1,13 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@vercel/ncc': ^0.31.1
+  '@vercel/ncc': ^0.33.1
   inquirer: ^8.2.0
   semver: ^7.3.5
   zx: ^4.2.0
 
 devDependencies:
-  '@vercel/ncc': 0.31.1
+  '@vercel/ncc': 0.33.1
   inquirer: 8.2.0
   semver: 7.3.5
   zx: 4.2.0
@@ -56,8 +56,8 @@ packages:
     resolution: {integrity: sha512-zCclL4/rx+W5SQTzFs9wyvvyCwoK9QtBpratqz2IYJ3O8Umrn0m3nsTv0wQBk9sRGpvUe9CwPDrQFB10f1FIjQ==}
     dev: true
 
-  /@vercel/ncc/0.31.1:
-    resolution: {integrity: sha512-g0FAxwdViI6UzsiVz5HssIHqjcPa1EHL6h+2dcJD893SoCJaGdqqgUF09xnMW6goWnnhbLvgiKlgJWrJa+7qYA==}
+  /@vercel/ncc/0.33.1:
+    resolution: {integrity: sha512-Mlsps/P0PLZwsCFtSol23FGqT3FhBGb4B1AuGQ52JTAtXhak+b0Fh/4T55r0/SVQPeRiX9pNItOEHwakGPmZYA==}
     hasBin: true
     dev: true
 
