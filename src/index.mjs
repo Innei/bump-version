@@ -86,16 +86,19 @@ async function main() {
   const isMasterBranch = ['master', 'main'].includes(branch.stdout.trim())
 
   if (createGitTag && isMasterBranch) {
+    console.log(chalk.green('Creating git tag.'))
     await $`git add .`
     await $`git commit -a -m "release: ${newVersion}"`
     await $`git tag -a ${newVersion} -m "Release ${newVersion}"`
     if (doGitPush) {
+      console.log(chalk.green('Pushing to remote.'))
       await $`git push`
       await $`git push --tags`
     }
   }
 
   if (doPublish) {
+    console.log(chalk.green('Publishing to npm.'))
     await $`npm publish --access=public`
   }
 }

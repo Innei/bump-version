@@ -23,10 +23,7 @@
       "pnpm i",
       "npm run build"
     ],
-    "after": [
-      "sh ./scripts/create-tags.sh",
-      "npm publish --access=public"
-    ],
+    "after": [],
     "publish": true
   },
   "devDependencies": {
