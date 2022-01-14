@@ -2,15 +2,16 @@
   "name": "@innei/bump-version",
   "type": "module",
   "bin": {
-    "bump": "dist/index.js",
-    "bp": "dist/index.js",
-    "bv": "dist/index.js",
-    "vv": "dist/index.js"
+    "bump": "dist/index.mjs",
+    "bp": "dist/index.mjs",
+    "bv": "dist/index.mjs",
+    "vv": "dist/index.mjs"
   },
   "version": "0.1.5",
   "files": [
-    "dist/index.js",
-    "package.json"
+    "dist/index.mjs",
+    "package.json",
+    "LICENSE"
   ],
   "scripts": {
     "watch": "ncc build --watch src/index.mjs -o dist",
