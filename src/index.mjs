@@ -7,7 +7,11 @@ import inquirer from 'inquirer'
 import semver from 'semver'
 import './error-handle.mjs'
 
-if (argv?.['version']) {
+if (
+  argv?.['version'] ||
+  argv?.['v'] ||
+  ['v', 'version'].includes(argv?.['_'][0])
+) {
   const json = JSON.parse(
     readFileSync(new URL('../package.json', import.meta.url), {
       encoding: 'utf-8',

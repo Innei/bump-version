@@ -9,7 +9,7 @@
   },
   "version": "0.2.4",
   "files": [
-    "dist/index.mjs",
+    "dist",
     "package.json",
     "LICENSE"
   ],
