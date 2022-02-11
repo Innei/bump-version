@@ -1,12 +1,23 @@
 // @ts-check
 import { join } from 'path'
-import { chalk, $ } from 'zx'
+import { chalk, $, argv } from 'zx'
 
 import { readFileSync, writeFileSync } from 'fs'
 import inquirer from 'inquirer'
 import semver from 'semver'
-
 import './error-handle.mjs'
+
+if (argv?.['version']) {
+  const json = JSON.parse(
+    readFileSync(new URL('../package.json', import.meta.url), {
+      encoding: 'utf-8',
+    }),
+  )
+
+  console.log(json.version)
+
+  process.exit(0)
+}
 
 function getPackageJson() {
   const PKG_PATH = join(String(process.cwd()), '/package.json')
