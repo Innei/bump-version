@@ -8,10 +8,20 @@ import semver from 'semver'
 
 import './error-handle.mjs'
 
-const PKG_PATH = join(String(process.cwd()), '/package.json')
-const originFile = readFileSync(PKG_PATH, 'utf-8')
-const tabIntent = originFile.match(/^\s+/)?.length
-const PKG = JSON.parse(originFile)
+function getPackageJson() {
+  const PKG_PATH = join(String(process.cwd()), '/package.json')
+  const originFile = readFileSync(PKG_PATH, 'utf-8')
+  const tabIntent = originFile.match(/^\s+/)?.length
+  const PKG = JSON.parse(originFile)
+
+  return { json: PKG, path: PKG_PATH, originFile, tabIntent }
+}
+
+/**
+ *
+ * @type {{json:Readonly<any>, originFile: Readonly<string>}}
+ */
+const { json: PKG, originFile } = getPackageJson()
 
 const beforeHooks = PKG.bump?.before || []
 const afterHooks = PKG.bump?.after || []
@@ -46,6 +56,7 @@ function generateReleaseTypes(currentVersion, types, pried = 'alpha') {
  */
 async function execCmd(cmds) {
   for (const cmd of cmds) {
+    // @ts-ignore
     await $([cmd])
   }
 }
@@ -64,12 +75,13 @@ async function main() {
     choices: generateReleaseTypes(PKG.version, releaseTypes),
   })
 
-  PKG.version = newVersion
   console.log(chalk.green('Running before hooks.'))
 
   await execCmd(beforeHooks)
-
-  writeFileSync(PKG_PATH, JSON.stringify(PKG, null, tabIntent || 2))
+  // const PKG = readFileSync(PKG_PATH, 'utf-8')
+  const { json, tabIntent, path } = getPackageJson()
+  json.version = newVersion
+  writeFileSync(path, JSON.stringify(json, null, tabIntent || 2))
 
   console.log(chalk.green('Running after hooks.'))
   try {
@@ -77,7 +89,7 @@ async function main() {
   } catch (e) {
     console.error(chalk.yellow('Hook running failed, rollback.'))
 
-    writeFileSync(PKG_PATH, originFile)
+    writeFileSync(path, originFile)
 
     process.exit(1)
   }
