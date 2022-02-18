@@ -1,3 +1,4 @@
+#!env node
 // @ts-check
 import { join } from 'path'
 import { chalk, $, argv } from 'zx'
