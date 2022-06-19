@@ -131,6 +131,7 @@ async function main() {
   if (createGitTag && isMasterBranch) {
     console.log(chalk.green('Creating git tag.'))
     await $`git add package.json`
+    await nothrow($`git add CHANGELOG`)
     await $`git commit -a -m "release: v${newVersion}"`
     await $`git tag -a v${newVersion} -m "Release v${newVersion}"`
     if (doGitPush) {
