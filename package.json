@@ -7,7 +7,7 @@
     "bv": "dist/index.mjs",
     "vv": "dist/index.mjs"
   },
-  "version": "0.3.0",
+  "version": "0.3.1",
   "files": [
     "dist",
     "package.json",
