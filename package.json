@@ -24,12 +24,16 @@
       "npm run build"
     ],
     "after": [],
-    "publish": true
+    "publish": true,
+    "changelog": true
   },
   "devDependencies": {
     "@vercel/ncc": "^0.33.1",
     "inquirer": "^8.2.0",
     "semver": "^7.3.5",
     "zx": "^4.2.0"
+  },
+  "dependencies": {
+    "changelogithub": "0.6.6"
   }
 }

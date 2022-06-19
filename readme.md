@@ -30,8 +30,8 @@ Define in package.json, add field `bump`:
 
 | Name    | Description                      | Type     | Default |
 | ------- | -------------------------------- | -------- | ------- |
-| before  | Run script before change version | string[] | `[]`    |
-| after   | Run script after change version  | string[] | `[]`    |
+| leading  | Run script before change version | string[] | `[]`    |
+| tailing   | Run script after change version  | string[] | `[]`    |
 | publish | Publish package after bump       | boolean  | false   |
 | tag     | Create git tag after bump        | boolean  | true    |
 | push    | Push git commit after bump       | boolean  | true    |

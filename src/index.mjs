@@ -1,13 +1,13 @@
 #!env node
 // @ts-check
 import { join } from 'path'
-import { chalk, $, argv } from 'zx'
+import { chalk, $, argv, nothrow, fs } from 'zx'
 
-import { readFileSync, writeFileSync } from 'fs'
+import { openSync, readFileSync, writeFileSync } from 'fs'
 import inquirer from 'inquirer'
 import semver from 'semver'
 import './error-handle.mjs'
-
+import { generate } from 'changelogithub'
 if (
   argv?.['version'] ||
   argv?.['v'] ||
@@ -39,12 +39,14 @@ function getPackageJson() {
  */
 const { json: PKG, originFile } = getPackageJson()
 
-const beforeHooks = PKG.bump?.before || []
-const afterHooks = PKG.bump?.after || []
+const leadingHooks = PKG.bump?.leading || PKG.bump?.before || []
+const taildingHooks = PKG.bump?.tailing || PKG.bump?.after || []
 const doPublish = PKG.bump?.publish || false
 const createGitTag = PKG.bump?.tag || true
 
 const doGitPush = PKG.bump?.push || true
+
+const generateChangeLog = PKG?.bump?.changelog || false
 
 const releaseTypes = [
   'patch',
@@ -91,17 +93,30 @@ async function main() {
     choices: generateReleaseTypes(PKG.version, releaseTypes),
   })
 
-  console.log(chalk.green('Running before hooks.'))
+  console.log(chalk.green('Running leading hooks.'))
 
-  await execCmd(beforeHooks)
+  await execCmd(leadingHooks)
   // const PKG = readFileSync(PKG_PATH, 'utf-8')
   const { json, tabIntent, path } = getPackageJson()
   json.version = newVersion
   writeFileSync(path, JSON.stringify(json, null, tabIntent || 2))
 
-  console.log(chalk.green('Running after hooks.'))
+  console.log(chalk.green('Running tailing hooks.'))
+
+  if (generateChangeLog) {
+    const { md } = await generate({})
+    await nothrow($`touch CHANGELOG`)
+    var data = fs.readFileSync('CHANGELOG') //read existing contents into data
+    var fd = fs.openSync('CHANGELOG', 'w+')
+    var buffer = Buffer.from(md)
+
+    fs.writeSync(fd, buffer, 0, buffer.length, 0) //write new data
+    fs.writeSync(fd, data, 0, data.length, buffer.length) //append old data
+    // or fs.appendFile(fd, data);
+    fs.close(fd)
+  }
   try {
-    await execCmd(afterHooks)
+    await execCmd(taildingHooks)
   } catch (e) {
     console.error(chalk.yellow('Hook running failed, rollback.'))
 
@@ -115,7 +130,7 @@ async function main() {
 
   if (createGitTag && isMasterBranch) {
     console.log(chalk.green('Creating git tag.'))
-    await $`git add .`
+    await $`git add package.json`
     await $`git commit -a -m "release: v${newVersion}"`
     await $`git tag -a v${newVersion} -m "Release v${newVersion}"`
     if (doGitPush) {
