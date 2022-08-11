@@ -3,8 +3,6 @@
   "type": "module",
   "bin": {
     "bump": "dist/index.mjs",
-    "bp": "dist/index.mjs",
-    "bv": "dist/index.mjs",
     "vv": "dist/index.mjs"
   },
   "version": "0.3.1",
@@ -14,8 +12,8 @@
     "LICENSE"
   ],
   "scripts": {
-    "watch": "ncc build --watch src/index.mjs -o dist",
-    "build": "ncc build --minify src/index.mjs -o dist"
+    "dev": "temir src/main.ts",
+    "build": "temir build src/main.ts"
   },
   "bump": {
     "before": [
@@ -34,6 +32,10 @@
     "zx": "^4.2.0"
   },
   "dependencies": {
-    "changelogithub": "0.6.6"
+    "@temir/cli": "^0.0.6",
+    "@temir/core": "^0.0.6",
+    "@temir/select-input": "^0.0.6",
+    "changelogithub": "0.6.6",
+    "vue": "^3.2.37"
   }
 }
