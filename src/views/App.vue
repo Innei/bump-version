@@ -1,14 +1,17 @@
 <template>
-  <TBox>
+  <TBox v-if="!packageJson.json.version">
+    <TText> Not a valid package.json file, can't find version. </TText>
+  </TBox>
+  <TBox v-if="packageJson.json.version">
     <TText color="#5a5">Which version would you like to bump it?</TText>
   </TBox>
-  <TBox>
+  <TBox v-if="packageJson.json.version">
     <TText>Current Version: </TText>
     <TText color="#41daaa">{{ currentVersion }}</TText>
 
     <TText v-if="updatedVersion"> -> {{ updatedVersion }} </TText>
   </TBox>
-  <TBox>
+  <TBox v-if="packageJson.json.version">
     <TSelectInput
       :items="selectItem"
       @select="handleSubmit"

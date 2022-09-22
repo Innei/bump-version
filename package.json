@@ -2,8 +2,8 @@
   "name": "@innei/bump-version",
   "type": "module",
   "bin": {
-    "bump": "dist/index.mjs",
-    "vv": "dist/index.mjs"
+    "bump": "dist/index.cjs",
+    "vv": "dist/index.cjs"
   },
   "version": "0.3.1",
   "files": [
@@ -13,7 +13,8 @@
   ],
   "scripts": {
     "dev": "temir src/main.ts",
-    "build": "temir build src/main.ts"
+    "prebuild": "rm -rf dist",
+    "build": "temir build src/main.ts && ncc build dist/main.cjs -o dist"
   },
   "bump": {
     "before": [
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "@innei/eslint-config-ts": "0.9.4",
+    "@vercel/ncc": "0.34.0",
     "inquirer": "^9.1.2",
     "semver": "^7.3.7",
     "zx": "^7.0.8"
