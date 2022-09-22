@@ -1,7 +1,7 @@
 import { generate } from 'changelogithub'
 import { writeFileSync } from 'fs'
 import { $, chalk, fs, nothrow } from 'zx'
-import type { BumpOptions } from '../interfaces/options'
+import type { BumpOptions } from '../interfaces/options.js'
 import { getPackageJson } from './pkg.js'
 
 /**
@@ -20,7 +20,11 @@ export async function run(newVersion: string) {
   const bumpOptions: Partial<BumpOptions> = PKG.bump || {}
   // define options
   const leadingHooks = bumpOptions.leading || bumpOptions.before || []
-  const taildingHooks = bumpOptions.tailing || bumpOptions.after || []
+  const taildingHooks =
+    bumpOptions.trailing ||
+    (bumpOptions as any).tailing ||
+    bumpOptions.after ||
+    []
   const doPublish = bumpOptions.publish || false
   const createGitTag = bumpOptions.tag || true
 

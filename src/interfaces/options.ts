@@ -1,7 +1,15 @@
 export interface BumpOptions {
   tag: string
   leading: string[]
-  tailding: string[]
+  /**
+   * @deprecated
+   */
+  before: string[]
+  /**
+   * @deprecated
+   */
+  after: string[]
+  trailing: string[]
   push: boolean
   commitMessage: string
   publish: string
