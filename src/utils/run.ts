@@ -1,6 +1,7 @@
 import { generate } from 'changelogithub'
 import { writeFileSync } from 'fs'
 import { $, chalk, fs, nothrow } from 'zx'
+import type { BumpOptions } from '../interfaces/options'
 import { getPackageJson } from './pkg.js'
 
 /**
@@ -16,15 +17,16 @@ export async function execCmd(cmds) {
 
 export async function run(newVersion: string) {
   const { json: PKG, originFile } = getPackageJson()
+  const bumpOptions: Partial<BumpOptions> = PKG.bump || {}
   // define options
-  const leadingHooks = PKG.bump?.leading || PKG.bump?.before || []
-  const taildingHooks = PKG.bump?.tailing || PKG.bump?.after || []
-  const doPublish = PKG.bump?.publish || false
-  const createGitTag = PKG.bump?.tag || true
+  const leadingHooks = bumpOptions.leading || bumpOptions.before || []
+  const taildingHooks = bumpOptions.tailing || bumpOptions.after || []
+  const doPublish = bumpOptions.publish || false
+  const createGitTag = bumpOptions.tag || true
 
-  const doGitPush = PKG.bump?.push || true
+  const doGitPush = bumpOptions.push || true
 
-  const generateChangeLog = PKG?.bump?.changelog || false
+  const generateChangeLog = bumpOptions.changelog || false
 
   console.log(chalk.green('Running leading hooks.'))
 

@@ -1,17 +1,14 @@
 <template>
-  <TBox v-if="!packageJson.json.version">
-    <TText> Not a valid package.json file, can't find version. </TText>
-  </TBox>
-  <TBox v-if="packageJson.json.version">
+  <TBox>
     <TText color="#5a5">Which version would you like to bump it?</TText>
   </TBox>
-  <TBox v-if="packageJson.json.version">
+  <TBox>
     <TText>Current Version: </TText>
     <TText color="#41daaa">{{ currentVersion }}</TText>
 
     <TText v-if="updatedVersion"> -> {{ updatedVersion }} </TText>
   </TBox>
-  <TBox v-if="packageJson.json.version">
+  <TBox>
     <TSelectInput
       :items="selectItem"
       @select="handleSubmit"
@@ -30,6 +27,11 @@ import { run } from '../utils/run.js'
 
 const packageJson = getPackageJson()
 const currentVersion = packageJson.json.version
+
+if (!currentVersion) {
+  console.error(`Not a valid package.json file, can't find version.`)
+  process.exit(-1)
+}
 const versions = generateReleaseTypes(currentVersion)
 
 const selectItem = versions.map((version) => ({

@@ -28,10 +28,12 @@ Define in package.json, add field `bump`:
 },
 ```
 
-| Name    | Description                      | Type     | Default |
-| ------- | -------------------------------- | -------- | ------- |
-| leading  | Run script before change version | string[] | `[]`    |
-| tailing   | Run script after change version  | string[] | `[]`    |
-| publish | Publish package after bump       | boolean  | false   |
-| tag     | Create git tag after bump        | boolean  | true    |
-| push    | Push git commit after bump       | boolean  | true    |
+| Name          | Description                        | Type     | Default                    |
+| ------------- | ---------------------------------- | -------- | -------------------------- |
+| leading       | Run script before change version   | string[] | `[]`                       |
+| tailing       | Run script after change version    | string[] | `[]`                       |
+| publish       | Publish package after bump         | boolean  | false                      |
+| tag           | Create git tag after bump          | boolean  | true                       |
+| push          | Push git commit after bump         | boolean  | true                       |
+| commitMessage | Commit message for new version tag | string   | `release: v${NEW_VERSION}` |
+| changelog     | Generate changelog                 | boolean  | false                      |
