@@ -11,7 +11,7 @@
   <TBox>
     <TSelectInput
       :items="selectItem"
-      @select="handleSelectVersion"
+      @select="handleSubmit"
       @highlight="handleSelectVersion"
     >
     </TSelectInput>
@@ -19,10 +19,11 @@
 </template>
 
 <script lang="ts" setup>
-import { TText, TBox, TNewline } from '@temir/core'
+import { TBox, TText } from '@temir/core'
 import TSelectInput from '@temir/select-input'
 import { ref } from 'vue'
-import { generateReleaseTypes, getPackageJson } from '../utils'
+import { generateReleaseTypes, getPackageJson } from '../utils/pkg.js'
+import { run } from '../utils/run.js'
 
 const packageJson = getPackageJson()
 const currentVersion = packageJson.json.version
@@ -35,7 +36,11 @@ const selectItem = versions.map((version) => ({
 
 const updatedVersion = ref()
 const handleSelectVersion = (item) => {
-  // @see https://github.com/webfansplz/temir/pull/7
   updatedVersion.value = item?.value
+}
+const handleSubmit = (item) => {
+  handleSelectVersion(item)
+
+  run(item.value)
 }
 </script>

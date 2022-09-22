@@ -2,9 +2,9 @@
   "compilerOptions": {
     "jsx": "preserve",
     "target": "esnext",
-    "module": "esnext",
+    "module": "NodeNext",
     "esModuleInterop": true,
-    "moduleResolution": "node",
+    "moduleResolution": "NodeNext",
     "resolveJsonModule": true,
     "allowJs": true
   }

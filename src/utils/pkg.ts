@@ -1,6 +1,6 @@
 // @ts-check
 import { join } from 'path'
-import { $, argv } from 'zx'
+import { argv } from 'zx'
 
 import { readFileSync } from 'fs'
 import semver from 'semver'
@@ -46,21 +46,10 @@ export function generateReleaseTypes(
   pried = 'alpha',
 ) {
   return types.map((item) => {
-    let version = semver.inc(currentVersion, item, pried)
+    const version = semver.inc(currentVersion, item, pried)
     return {
       name: `${item} - ${version}`,
       value: version,
     }
   })
-}
-
-/**
- *
- * @param {string[]} cmds
- */
-export async function execCmd(cmds) {
-  for (const cmd of cmds) {
-    // @ts-ignore
-    await $([cmd])
-  }
 }
