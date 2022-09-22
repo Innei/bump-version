@@ -4,9 +4,11 @@
   </TBox>
   <TBox>
     <TText>Current Version: </TText>
-    <TText color="#41daaa">{{ currentVersion }}</TText>
+    <TText>{{ currentVersion }}</TText>
 
-    <TText v-if="updatedVersion"> -> {{ updatedVersion }} </TText>
+    <TText v-if="updatedVersion" color="#41daaa">
+      -> {{ updatedVersion }}
+    </TText>
   </TBox>
   <TBox>
     <TSelectInput
@@ -28,10 +30,6 @@ import { run } from '../utils/run.js'
 const packageJson = getPackageJson()
 const currentVersion = packageJson.json.version
 
-if (!currentVersion) {
-  console.error(`Not a valid package.json file, can't find version.`)
-  process.exit(-1)
-}
 const versions = generateReleaseTypes(currentVersion)
 
 const selectItem = versions.map((version) => ({

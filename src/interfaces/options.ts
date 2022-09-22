@@ -14,4 +14,5 @@ export interface BumpOptions {
   commitMessage: string
   publish: string
   changelog: boolean
+  allowedBranches: string[]
 }
