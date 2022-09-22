@@ -8,6 +8,7 @@ specifiers:
   '@temir/cli': ^0.0.20
   '@temir/core': ^0.0.20
   '@temir/select-input': ^0.0.20
+  '@vercel/ncc': 0.34.0
   changelogithub: 0.12.4
   inquirer: ^9.1.2
   semver: ^7.3.7
@@ -23,6 +24,7 @@ dependencies:
 
 devDependencies:
   '@innei/eslint-config-ts': 0.9.4
+  '@vercel/ncc': 0.34.0
   inquirer: 9.1.2
   semver: 7.3.7
   zx: 7.0.8
@@ -742,6 +744,11 @@ packages:
     dependencies:
       '@typescript-eslint/types': 5.38.0
       eslint-visitor-keys: 3.3.0
+    dev: true
+
+  /@vercel/ncc/0.34.0:
+    resolution: {integrity: sha512-G9h5ZLBJ/V57Ou9vz5hI8pda/YQX5HQszCs3AmIus3XzsmRn/0Ptic5otD3xVST8QLKk7AMk7AqpsyQGN7MZ9A==}
+    hasBin: true
     dev: true
 
   /@vitejs/plugin-vue-jsx/2.0.0_vite@3.0.5+vue@3.2.39:
