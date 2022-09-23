@@ -1,13 +1,7 @@
 import { argv } from 'zx'
 
 export const resolveArgs = () => {
-  argv['--dry-run'] = argv['--dry-run'] || argv['-d']
-
   return {
-    dryRun: argv['--dry-run'] || false,
-
-    ///
-
     // 'patch',
     // 'minor',
     // 'major',
