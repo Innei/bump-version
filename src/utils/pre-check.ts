@@ -1,3 +1,4 @@
+import { chalk, question } from 'zx'
 import { getPackageJson, releaseTypes, getNextVersion } from './pkg.js'
 import { resolveArgs } from './resolve-args.js'
 import { run } from './run.js'
@@ -7,7 +8,9 @@ export const precheck = () => {
   const currentVersion = packageJson.json.version
 
   if (!currentVersion) {
-    console.error(`Not a valid package.json file, can't find version.`)
+    console.error(
+      chalk.red(`Not a valid package.json file, can't find version.`),
+    )
     process.exit(-1)
   }
 
@@ -25,8 +28,14 @@ export const precheck = () => {
       `Current version: ${currentVersion}, New version: ${nextVersion}`,
     )
 
-    run(nextVersion)
-
-    process.exit(0)
+    question('Continue? (Y/n) ', {
+      choices: ['y', 'n'],
+    }).then((answer) => {
+      if (answer === 'y' && !answer) {
+        run(nextVersion)
+      } else {
+        process.exit(0)
+      }
+    })
   }
 }
