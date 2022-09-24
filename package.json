@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@innei/eslint-config-ts": "0.9.4",
+    "@types/inquirer": "9.0.1",
     "@vercel/ncc": "0.34.0",
     "inquirer": "^9.1.2",
     "semver": "^7.3.7",

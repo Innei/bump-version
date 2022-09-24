@@ -8,6 +8,7 @@ specifiers:
   '@temir/cli': ^0.0.20
   '@temir/core': ^0.0.20
   '@temir/select-input': ^0.0.20
+  '@types/inquirer': 9.0.1
   '@vercel/ncc': 0.34.0
   changelogithub: 0.12.4
   inquirer: ^9.1.2
@@ -24,6 +25,7 @@ dependencies:
 
 devDependencies:
   '@innei/eslint-config-ts': 0.9.4
+  '@types/inquirer': 9.0.1
   '@vercel/ncc': 0.34.0
   inquirer: 9.1.2
   semver: 7.3.7
@@ -550,6 +552,13 @@ packages:
       '@types/node': 18.7.18
     dev: true
 
+  /@types/inquirer/9.0.1:
+    resolution: {integrity: sha512-I4eZdYXpFHj0pAzMndJFQMu/4hCc6Z340au9lvxHofGJnFmVgckxR/t9jRzsOVviajsOmEL+OABx+e0e28IbNw==}
+    dependencies:
+      '@types/through': 0.0.30
+      rxjs: 7.5.6
+    dev: true
+
   /@types/json-schema/7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
     dev: true
@@ -568,6 +577,12 @@ packages:
 
   /@types/ps-tree/1.1.2:
     resolution: {integrity: sha512-ZREFYlpUmPQJ0esjxoG1fMvB2HNaD3z+mjqdSosZvd3RalncI9NEur73P8ZJz4YQdL64CmV1w0RuqoRUlhQRBw==}
+    dev: true
+
+  /@types/through/0.0.30:
+    resolution: {integrity: sha512-FvnCJljyxhPM3gkRgWmxmDZyAQSiBQQWLI0A0VFL0K7W1oRUrPJSqNO0NvTnLkBcotdlp3lKvaT0JrnyRDkzOg==}
+    dependencies:
+      '@types/node': 18.7.18
     dev: true
 
   /@types/which/2.0.1:

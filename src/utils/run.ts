@@ -73,7 +73,9 @@ export async function run(newVersion: string) {
     // TODO
 
     if (generateChangeLog) {
-      const { md } = await generate({})
+      const { md } = await generate({
+        github: false,
+      })
       await nothrow($`touch CHANGELOG`)
       const data = fs.readFileSync('CHANGELOG') // read existing contents into data
       const fd = fs.openSync('CHANGELOG', 'w+')

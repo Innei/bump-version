@@ -1,9 +1,10 @@
-import { chalk, question } from 'zx'
+import { chalk } from 'zx'
 import { getPackageJson, releaseTypes, getNextVersion } from './pkg.js'
 import { resolveArgs } from './resolve-args.js'
 import { run } from './run.js'
+import inquirer from 'inquirer'
 
-export const precheck = () => {
+export const precheck = async () => {
   const packageJson = getPackageJson()
   const currentVersion = packageJson.json.version
 
@@ -28,14 +29,22 @@ export const precheck = () => {
       `Current version: ${currentVersion}, New version: ${nextVersion}`,
     )
 
-    question('Continue? (Y/n) ', {
-      choices: ['y', 'n'],
-    }).then((answer) => {
-      if (answer === 'y' && !answer) {
-        run(nextVersion)
-      } else {
-        process.exit(0)
-      }
-    })
+    return inquirer
+      .prompt([
+        {
+          name: 'confirm',
+          default: 'Y',
+          message: 'Continue? (Y/n)',
+          choices: ['Y', 'y', 'n'],
+        },
+      ])
+      .then((answer) => {
+        answer = (answer as string).toLowerCase()
+        if (answer === 'y' && !answer) {
+          run(nextVersion)
+        } else {
+          process.exit(0)
+        }
+      })
   }
 }
