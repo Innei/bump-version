@@ -3,6 +3,7 @@ import { getPackageJson, releaseTypes, getNextVersion } from './pkg.js'
 import { resolveArgs } from './resolve-args.js'
 import { run } from './run.js'
 import inquirer from 'inquirer'
+import type { ReleaseType } from 'semver'
 
 export const precheck = async () => {
   const packageJson = getPackageJson()
@@ -18,9 +19,9 @@ export const precheck = async () => {
   const args = resolveArgs()
 
   const keys = Object.keys(args)
-  const isReleaseType = keys.find(
-    (key) => args[key] && releaseTypes.includes(key),
-  )
+  const isReleaseType: ReleaseType = keys.find(
+    (key) => args[key] && releaseTypes.includes(key as ReleaseType),
+  ) as any
 
   if (isReleaseType) {
     const nextVersion = getNextVersion(currentVersion, isReleaseType)
@@ -30,14 +31,12 @@ export const precheck = async () => {
     )
 
     return inquirer
-      .prompt([
-        {
-          name: 'confirm',
-          default: 'Y',
-          message: 'Continue? (Y/n)',
-          choices: ['Y', 'y', 'n'],
-        },
-      ])
+      .prompt({
+        name: 'confirm',
+        default: 'Y',
+        message: 'Continue? (Y/n)',
+        choices: ['Y', 'y', 'n'],
+      })
       .then((answer) => {
         answer = (answer as string).toLowerCase()
         if (answer === 'y' && !answer) {

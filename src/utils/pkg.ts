@@ -13,7 +13,7 @@ export function getPackageJson() {
   return { json: PKG, path: PKG_PATH, originFile, tabIntent }
 }
 
-export const releaseTypes = [
+export const releaseTypes: semver.ReleaseType[] = [
   'patch',
   'minor',
   'major',
@@ -23,7 +23,10 @@ export const releaseTypes = [
   'prerelease',
 ]
 
-export const getNextVersion = (currentVersion: string, releaseType: string) => {
+export const getNextVersion = (
+  currentVersion: string,
+  releaseType: semver.ReleaseType,
+) => {
   return semver.inc(currentVersion, releaseType)
 }
 

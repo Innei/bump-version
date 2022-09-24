@@ -1,10 +1,14 @@
 import { generate } from 'changelogithub'
 import { writeFileSync } from 'fs'
+import inquirer from 'inquirer'
 import { $, chalk, fs, nothrow } from 'zx'
 import type { BumpOptions } from '../interfaces/options.js'
 import { camelcaseKeys } from './camelcase-keys.js'
 import { getCurrentGitBranch } from './git.js'
 import { getPackageJson } from './pkg.js'
+import { valid, lte } from 'semver'
+
+import confirm from '@inquirer/confirm'
 
 /**
  *
@@ -15,6 +19,41 @@ export async function execCmd(cmds) {
     // @ts-ignore
     await $([cmd])
   }
+}
+
+export async function cutsomVersionRun() {
+  const answers = await inquirer.prompt({
+    name: 'customVersion',
+    message: 'Enter a custom version',
+    validate(input) {
+      if (!input) {
+        return 'Please enter a custom version'
+      }
+      return valid(input) ? true : 'Please enter a valid version'
+    },
+  })
+  const nextVersion = answers.customVersion.trim()
+
+  const currentVersion = getPackageJson().json.version
+
+  if (lte(nextVersion, currentVersion)) {
+    console.log(
+      chalk.red(
+        `The version you entered is less than or equal to the current version`,
+      ),
+    )
+    process.exit(-1)
+  }
+  const answer = await confirm({
+    message: `${currentVersion} -> ${nextVersion} , confirm?`,
+    default: true,
+  })
+
+  if (!answer) {
+    process.exit(0)
+  }
+
+  return run(nextVersion)
 }
 
 export async function run(newVersion: string) {
@@ -73,9 +112,7 @@ export async function run(newVersion: string) {
     // TODO
 
     if (generateChangeLog) {
-      const { md } = await generate({
-        github: false,
-      })
+      const { md } = await generate({})
       await nothrow($`touch CHANGELOG`)
       const data = fs.readFileSync('CHANGELOG') // read existing contents into data
       const fd = fs.openSync('CHANGELOG', 'w+')
