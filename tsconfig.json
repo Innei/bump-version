@@ -6,6 +6,7 @@
     "esModuleInterop": true,
     "moduleResolution": "NodeNext",
     "resolveJsonModule": true,
-    "allowJs": true
+    "allowJs": true,
+    "outDir": "./lib"
   }
 }

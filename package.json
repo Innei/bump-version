@@ -2,8 +2,8 @@
   "name": "@innei/bump-version",
   "type": "module",
   "bin": {
-    "bump": "dist/index.js",
-    "vv": "dist/index.js"
+    "bump": "dist/index.mjs",
+    "vv": "dist/index.mjs"
   },
   "version": "1.0.0-alpha.0",
   "files": [
@@ -12,9 +12,9 @@
     "LICENSE"
   ],
   "scripts": {
-    "dev": "NODE_ENV=development tsx src/main.ts",
+    "dev": "NODE_ENV=development tsx src/main.mts",
     "prebuild": "rm -rf dist",
-    "build": "ncc build src/main.ts -o dist"
+    "build": "tsc && ncc build lib/main.mjs -o dist --external conventional-changelog"
   },
   "bump": {
     "leading": [
@@ -32,10 +32,13 @@
     "@types/inquirer": "9.0.1",
     "@types/semver": "7.3.12",
     "@vercel/ncc": "0.34.0",
-    "conventional-changelog": "3.1.25",
     "inquirer": "^9.1.2",
     "semver": "^7.3.7",
+    "typescript": "4.8.3",
     "zx": "^7.0.8"
+  },
+  "dependencies": {
+    "conventional-changelog": "3.1.25"
   },
   "resolutions": {
     "chalk": "^4.0"
