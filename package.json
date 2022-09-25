@@ -14,8 +14,7 @@
   "scripts": {
     "dev": "NODE_ENV=development tsx src/main.mts",
     "prebuild": "rm -rf dist",
-    "build": "tsc && ncc build lib/main.mjs -o dist --external conventional-changelog",
-    "test": "node src/test.js"
+    "build": "tsc && ncc build lib/main.mjs -o dist --external conventional-changelog"
   },
   "bump": {
     "leading": [
