@@ -145,15 +145,15 @@ export async function run(newVersion: string) {
       await $`git commit --amend --no-edit`
     }
 
-    if (doGitPush) {
-      console.log(chalk.green('Pushing to remote.'))
-      await $`git push`
-      await $`git push --tags`
-    }
+    // if (doGitPush) {
+    //   console.log(chalk.green('Pushing to remote.'))
+    //   await $`git push`
+    //   await $`git push --tags`
+    // }
   }
 
-  if (doPublish) {
-    console.log(chalk.green('Publishing to npm.'))
-    await $`npm publish --access=public`
-  }
+  // if (doPublish) {
+  //   console.log(chalk.green('Publishing to npm.'))
+  //   await $`npm publish --access=public`
+  // }
 }
