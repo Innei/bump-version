@@ -33,13 +33,13 @@ export const precheck = async () => {
     return inquirer
       .prompt({
         name: 'confirm',
-        default: 'Y',
+        default: true,
         message: 'Continue? (Y/n)',
-        choices: ['Y', 'y', 'n'],
+        type: 'confirm',
       })
       .then((answer) => {
-        answer = (answer as string).toLowerCase()
-        if (answer === 'y' && !answer) {
+        const result = answer.confirm
+        if (result === 'y' && !result) {
           run(nextVersion)
         } else {
           process.exit(0)
