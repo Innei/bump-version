@@ -2,16 +2,17 @@ import { join } from 'path'
 
 import { readFileSync } from 'fs'
 import semver from 'semver'
-import { WORKSPACE_DIR } from '../constants/index.js'
+import { WORKSPACE_DIR } from '../constants/path.js'
+import { memoReturnValueFunction } from './memo.js'
 
-export function getPackageJson() {
+export const getPackageJson = memoReturnValueFunction(() => {
   const PKG_PATH = join(WORKSPACE_DIR, '/package.json')
   const originFile = readFileSync(PKG_PATH, 'utf-8')
   const tabIntent = originFile.match(/^\s+/)?.length
   const PKG = JSON.parse(originFile)
 
   return { json: PKG, path: PKG_PATH, originFile, tabIntent }
-}
+})
 
 export const releaseTypes: semver.ReleaseType[] = [
   'patch',

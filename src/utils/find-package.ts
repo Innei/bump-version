@@ -9,7 +9,6 @@ export const findPackageJSONPath = (dir: string): string => {
     return packageJSONPath
   }
   const parentDir = path.dirname(dir)
-  console.log(parentDir)
 
   if (parentDir === dir) {
     throw new Error('package.json not found')

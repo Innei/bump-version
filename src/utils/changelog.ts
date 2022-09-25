@@ -1,6 +1,6 @@
 import conventionalChangelog from 'conventional-changelog'
 import { fs, path } from 'zx'
-import { WORKSPACE_DIR } from '../constants/index.js'
+import { WORKSPACE_DIR } from '../constants/path.js'
 
 export const generateChangeLog = () => {
   return new Promise<string>((resolve) => {

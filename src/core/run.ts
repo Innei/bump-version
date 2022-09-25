@@ -2,15 +2,14 @@ import { writeFileSync } from 'fs'
 import inquirer from 'inquirer'
 import semver from 'semver'
 import { $, chalk, fs } from 'zx'
-import type { BumpOptions } from '../interfaces/options.js'
-import { camelcaseKeys } from '../utils/camelcase-keys.js'
 import { getCurrentGitBranch } from '../utils/git.js'
 import { getPackageJson } from '../utils/pkg.js'
 
 import { generateChangeLog, isExistChangelogFile } from '../utils/changelog.js'
 import { snakecase } from '../utils/snakecase.js'
 import { join as pathJoin } from 'path'
-import { WORKSPACE_DIR } from '../constants/index.js'
+import { WORKSPACE_DIR } from '../constants/path.js'
+import { resolveConfig } from './resolve-config.js'
 
 const { valid, lte } = semver
 
@@ -67,27 +66,17 @@ export async function cutsomVersionRun() {
 }
 
 export async function run(newVersion: string) {
-  const { json: PKG, originFile } = getPackageJson()
-  const bumpOptions: Partial<BumpOptions> = camelcaseKeys(PKG.bump || {})
-  // define options
-  const leadingHooks = bumpOptions.leading || bumpOptions.before || []
-  const taildingHooks =
-    bumpOptions.trailing ||
-    (bumpOptions as any).tailing ||
-    bumpOptions.after ||
-    []
-
-  // npm
-  const doPublish = bumpOptions.publish || false
-
-  // git
-  const createGitTag = bumpOptions.tag || true
-  const doGitPush = bumpOptions.push || true
-  const commitMessage = bumpOptions.commitMessage || 'release: v${NEW_VERSION}'
-  const allowedBranches = bumpOptions.allowedBranches
-
-  // changelog
-  const shouldGenerateChangeLog = bumpOptions.changelog || false
+  const { originFile } = getPackageJson()
+  const {
+    allowedBranches,
+    commitMessage,
+    createGitTag,
+    doGitPush,
+    doPublish,
+    leadingHooks,
+    shouldGenerateChangeLog,
+    taildingHooks,
+  } = resolveConfig()
 
   // check allowed branches
   const currentBranch = await getCurrentGitBranch()
