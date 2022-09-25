@@ -1,19 +1,21 @@
-## [0.3.2](https://github.com/Innei/bump-version/compare/v0.3.1...v0.3.2) (2022-09-25)
+# [1.0.0-alpha.0](https://github.com/Innei/bump-version/compare/v0.3.1...v1.0.0-alpha.0) (2022-09-25)
 
 
 ### Bug Fixes
 
+* changelog ([59e7d10](https://github.com/Innei/bump-version/commit/59e7d1054af256950afcc3d82bbdde78801260b4))
 * entry ([dca0efb](https://github.com/Innei/bump-version/commit/dca0efb1de476364612e46076bdd000fe24216c4))
 * pre check ([a82a64b](https://github.com/Innei/bump-version/commit/a82a64b3c2d7c6930849df6da636f127c5aa98f3))
 * pre check run confirm ([3664030](https://github.com/Innei/bump-version/commit/3664030b9ed4f6a975af1182ff476b0d8bcb23fb))
 * readme ([5ee7926](https://github.com/Innei/bump-version/commit/5ee7926615515bcfa61ac633be940a40fd905cdd))
+* tag ([29fe4a7](https://github.com/Innei/bump-version/commit/29fe4a7271d680baa56be3d57746a73dab164ced))
 * typo ([758681d](https://github.com/Innei/bump-version/commit/758681d44184b6709868b6d9bde1b04c3f4e100f))
 
 
 ### Features
 
 * add changelog update ([c50f2f2](https://github.com/Innei/bump-version/commit/c50f2f2400466e14b99cd7196afff14bf8413c38))
-* default allowed branched ([b53a8fa](https://github.com/Innei/bump-version/commit/b53a8fa31e453ae1b778eea1b8490c4cc1888d8c))
+* default allowed branched ([d1329f1](https://github.com/Innei/bump-version/commit/d1329f124b4d5a73b1c569b27a7809e450a152e1))
 * init v2 ([b2b8bcf](https://github.com/Innei/bump-version/commit/b2b8bcf6422337fc8d99c5793316bbb9ed3790c9))
 * precheck ([1f98b6d](https://github.com/Innei/bump-version/commit/1f98b6d99d36c83e7e143db93e4efd7ea39eb8d8))
 * update ([d71806e](https://github.com/Innei/bump-version/commit/d71806ebe2470f52924902c21ecbe493b3072b53))
