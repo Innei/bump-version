@@ -9,17 +9,21 @@ import { getPackageJson } from '../utils/pkg.js'
 
 import { generateChangeLog, isExistChangelogFile } from '../utils/changelog.js'
 import { snakecase } from '../utils/snakecase.js'
-import { resolve as pathResolve } from 'path'
+import { join as pathJoin } from 'path'
+
 const { valid, lte } = semver
+
 type CmdContext = {
   nextVersion: string
 }
+// prevent ncc transform cwd path
+const cwd = String(process.cwd())
 
 export async function execCmd(cmds: string[], context: CmdContext) {
   const ctxKeys = Object.keys(context)
   for (const cmd of cmds) {
     const handledCmd = ctxKeys.reduce((key, nextKey) => {
-      return cmd.replace(`$\{${snakecase(key).toUpperCase()}\}`, context[key])
+      return cmd.replace(`$\{${snakecase(key).toUpperCase()}}`, context[key])
     }, cmd)
     // @ts-ignore
     await $([handledCmd])
@@ -152,17 +156,18 @@ export async function run(newVersion: string) {
       const hasExistChangeFile = isExistChangelogFile()
       const defaultChangelogFilename = 'CHANGELOG'
       let changelogFilename = defaultChangelogFilename
-      let changelogPath = pathResolve(process.cwd(), defaultChangelogFilename)
+
+      let changelogPath = pathJoin(cwd, defaultChangelogFilename)
       if (hasExistChangeFile) {
         // FIXME
         changelogFilename = hasExistChangeFile
-        changelogPath = pathResolve(process.cwd(), hasExistChangeFile)
+        changelogPath = pathJoin(cwd, hasExistChangeFile)
         fs.unlinkSync(changelogPath)
       }
       // TODO custom changelog filename
       // fs.unlinkSync('CHANGELOG.md')
       writeFileSync(changelogPath, changelog)
-      await $`git add ${changelogPath}`
+      await $`git add ${changelogFilename}`
       await $`git commit --amend --no-edit`
       await $`git tag -d v${newVersion}`
       await $`git tag -a v${newVersion} -m "Release v${newVersion}"`

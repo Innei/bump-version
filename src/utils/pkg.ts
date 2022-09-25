@@ -1,4 +1,3 @@
-// @ts-check
 import { join } from 'path'
 
 import { readFileSync } from 'fs'
