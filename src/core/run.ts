@@ -86,6 +86,32 @@ export async function run(newVersion: string) {
   // changelog
   const shouldGenerateChangeLog = bumpOptions.changelog || false
 
+  // check allowed branches
+  const currentBranch = await getCurrentGitBranch()
+  const defaultAllowedBranches: string[] = ['main', 'master']
+  if (__DEV__) {
+    defaultAllowedBranches.push('test', 'dev')
+  }
+  const isAllowedBranch = allowedBranches
+    ? allowedBranches.some((regexpString) =>
+        new RegExp(regexpString).test(currentBranch),
+      )
+    : defaultAllowedBranches.includes(currentBranch)
+
+  if (!isAllowedBranch) {
+    console.log(
+      chalk.red(
+        `Current branch ${currentBranch} is not allowed to release. ${(
+          allowedBranches || defaultAllowedBranches
+        )
+          .map((b) => chalk.green(b))
+          .join(', ')} is allowed.`,
+      ),
+    )
+
+    process.exit(-2)
+  }
+
   console.log(chalk.green('Running leading hooks.'))
 
   const cmdContext: CmdContext = {
@@ -108,14 +134,8 @@ export async function run(newVersion: string) {
 
     process.exit(1)
   }
-  const currentBranch = await getCurrentGitBranch()
-  const isAllowedBranch = allowedBranches
-    ? allowedBranches.some((regexpString) =>
-        new RegExp(regexpString).test(currentBranch),
-      )
-    : ['master', 'main'].includes(currentBranch)
 
-  if (createGitTag && isAllowedBranch) {
+  if (createGitTag) {
     console.log(chalk.green('Creating git tag.'))
     await $`git add package.json`
     await $`git commit -a -m "${commitMessage.replace(
