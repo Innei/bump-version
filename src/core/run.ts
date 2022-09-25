@@ -10,14 +10,13 @@ import { getPackageJson } from '../utils/pkg.js'
 import { generateChangeLog, isExistChangelogFile } from '../utils/changelog.js'
 import { snakecase } from '../utils/snakecase.js'
 import { join as pathJoin } from 'path'
+import { WORKSPACE_DIR } from '../constants/index.js'
 
 const { valid, lte } = semver
 
 type CmdContext = {
   nextVersion: string
 }
-// prevent ncc transform cwd path
-const cwd = String(process.cwd())
 
 export async function execCmd(cmds: string[], context: CmdContext) {
   const ctxKeys = Object.keys(context)
@@ -157,11 +156,11 @@ export async function run(newVersion: string) {
       const defaultChangelogFilename = 'CHANGELOG'
       let changelogFilename = defaultChangelogFilename
 
-      let changelogPath = pathJoin(cwd, defaultChangelogFilename)
+      let changelogPath = pathJoin(WORKSPACE_DIR, defaultChangelogFilename)
       if (hasExistChangeFile) {
         // FIXME
         changelogFilename = hasExistChangeFile
-        changelogPath = pathJoin(cwd, hasExistChangeFile)
+        changelogPath = pathJoin(WORKSPACE_DIR, hasExistChangeFile)
         fs.unlinkSync(changelogPath)
       }
       // TODO custom changelog filename

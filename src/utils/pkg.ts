@@ -2,9 +2,10 @@ import { join } from 'path'
 
 import { readFileSync } from 'fs'
 import semver from 'semver'
+import { WORKSPACE_DIR } from '../constants/index.js'
 
 export function getPackageJson() {
-  const PKG_PATH = join(String(process.cwd()), '/package.json')
+  const PKG_PATH = join(WORKSPACE_DIR, '/package.json')
   const originFile = readFileSync(PKG_PATH, 'utf-8')
   const tabIntent = originFile.match(/^\s+/)?.length
   const PKG = JSON.parse(originFile)

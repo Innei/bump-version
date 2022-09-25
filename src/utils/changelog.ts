@@ -1,5 +1,6 @@
 import conventionalChangelog from 'conventional-changelog'
 import { fs, path } from 'zx'
+import { WORKSPACE_DIR } from '../constants/index.js'
 
 export const generateChangeLog = () => {
   return new Promise<string>((resolve) => {
@@ -21,7 +22,7 @@ export const generateChangeLog = () => {
 export const isExistChangelogFile = () => {
   return ['changelog.md', 'changelog', 'CHANGELOG', 'CHANGELOG.md'].reduce(
     (filename, currentFilename) => {
-      return fs.existsSync(path.resolve(process.cwd(), currentFilename))
+      return fs.existsSync(path.resolve(WORKSPACE_DIR, currentFilename))
         ? currentFilename
         : filename
     },

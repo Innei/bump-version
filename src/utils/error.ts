@@ -1,11 +1,14 @@
 import { chalk } from 'zx'
-process.on('uncaughtException', function (err) {
-  console.error(chalk.red('Error: ') + err.message)
-  process.exit(1)
-})
-process.on('unhandledRejection', function (err: any, promise) {
-  console.error(chalk.red('Error: ') + err?.message)
-  process.exit(1)
-})
+
+if (process.env.NODE_ENV !== 'development') {
+  process.on('uncaughtException', (err) => {
+    console.error(chalk.red('Error: ') + err.message)
+    process.exit(1)
+  })
+  process.on('unhandledRejection', (err: any, promise) => {
+    console.error(chalk.red('Error: ') + err?.message)
+    process.exit(1)
+  })
+}
 
 export {}
