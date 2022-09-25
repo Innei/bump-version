@@ -7,6 +7,7 @@ export const generateChangeLog = () => {
     conventionalChangelog({
       preset: 'angular',
       releaseCount: 0,
+      skipUnstable: false,
     })
       .on('data', (chunk: any) => {
         changelog += chunk.toString()
