@@ -1,3 +1,23 @@
+# [1.0.0-alpha.2](https://github.com/Innei/bump-version/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2022-09-25)
+
+
+### Bug Fixes
+
+* add shebang ([413d42d](https://github.com/Innei/bump-version/commit/413d42d48de72d8a5bc07c161e19337c6a363114))
+* ncc transform for cwd ([da91304](https://github.com/Innei/bump-version/commit/da913041a7f9ff3e1ad31725ba4afbe28e70846b))
+* no skip unstable version ([bb6c210](https://github.com/Innei/bump-version/commit/bb6c210054da0545ee618173a5b9ab11cc2892cc))
+
+
+
+# [1.0.0-alpha.1](https://github.com/Innei/bump-version/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2022-09-25)
+
+
+### Bug Fixes
+
+* bundler ([03ab990](https://github.com/Innei/bump-version/commit/03ab990dcca4523c17956946382c8a9eae496936))
+
+
+
 # [1.0.0-alpha.0](https://github.com/Innei/bump-version/compare/v0.3.1...v1.0.0-alpha.0) (2022-09-25)
 
 
