@@ -164,6 +164,8 @@ export async function run(newVersion: string) {
       writeFileSync(changelogPath, changelog)
       await $`git add ${changelogPath}`
       await $`git commit --amend --no-edit`
+      await $`git tag -d v${newVersion}`
+      await $`git tag -a v${newVersion} -m "Release v${newVersion}"`
     }
 
     if (doGitPush) {
