@@ -138,10 +138,10 @@ export async function run(newVersion: string) {
   if (createGitTag) {
     console.log(chalk.green('Creating git tag.'))
     await $`git add package.json`
-    await $`git commit -a -m "${commitMessage.replace(
+    await $`git commit -a -m ${commitMessage.replace(
       '${NEW_VERSION}',
       newVersion,
-    )}"`
+    )}`
     await $`git tag -a v${newVersion} -m "Release v${newVersion}"`
 
     // TODO
@@ -150,18 +150,19 @@ export async function run(newVersion: string) {
       const changelog = await generateChangeLog()
 
       const hasExistChangeFile = isExistChangelogFile()
-      let changelogPath = ''
+      const defaultChangelogFilename = 'CHANGELOG'
+      let changelogFilename = defaultChangelogFilename
+      let changelogPath = pathResolve(process.cwd(), defaultChangelogFilename)
       if (hasExistChangeFile) {
+        // FIXME
+        changelogFilename = hasExistChangeFile
         changelogPath = pathResolve(process.cwd(), hasExistChangeFile)
         fs.unlinkSync(changelogPath)
       }
       // TODO custom changelog filename
       // fs.unlinkSync('CHANGELOG.md')
-      writeFileSync(
-        changelogPath || pathResolve(process.cwd(), 'CHANGELOG'),
-        changelog,
-      )
-
+      writeFileSync(changelogPath, changelog)
+      await $`git add ${changelogPath}`
       await $`git commit --amend --no-edit`
     }
 
