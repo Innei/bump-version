@@ -1,8 +1,9 @@
-## [0.3.2](https://github.com/Innei/bump-version/compare/v0.3.1...v0.3.2) (2022-09-25)
+# [1.0.0](https://github.com/Innei/bump-version/compare/v0.3.1...v1.0.0) (2022-09-25)
 
 
 ### Bug Fixes
 
+* changelog ([87bf07a](https://github.com/Innei/bump-version/commit/87bf07ab1723aae9ebe483970e65f77a4d733100))
 * entry ([dca0efb](https://github.com/Innei/bump-version/commit/dca0efb1de476364612e46076bdd000fe24216c4))
 * pre check ([a82a64b](https://github.com/Innei/bump-version/commit/a82a64b3c2d7c6930849df6da636f127c5aa98f3))
 * pre check run confirm ([3664030](https://github.com/Innei/bump-version/commit/3664030b9ed4f6a975af1182ff476b0d8bcb23fb))
