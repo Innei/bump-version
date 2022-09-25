@@ -1,3 +1,4 @@
+#!env node
 import { precheck } from './core/pre-check.js'
 import { promptMain } from './core/prompt.js'
 
