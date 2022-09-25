@@ -6,7 +6,7 @@ import type {
 import inquirer from 'inquirer'
 import { chalk } from 'zx'
 import { getPackageJson, generateReleaseTypes } from '../utils/pkg.js'
-import { run, cutsomVersionRun } from '../utils/run.js'
+import { run, cutsomVersionRun } from './run.js'
 
 export const promptMain = async () => {
   const packageJson = getPackageJson()
@@ -32,6 +32,8 @@ export const promptMain = async () => {
     name: 'nextVersion',
     message: 'Select a version',
     type: 'list',
+    pageSize: selectItems.length,
+
     choices: [...selectItems],
   })
 

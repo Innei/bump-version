@@ -1,23 +1,28 @@
-import { generate } from 'changelogithub'
 import { writeFileSync } from 'fs'
 import inquirer from 'inquirer'
-import { $, chalk, fs, nothrow } from 'zx'
+import semver from 'semver'
+import { $, chalk, fs } from 'zx'
 import type { BumpOptions } from '../interfaces/options.js'
-import { camelcaseKeys } from './camelcase-keys.js'
-import { getCurrentGitBranch } from './git.js'
-import { getPackageJson } from './pkg.js'
-import { valid, lte } from 'semver'
+import { camelcaseKeys } from '../utils/camelcase-keys.js'
+import { getCurrentGitBranch } from '../utils/git.js'
+import { getPackageJson } from '../utils/pkg.js'
 
-import confirm from '@inquirer/confirm'
+import { generateChangeLog, isExistChangelogFile } from '../utils/changelog.js'
+import { snakecase } from '../utils/snakecase.js'
+import { resolve as pathResolve } from 'path'
+const { valid, lte } = semver
+type CmdContext = {
+  nextVersion: string
+}
 
-/**
- *
- * @param {string[]} cmds
- */
-export async function execCmd(cmds) {
+export async function execCmd(cmds: string[], context: CmdContext) {
+  const ctxKeys = Object.keys(context)
   for (const cmd of cmds) {
+    const handledCmd = ctxKeys.reduce((key, nextKey) => {
+      return cmd.replace(`$\{${snakecase(key).toUpperCase()}\}`, context[key])
+    }, cmd)
     // @ts-ignore
-    await $([cmd])
+    await $([handledCmd])
   }
 }
 
@@ -44,12 +49,14 @@ export async function cutsomVersionRun() {
     )
     process.exit(-1)
   }
-  const answer = await confirm({
-    message: `${currentVersion} -> ${nextVersion} , confirm?`,
+  const confirm = await inquirer.prompt({
+    type: 'confirm',
+    message: `${currentVersion} -> ${chalk.green(nextVersion)}, confirm?`,
     default: true,
+    name: 'confirm',
   })
 
-  if (!answer) {
+  if (!confirm) {
     process.exit(0)
   }
 
@@ -77,12 +84,15 @@ export async function run(newVersion: string) {
   const allowedBranches = bumpOptions.allowedBranches
 
   // changelog
-  const generateChangeLog = bumpOptions.changelog || false
+  const shouldGenerateChangeLog = bumpOptions.changelog || false
 
   console.log(chalk.green('Running leading hooks.'))
 
-  await execCmd(leadingHooks)
-  // const PKG = readFileSync(PKG_PATH, 'utf-8')
+  const cmdContext: CmdContext = {
+    nextVersion: newVersion,
+  }
+
+  await execCmd(leadingHooks, cmdContext)
   const { json, tabIntent, path } = getPackageJson()
   json.version = newVersion
   writeFileSync(path, JSON.stringify(json, null, tabIntent || 2))
@@ -90,7 +100,7 @@ export async function run(newVersion: string) {
   console.log(chalk.green('Running tailing hooks.'))
 
   try {
-    await execCmd(taildingHooks)
+    await execCmd(taildingHooks, cmdContext)
   } catch (e) {
     console.error(chalk.yellow('Hook running failed, rollback.'))
 
@@ -108,28 +118,33 @@ export async function run(newVersion: string) {
   if (createGitTag && isAllowedBranch) {
     console.log(chalk.green('Creating git tag.'))
     await $`git add package.json`
-
-    // TODO
-
-    if (generateChangeLog) {
-      const { md } = await generate({})
-      await nothrow($`touch CHANGELOG`)
-      const data = fs.readFileSync('CHANGELOG') // read existing contents into data
-      const fd = fs.openSync('CHANGELOG', 'w+')
-      const buffer = Buffer.from(md)
-
-      fs.writeSync(fd, buffer, 0, buffer.length, 0) // write new data
-      fs.writeSync(fd, data, 0, data.length, buffer.length) // append old data
-      // or fs.appendFile(fd, data);
-      fs.close(fd)
-    }
-
-    await nothrow($`git add CHANGELOG`)
     await $`git commit -a -m "${commitMessage.replace(
       '${NEW_VERSION}',
       newVersion,
     )}"`
     await $`git tag -a v${newVersion} -m "Release v${newVersion}"`
+
+    // TODO
+
+    if (shouldGenerateChangeLog) {
+      const changelog = await generateChangeLog()
+
+      const hasExistChangeFile = isExistChangelogFile()
+      let changelogPath = ''
+      if (hasExistChangeFile) {
+        changelogPath = pathResolve(process.cwd(), hasExistChangeFile)
+        fs.unlinkSync(changelogPath)
+      }
+      // TODO custom changelog filename
+      // fs.unlinkSync('CHANGELOG.md')
+      writeFileSync(
+        changelogPath || pathResolve(process.cwd(), 'CHANGELOG'),
+        changelog,
+      )
+
+      await $`git commit --amend --no-edit`
+    }
+
     if (doGitPush) {
       console.log(chalk.green('Pushing to remote.'))
       await $`git push`

@@ -1,5 +1,7 @@
+import { precheck } from './core/pre-check.js'
 import { promptMain } from './core/prompt.js'
-import { precheck } from './utils/pre-check.js'
+
+import './utils/error'
 
 // precheck
 precheck().then(() => {

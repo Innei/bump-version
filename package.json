@@ -12,33 +12,30 @@
     "LICENSE"
   ],
   "scripts": {
-    "dev": "tsx src/main.ts",
+    "dev": "tsx watch src/main.ts",
     "prebuild": "rm -rf dist",
     "build": "ncc build src/main.ts -o dist"
   },
   "bump": {
-    "before": [
+    "leading": [
       "git pull --rebase",
       "pnpm i",
       "npm run build"
     ],
-    "after": [],
+    "trailing": [],
     "publish": true,
     "changelog": true
   },
   "devDependencies": {
     "@innei/eslint-config-ts": "0.9.4",
+    "@types/conventional-changelog": "3.1.1",
     "@types/inquirer": "9.0.1",
     "@types/semver": "7.3.12",
     "@vercel/ncc": "0.34.0",
+    "conventional-changelog": "3.1.25",
     "inquirer": "^9.1.2",
     "semver": "^7.3.7",
     "zx": "^7.0.8"
-  },
-  "dependencies": {
-    "@inquirer/confirm": "0.0.25-alpha.0",
-    "changelogithub": "0.12.4",
-    "vue": "^3.2.39"
   },
   "resolutions": {
     "chalk": "^4.0"
