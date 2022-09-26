@@ -2,13 +2,15 @@ import { fs } from 'zx'
 import { CONFIG_RC_PATH } from '../constants/path.js'
 import type { BumpOptions } from '../interfaces/options.js'
 import { camelcaseKeys } from '../utils/camelcase-keys.js'
-import { getPackageJson } from '../utils/pkg.js'
+import { getPackageJson, getRootPackageJson } from '../utils/pkg.js'
 
 const checkConfigRcExist = () => {
   return fs.existsSync(CONFIG_RC_PATH)
 }
 
 export const resolveConfig = () => {
+  // FIXME monorepo read pkg json issue
+  const { json: ROOT_PKG } = getRootPackageJson()
   const { json: PKG } = getPackageJson()
   let bumpOptions: Partial<BumpOptions>
   if (checkConfigRcExist()) {
@@ -19,7 +21,7 @@ export const resolveConfig = () => {
       throw new TypeError('Invalid .bumprc file, should be valid JSON file')
     }
   } else {
-    bumpOptions = camelcaseKeys(PKG.bump || {})
+    bumpOptions = camelcaseKeys(PKG.bump || ROOT_PKG.bump || {})
   }
 
   // define options
