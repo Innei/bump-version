@@ -47,3 +47,4 @@ Define in package.json, add field `bump` or create `.bumprc`:
 | commit_message   | Commit message for new version tag       | string               | `release: v${NEW_VERSION}` |
 | changelog        | Generate changelog                       | boolean              | false                      |
 | allowed_branches | Allow run bump version on special branch | (RegExp \| string)[] | `["main", "master"]`       |
+| tag-prefix       | Git prefix tag                           | string               | `v`                        |

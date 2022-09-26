@@ -15,4 +15,5 @@ export interface BumpOptions {
   publish: string
   changelog: boolean
   allowedBranches: string[]
+  tagPrefix: string
 }

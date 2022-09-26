@@ -20,6 +20,7 @@ export const precheck = async () => {
 
   if (args.dryRun) {
     console.warn(chalk.yellow(`Dry run mode. Will not exec commands.`))
+    __DEV__ && console.log(args)
   }
 
   const keys = Object.keys(args)

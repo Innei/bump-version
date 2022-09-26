@@ -81,6 +81,7 @@ export async function run(newVersion: string) {
     leadingHooks,
     shouldGenerateChangeLog,
     taildingHooks,
+    tagPrefix,
   } = resolveConfig()
   const { dryRun: dryMode } = resolveArgs()
 
@@ -121,7 +122,7 @@ export async function run(newVersion: string) {
   json.version = newVersion
   !dryMode && writeFileSync(path, JSON.stringify(json, null, tabIntent || 2))
 
-  console.log(chalk.green('Running tailing hooks.'))
+  console.log(chalk.green('Running tailding hooks.'))
 
   try {
     await execCmd(taildingHooks, cmdContext)
@@ -140,12 +141,16 @@ export async function run(newVersion: string) {
       '${NEW_VERSION}',
       newVersion,
     )}`
-    await $`git tag -a v${newVersion} -m "Release v${newVersion}"`
+    await $`git tag -a ${tagPrefix + newVersion} -m "Release ${
+      tagPrefix + newVersion
+    }"`
 
     // TODO
 
     if (shouldGenerateChangeLog) {
-      const changelog = await generateChangeLog()
+      const changelog = await generateChangeLog({
+        tagPrefix,
+      })
 
       if (dryMode) {
         console.log(`changelog generate: `, changelog)
@@ -166,13 +171,15 @@ export async function run(newVersion: string) {
         writeFileSync(changelogPath, changelog)
         await dryRun`git add ${changelogFilename}`
         await dryRun`git commit --amend --no-edit`
-        await $`git tag -d v${newVersion}`
-        await dryRun`git tag -a v${newVersion} -m "Release v${newVersion}"`
+        await $`git tag -d ${tagPrefix + newVersion}`
+        await dryRun`git tag -a ${tagPrefix + newVersion} -m "Release ${
+          tagPrefix + newVersion
+        }"`
       }
     }
 
     if (dryMode) {
-      await nothrow($`git tag -d v${newVersion}`)
+      await nothrow($`git tag -d ${tagPrefix + newVersion}`)
     }
 
     if (doGitPush) {
