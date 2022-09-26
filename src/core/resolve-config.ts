@@ -56,6 +56,16 @@ export const resolveConfig = () => {
   // changelog
   const shouldGenerateChangeLog = bumpOptions.changelog || false
 
+  // monorepo
+  const mode = bumpOptions.mode || 'independent'
+  const packages = bumpOptions.packages || []
+
+  if (mode === 'monorepo' && !packages.length) {
+    throw new ReferenceError(
+      'packages is required in monorepo mode, please add packages paths in `packages` filed.',
+    )
+  }
+
   return {
     leadingHooks,
     taildingHooks,
@@ -66,5 +76,7 @@ export const resolveConfig = () => {
     allowedBranches,
     shouldGenerateChangeLog,
     tagPrefix,
+    mode,
+    packages,
   }
 }

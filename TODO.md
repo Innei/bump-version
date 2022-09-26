@@ -2,4 +2,5 @@
 
 - [x] .bumprc
 - [ ] custom changelog
-- [ ] filter monorepo package
+- [x] filter monorepo package
+- [ ] monorepo mode
