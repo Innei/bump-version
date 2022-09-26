@@ -11,8 +11,13 @@ export const PACKAGE_PATH = findPackageJSONPath(
   filter,
 )
 
+export const ROOT_WORKSPACE_DIR = path.dirname(
+  findPackageJSONPath(process.env.INIT_CWD || String(process.cwd())),
+)
+
 export const WORKSPACE_DIR = path.dirname(PACKAGE_PATH)
 
-export const CONFIG_RC_PATH = path.join(WORKSPACE_DIR, '.bumprc')
+export const CONFIG_RC_PATH = path.join(ROOT_WORKSPACE_DIR, '.bumprc')
 
 console.log(`Workspace dir: ${chalk.yellow(WORKSPACE_DIR)}`)
+console.log(`Root workspace dir: ${chalk.yellow(ROOT_WORKSPACE_DIR)}`)
