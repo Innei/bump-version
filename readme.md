@@ -10,22 +10,31 @@ npm i -g @innei/bump-version
 vv # or bv, bump, bp
 ```
 
+## Args
+
+| Args                     | Description                       | Example            |
+| ------------------------ | --------------------------------- | ------------------ |
+| `--dry-run`              | Dry run mode                      |                    |
+| `-f` `--filter`          | Run in special monorepo workspace | `-f packages/core` |
+| `--alpha` `--prerelease` | Create prerelease version         |                    |
+| `minor`                  | Create minor version              |                    |
+| `major`                  | Create major version              |                    |
+| `patch`                  | Create patch version              |                    |
+| `prepatch`               | Create prepatch version           |                    |
+| `preminor`               | Create preminor version           |                    |
+| `premajor`               | Create premajor version           |                    |
+
 ## Config
 
-Define in package.json, add field `bump`:
+Define in package.json, add field `bump` or create `.bumprc`:
 
-```js
-"bump": {
-    "before": [
-      "git pull --rebase",
-      "pnpm i",
-      "npm run build"
-    ],
-    "after": [
-      "sh ./scripts/create-tags.sh",
-      "npm publish --access=public"
-    ]
-},
+```json
+{
+  "leading": ["git pull --rebase", "pnpm i", "npm run build"],
+  "trailing": ["sh ./scripts/create-tags.sh", "npm publish --access=public"],
+  "changelog": true,
+  "publish": true
+}
 ```
 
 | Name             | Description                              | Type                 | Default                    |
