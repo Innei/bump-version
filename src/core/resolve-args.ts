@@ -9,10 +9,12 @@ export const resolveArgs = memoReturnValueFunction(() => {
 
   const filter = argv['f'] || argv['filter']
   const dryRun = argv['dry-run'] || argv['dryRun']
+  const tagPrefix = argv['tag-prefix'] || argv['t']
 
   return {
     filter,
     dryRun,
+    tagPrefix,
 
     // version controll
     prerelease: argv['prerelease'] || argv['alpha'] || false,

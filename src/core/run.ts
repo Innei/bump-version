@@ -83,7 +83,8 @@ export async function run(newVersion: string) {
     taildingHooks,
     tagPrefix,
   } = resolveConfig()
-  const { dryRun: dryMode } = resolveArgs()
+  const { dryRun: dryMode, tagPrefix: tagPrefixArgs } = resolveArgs()
+  const nextTagPrefix = tagPrefixArgs || tagPrefix
 
   // check allowed branches
   const currentBranch = await getCurrentGitBranch()
@@ -141,15 +142,15 @@ export async function run(newVersion: string) {
       '${NEW_VERSION}',
       newVersion,
     )}`
-    await $`git tag -a ${tagPrefix + newVersion} -m "Release ${
-      tagPrefix + newVersion
+    await $`git tag -a ${nextTagPrefix + newVersion} -m "Release ${
+      nextTagPrefix + newVersion
     }"`
 
     // TODO
 
     if (shouldGenerateChangeLog) {
       const changelog = await generateChangeLog({
-        tagPrefix,
+        nextTagPrefix,
       })
 
       if (dryMode) {
@@ -171,15 +172,15 @@ export async function run(newVersion: string) {
         writeFileSync(changelogPath, changelog)
         await dryRun`git add ${changelogFilename}`
         await dryRun`git commit --amend --no-edit`
-        await $`git tag -d ${tagPrefix + newVersion}`
-        await dryRun`git tag -a ${tagPrefix + newVersion} -m "Release ${
-          tagPrefix + newVersion
+        await $`git tag -d ${nextTagPrefix + newVersion}`
+        await dryRun`git tag -a ${nextTagPrefix + newVersion} -m "Release ${
+          nextTagPrefix + newVersion
         }"`
       }
     }
 
     if (dryMode) {
-      await nothrow($`git tag -d ${tagPrefix + newVersion}`)
+      await nothrow($`git tag -d ${nextTagPrefix + newVersion}`)
     }
 
     if (doGitPush) {

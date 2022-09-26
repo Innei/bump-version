@@ -12,17 +12,18 @@ vv # or bv, bump, bp
 
 ## Args
 
-| Args                     | Description                       | Example            |
-| ------------------------ | --------------------------------- | ------------------ |
-| `--dry-run`              | Dry run mode                      |                    |
-| `-f` `--filter`          | Run in special monorepo workspace | `-f packages/core` |
-| `--alpha` `--prerelease` | Create prerelease version         |                    |
-| `minor`                  | Create minor version              |                    |
-| `major`                  | Create major version              |                    |
-| `patch`                  | Create patch version              |                    |
-| `prepatch`               | Create prepatch version           |                    |
-| `preminor`               | Create preminor version           |                    |
-| `premajor`               | Create premajor version           |                    |
+| Args                     | Description                                               | Example            |
+| ------------------------ | --------------------------------------------------------- | ------------------ |
+| `--dry-run`              | Dry run mode                                              |                    |
+| `-f` `--filter`          | Run in special monorepo workspace                         | `-f packages/core` |
+| `--alpha` `--prerelease` | Create prerelease version                                 |                    |
+| `tag-prefix`             | Custom git tag prefix, the priority is higher than rcfile |                    |
+| `minor`                  | Create minor version                                      |                    |
+| `major`                  | Create major version                                      |                    |
+| `patch`                  | Create patch version                                      |                    |
+| `prepatch`               | Create prepatch version                                   |                    |
+| `preminor`               | Create preminor version                                   |                    |
+| `premajor`               | Create premajor version                                   |                    |
 
 ## Config
 
