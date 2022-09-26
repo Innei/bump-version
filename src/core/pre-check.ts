@@ -18,6 +18,10 @@ export const precheck = async () => {
 
   const args = resolveArgs()
 
+  if (args.dryRun) {
+    console.warn(chalk.yellow(`Dry run mode. Will not exec commands.`))
+  }
+
   const keys = Object.keys(args)
   const isReleaseType: ReleaseType = keys.find(
     (key) => args[key] && releaseTypes.includes(key as ReleaseType),

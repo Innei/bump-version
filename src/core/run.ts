@@ -1,15 +1,17 @@
 import { writeFileSync } from 'fs'
 import inquirer from 'inquirer'
 import semver from 'semver'
-import { $, chalk, fs } from 'zx'
+import { $, chalk, fs, nothrow } from 'zx'
 import { getCurrentGitBranch } from '../utils/git.js'
 import { getPackageJson } from '../utils/pkg.js'
 
-import { generateChangeLog, isExistChangelogFile } from '../utils/changelog.js'
-import { snakecase } from '../utils/snakecase.js'
 import { join as pathJoin } from 'path'
 import { WORKSPACE_DIR } from '../constants/path.js'
+import { generateChangeLog, isExistChangelogFile } from '../utils/changelog.js'
+import { dryRun } from '../utils/run.js'
+import { snakecase } from '../utils/snakecase.js'
 import { resolveConfig } from './resolve-config.js'
+import { resolveArgs } from './resolve-args.js'
 
 const { valid, lte } = semver
 
@@ -27,7 +29,7 @@ export async function execCmd(cmds: string[], context: CmdContext) {
       )
     }, cmd)
     // @ts-ignore
-    await $([handledCmd])
+    await dryRun([handledCmd])
   }
 }
 
@@ -80,6 +82,7 @@ export async function run(newVersion: string) {
     shouldGenerateChangeLog,
     taildingHooks,
   } = resolveConfig()
+  const { dryRun: dryMode } = resolveArgs()
 
   // check allowed branches
   const currentBranch = await getCurrentGitBranch()
@@ -116,7 +119,7 @@ export async function run(newVersion: string) {
   await execCmd(leadingHooks, cmdContext)
   const { json, tabIntent, path } = getPackageJson()
   json.version = newVersion
-  writeFileSync(path, JSON.stringify(json, null, tabIntent || 2))
+  !dryMode && writeFileSync(path, JSON.stringify(json, null, tabIntent || 2))
 
   console.log(chalk.green('Running tailing hooks.'))
 
@@ -132,8 +135,8 @@ export async function run(newVersion: string) {
 
   if (createGitTag) {
     console.log(chalk.green('Creating git tag.'))
-    await $`git add package.json`
-    await $`git commit -a -m ${commitMessage.replace(
+    await dryRun`git add package.json`
+    await dryRun`git commit -a -m ${commitMessage.replace(
       '${NEW_VERSION}',
       newVersion,
     )}`
@@ -144,35 +147,43 @@ export async function run(newVersion: string) {
     if (shouldGenerateChangeLog) {
       const changelog = await generateChangeLog()
 
-      const hasExistChangeFile = isExistChangelogFile()
-      const defaultChangelogFilename = 'CHANGELOG'
-      let changelogFilename = defaultChangelogFilename
+      if (dryMode) {
+        console.log(`changelog generate: `, changelog)
+      } else {
+        const hasExistChangeFile = isExistChangelogFile()
+        const defaultChangelogFilename = 'CHANGELOG'
+        let changelogFilename = defaultChangelogFilename
 
-      let changelogPath = pathJoin(WORKSPACE_DIR, defaultChangelogFilename)
-      if (hasExistChangeFile) {
-        // FIXME
-        changelogFilename = hasExistChangeFile
-        changelogPath = pathJoin(WORKSPACE_DIR, hasExistChangeFile)
-        fs.unlinkSync(changelogPath)
+        let changelogPath = pathJoin(WORKSPACE_DIR, defaultChangelogFilename)
+        if (hasExistChangeFile) {
+          // FIXME
+          changelogFilename = hasExistChangeFile
+          changelogPath = pathJoin(WORKSPACE_DIR, hasExistChangeFile)
+          fs.unlinkSync(changelogPath)
+        }
+        // TODO custom changelog filename
+        // fs.unlinkSync('CHANGELOG.md')
+        writeFileSync(changelogPath, changelog)
+        await dryRun`git add ${changelogFilename}`
+        await dryRun`git commit --amend --no-edit`
+        await $`git tag -d v${newVersion}`
+        await dryRun`git tag -a v${newVersion} -m "Release v${newVersion}"`
       }
-      // TODO custom changelog filename
-      // fs.unlinkSync('CHANGELOG.md')
-      writeFileSync(changelogPath, changelog)
-      await $`git add ${changelogFilename}`
-      await $`git commit --amend --no-edit`
-      await $`git tag -d v${newVersion}`
-      await $`git tag -a v${newVersion} -m "Release v${newVersion}"`
+    }
+
+    if (dryMode) {
+      await nothrow($`git tag -d v${newVersion}`)
     }
 
     if (doGitPush) {
       console.log(chalk.green('Pushing to remote.'))
-      await $`git push`
-      await $`git push --tags`
+      await dryRun`git push`
+      await dryRun`git push --tags`
     }
   }
 
   if (doPublish) {
     console.log(chalk.green('Publishing to npm.'))
-    await $`npm publish --access=public`
+    await dryRun`npm publish --access=public`
   }
 }

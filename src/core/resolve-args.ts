@@ -1,15 +1,18 @@
 import { argv } from 'zx'
+import { memoReturnValueFunction } from '../utils/memo.js'
 
-export const resolveArgs = () => {
+export const resolveArgs = memoReturnValueFunction(() => {
   /**
    * --filter packages/query
    * -f packages/query
    */
 
   const filter = argv['f'] || argv['filter']
+  const dryRun = argv['dry-run'] || argv['dryRun']
 
   return {
     filter,
+    dryRun,
 
     // version controll
     prerelease: argv['prerelease'] || argv['alpha'] || false,
@@ -20,4 +23,4 @@ export const resolveArgs = () => {
     preminor: argv['preminor'] || false,
     prepatch: argv['prepatch'] || false,
   }
-}
+})
