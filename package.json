@@ -26,7 +26,7 @@
     "dev": "NODE_ENV=development tsx src/main.mts -- --dry-run",
     "dev:monorepo": "NODE_ENV=development tsx src/main.mts -- --dry-run -f test/packages/core",
     "prebuild": "rm -rf dist",
-    "build": "tsc && ncc build lib/main.mjs -o dist --external conventional-changelog",
+    "build": "tsc && ncc build lib/src/main.mjs -o dist --external conventional-changelog",
     "test": "vitest"
   },
   "devDependencies": {
