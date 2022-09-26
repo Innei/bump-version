@@ -34,7 +34,7 @@ export const precheck = async () => {
       .prompt({
         name: 'confirm',
         default: true,
-        message: 'Continue? (Y/n)',
+        message: 'Continue?',
         type: 'confirm',
       })
       .then((answer) => {

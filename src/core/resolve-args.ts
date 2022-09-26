@@ -1,14 +1,17 @@
 import { argv } from 'zx'
 
 export const resolveArgs = () => {
+  /**
+   * --filter packages/query
+   * -f packages/query
+   */
+
+  const filter = argv['f'] || argv['filter']
+
   return {
-    // 'patch',
-    // 'minor',
-    // 'major',
-    // 'premajor',
-    // 'preminor',
-    // 'prepatch',
-    // 'prerelease',
+    filter,
+
+    // version controll
     prerelease: argv['prerelease'] || argv['alpha'] || false,
     patch: argv['patch'] || false,
     minor: argv['minor'] || false,

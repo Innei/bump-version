@@ -20,8 +20,11 @@ type CmdContext = {
 export async function execCmd(cmds: string[], context: CmdContext) {
   const ctxKeys = Object.keys(context)
   for (const cmd of cmds) {
-    const handledCmd = ctxKeys.reduce((key, nextKey) => {
-      return cmd.replace(`$\{${snakecase(key).toUpperCase()}}`, context[key])
+    const handledCmd = ctxKeys.reduce((cmd, nextKey) => {
+      return cmd.replace(
+        `$\{${snakecase(nextKey).toUpperCase()}}`,
+        context[nextKey],
+      )
     }, cmd)
     // @ts-ignore
     await $([handledCmd])
