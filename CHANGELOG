@@ -1,3 +1,21 @@
+# [1.0.0-alpha.3](https://github.com/Innei/bump-version/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2022-09-26)
+
+
+### Bug Fixes
+
+* build ([217b49e](https://github.com/Innei/bump-version/commit/217b49ec8e1bd2671b123d19f7d42d1dc7f79e35))
+* confirm precheck ([1402220](https://github.com/Innei/bump-version/commit/140222047791c99d383ac76f44aac3335cf39947))
+* root rc path ([2e00199](https://github.com/Innei/bump-version/commit/2e001991baa88541ae55d2543943698e9317c3ed))
+
+
+### Features
+
+* dry run mode ([4149909](https://github.com/Innei/bump-version/commit/4149909d4374b88fdc38aba8930587db291640f4))
+* filter ([eea8d94](https://github.com/Innei/bump-version/commit/eea8d94db1645425193c097f375bbf2adc4d787f))
+* rc config ([955648c](https://github.com/Innei/bump-version/commit/955648c48a6ac477aa90ca146f9ccd56feada312))
+
+
+
 # [1.0.0-alpha.2](https://github.com/Innei/bump-version/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2022-09-25)
 
 
