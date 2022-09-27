@@ -1,3 +1,18 @@
+# [1.0.0-alpha.6](https://github.com/Innei/bump-version/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2022-09-27)
+
+
+### Bug Fixes
+
+* confrim result ([4762e9c](https://github.com/Innei/bump-version/commit/4762e9c94393eee076e0724b4d513bf6418caf7e))
+* tag-prefix params ([201dd72](https://github.com/Innei/bump-version/commit/201dd72b6eb202099e53ca79e533cd724f8e31f3))
+
+
+### Features
+
+* argv of `rag-prefix` ([4dc25dc](https://github.com/Innei/bump-version/commit/4dc25dc788fd6a742daeeb9fb8232c9b49103c94))
+
+
+
 # [1.0.0-alpha.5](https://github.com/Innei/bump-version/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2022-09-26)
 
 
@@ -127,16 +142,12 @@
 
 
 
-## [0.2.2](https://github.com/Innei/bump-version/compare/0.2.1...v0.2.2) (2022-01-15)
+## [0.2.2](https://github.com/Innei/bump-version/compare/v0.2.0...v0.2.2) (2022-01-15)
 
 
 ### Bug Fixes
 
 * add `v` prefix ([27df99b](https://github.com/Innei/bump-version/commit/27df99b467e073759c6a197fa1dc5440737b5d18))
-
-
-
-## [0.2.1](https://github.com/Innei/bump-version/compare/v0.2.0...0.2.1) (2022-01-14)
 
 
 ### Features
