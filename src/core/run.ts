@@ -150,7 +150,7 @@ export async function run(newVersion: string) {
 
     if (shouldGenerateChangeLog) {
       const changelog = await generateChangeLog({
-        nextTagPrefix,
+        tagPrefix: nextTagPrefix,
       })
 
       if (dryMode) {
