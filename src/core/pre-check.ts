@@ -44,7 +44,8 @@ export const precheck = async () => {
       })
       .then((answer) => {
         const result = answer.confirm
-        if (result === 'y' && !result) {
+
+        if (result) {
           run(nextVersion)
         } else {
           process.exit(0)
