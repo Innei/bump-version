@@ -1,6 +1,6 @@
 import inquirer from 'inquirer'
 import type { ReleaseType } from 'semver'
-import { chalk } from 'zx'
+import { chalk, fs, path } from 'zx'
 
 import { getNextVersion, getPackageJson, releaseTypes } from '../utils/pkg.js'
 import { resolveArgs } from './resolve-args.js'
@@ -22,6 +22,13 @@ export const precheck = async () => {
   if (args.dryRun) {
     console.warn(chalk.yellow(`Dry run mode. Will not exec commands.`))
     __DEV__ && console.log(args)
+  }
+
+  if (typeof args.v == 'boolean' && args.v) {
+    const cwd = process.cwd()
+    console.log(fs.readJSONSync(path.resolve(cwd, 'package.json')).version)
+
+    process.exit(0)
   }
 
   const keys = Object.keys(args)

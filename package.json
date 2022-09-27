@@ -1,6 +1,7 @@
 {
   "name": "@innei/bump-version",
   "type": "module",
+  "packageManager": "pnpm@7.1.0",
   "bin": {
     "bump": "dist/index.mjs",
     "vv": "dist/index.mjs"
