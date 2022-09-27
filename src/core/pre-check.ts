@@ -1,9 +1,10 @@
-import { chalk } from 'zx'
-import { getPackageJson, releaseTypes, getNextVersion } from '../utils/pkg.js'
-import { resolveArgs } from './resolve-args.js'
-import { run } from './run.js'
 import inquirer from 'inquirer'
 import type { ReleaseType } from 'semver'
+import { chalk } from 'zx'
+
+import { getNextVersion, getPackageJson, releaseTypes } from '../utils/pkg.js'
+import { resolveArgs } from './resolve-args.js'
+import { run } from './run.js'
 
 export const precheck = async () => {
   const packageJson = getPackageJson()

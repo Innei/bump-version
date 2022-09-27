@@ -1,7 +1,7 @@
 import { chalk, path } from 'zx'
 
-import { findPackageJSONPath } from '../utils/find-package.js'
 import { resolveArgs } from '../core/resolve-args.js'
+import { findPackageJSONPath } from '../utils/find-package.js'
 
 const { filter } = resolveArgs()
 // TODO

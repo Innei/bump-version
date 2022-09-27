@@ -5,8 +5,9 @@ import type {
 } from 'inquirer'
 import inquirer from 'inquirer'
 import { chalk } from 'zx'
-import { getPackageJson, generateReleaseTypes } from '../utils/pkg.js'
-import { run, cutsomVersionRun } from './run.js'
+
+import { generateReleaseTypes, getPackageJson } from '../utils/pkg.js'
+import { cutsomVersionRun, run } from './run.js'
 
 export const promptMain = async () => {
   const packageJson = getPackageJson()

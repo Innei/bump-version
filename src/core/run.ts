@@ -1,17 +1,17 @@
 import { writeFileSync } from 'fs'
 import inquirer from 'inquirer'
-import semver from 'semver'
-import { $, chalk, fs, nothrow } from 'zx'
-import { getCurrentGitBranch } from '../utils/git.js'
-import { getPackageJson } from '../utils/pkg.js'
-
 import { join as pathJoin } from 'path'
+import semver from 'semver'
+import { $, chalk, fs } from 'zx'
+
 import { WORKSPACE_DIR } from '../constants/path.js'
 import { generateChangeLog, isExistChangelogFile } from '../utils/changelog.js'
+import { getCurrentGitBranch } from '../utils/git.js'
+import { getPackageJson } from '../utils/pkg.js'
 import { dryRun } from '../utils/run.js'
 import { snakecase } from '../utils/snakecase.js'
-import { resolveConfig } from './resolve-config.js'
 import { resolveArgs } from './resolve-args.js'
+import { resolveConfig } from './resolve-config.js'
 
 const { valid, lte } = semver
 
@@ -153,25 +153,27 @@ export async function run(newVersion: string) {
         tagPrefix: nextTagPrefix,
       })
 
-      if (dryMode) {
-        console.log(`changelog generate: `, changelog)
-      } else {
-        const hasExistChangeFile = isExistChangelogFile()
-        const defaultChangelogFilename = 'CHANGELOG'
-        let changelogFilename = defaultChangelogFilename
+      const hasExistChangeFile = isExistChangelogFile()
+      const defaultChangelogFilename = 'CHANGELOG'
+      let changelogFilename = defaultChangelogFilename
 
-        let changelogPath = pathJoin(WORKSPACE_DIR, defaultChangelogFilename)
-        if (hasExistChangeFile) {
-          // FIXME
-          changelogFilename = hasExistChangeFile
-          changelogPath = pathJoin(WORKSPACE_DIR, hasExistChangeFile)
-          fs.unlinkSync(changelogPath)
-        }
+      let changelogPath = pathJoin(WORKSPACE_DIR, defaultChangelogFilename)
+      if (hasExistChangeFile) {
+        // FIXME
+        changelogFilename = hasExistChangeFile
+        changelogPath = pathJoin(WORKSPACE_DIR, hasExistChangeFile)
+        !dryMode && fs.unlinkSync(changelogPath)
+      }
+
+      if (dryMode) {
+        console.log(`changelog generate: \n`, changelog)
+        console.log(`changelog location: \n`, changelogPath)
+      } else {
         // TODO custom changelog filename
         // fs.unlinkSync('CHANGELOG.md')
         writeFileSync(changelogPath, changelog)
         await dryRun`git add ${changelogFilename}`
-        await dryRun`git commit --amend --no-edit`
+        await dryRun`git commit --amend --no-verify --no-edit`
         await $`git tag -d ${nextTagPrefix + newVersion}`
         await dryRun`git tag -a ${nextTagPrefix + newVersion} -m "Release ${
           nextTagPrefix + newVersion
@@ -180,7 +182,7 @@ export async function run(newVersion: string) {
     }
 
     if (dryMode) {
-      await nothrow($`git tag -d ${nextTagPrefix + newVersion}`)
+      await $`git tag -d ${nextTagPrefix + newVersion}`.nothrow()
     }
 
     if (doGitPush) {

@@ -1,5 +1,6 @@
 import { $ } from 'zx'
 import { log } from 'zx/core'
+
 import { resolveArgs } from '../core/resolve-args.js'
 
 export const dryRun = async (pieces: TemplateStringsArray, ...args: any[]) => {
