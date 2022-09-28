@@ -141,7 +141,7 @@ export async function run(newVersion: string) {
     await dryRun`git commit -a -m ${commitMessage.replace(
       '${NEW_VERSION}',
       newVersion,
-    )}`
+    )} --no-verify`
     await $`git tag -a ${nextTagPrefix + newVersion} -m "Release ${
       nextTagPrefix + newVersion
     }"`

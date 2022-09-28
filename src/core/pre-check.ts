@@ -1,6 +1,8 @@
+import fs from 'fs'
 import inquirer from 'inquirer'
+import path from 'path'
 import type { ReleaseType } from 'semver'
-import { chalk, fs, path } from 'zx'
+import { chalk } from 'zx'
 
 import { getNextVersion, getPackageJson, releaseTypes } from '../utils/pkg.js'
 import { resolveArgs } from './resolve-args.js'
@@ -25,8 +27,10 @@ export const precheck = async () => {
   }
 
   if (typeof args.v == 'boolean' && args.v) {
-    const cwd = process.cwd()
-    console.log(fs.readJSONSync(path.resolve(cwd, 'package.json')).version)
+    const pkg = fs.readFileSync(path.resolve(process.cwd(), `./package.json`), {
+      encoding: 'utf-8',
+    })
+    console.log(JSON.parse(pkg).version)
 
     process.exit(0)
   }
