@@ -6,6 +6,7 @@ import { $, chalk, fs } from 'zx'
 
 import { WORKSPACE_DIR } from '../constants/path.js'
 import { generateChangeLog, isExistChangelogFile } from '../utils/changelog.js'
+import { detectPackage } from '../utils/detect-package.js'
 import { getCurrentGitBranch } from '../utils/git.js'
 import { getPackageJson } from '../utils/pkg.js'
 import { dryRun } from '../utils/run.js'
@@ -194,7 +195,9 @@ export async function run(newVersion: string) {
   }
 
   if (doPublish) {
+    const packageManager = await detectPackage()
+    const publishCommand = `${packageManager} publish --access public`
     console.log(chalk.green('Publishing to npm.'))
-    await dryRun`npm publish --access=public`
+    await dryRun([publishCommand])
   }
 }
