@@ -12,6 +12,7 @@ import { dryRun } from '../utils/run.js'
 import { snakecase } from '../utils/snakecase.js'
 import { resolveArgs } from './resolve-args.js'
 import { resolveConfig } from './resolve-config.js'
+import { updatePackageJsonVersion } from './update-pkg.js'
 
 const { valid, lte } = semver
 
@@ -119,9 +120,9 @@ export async function run(newVersion: string) {
   }
 
   await execCmd(leadingHooks, cmdContext)
-  const { json, tabIntent, path } = getPackageJson()
-  json.version = newVersion
-  !dryMode && writeFileSync(path, JSON.stringify(json, null, tabIntent || 2))
+
+  const { path } = getPackageJson()
+  await updatePackageJsonVersion(newVersion)
 
   console.log(chalk.green('Running tailding hooks.'))
 

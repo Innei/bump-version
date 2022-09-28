@@ -17,10 +17,11 @@ export const getPackageJson = memoReturnValueFunction(() => {
 export const getRootPackageJson = memoReturnValueFunction(() => {
   const PKG_PATH = join(ROOT_WORKSPACE_DIR, '/package.json')
   const originFile = readFileSync(PKG_PATH, 'utf-8')
+  const tabIntent = originFile.match(/^\s+/)?.length
 
   const PKG = JSON.parse(originFile)
 
-  return { json: PKG, path: PKG_PATH, originFile }
+  return { json: PKG, path: PKG_PATH, originFile, tabIntent }
 })
 
 export const releaseTypes: semver.ReleaseType[] = [

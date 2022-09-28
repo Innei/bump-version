@@ -1,0 +1,15 @@
+{
+  "leading": [
+    "git pull --rebase",
+    "pnpm i",
+    "npm run build"
+  ],
+  "trailing": [],
+  "publish": true,
+  "changelog": true,
+  "mode": "monorepo",
+  "allowed_branches": ["dev/*"],
+  "packages": [
+    "test/packages/*"
+  ]
+}

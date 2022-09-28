@@ -1,12 +1,30 @@
-import { fs } from 'zx'
+import { fs, path } from 'zx'
 
-import { CONFIG_RC_PATH, ROOT_CONFIG_RC_PATH } from '../constants/path.js'
+import {
+  CONFIG_RC_PATH,
+  ROOT_CONFIG_RC_PATH,
+  ROOT_WORKSPACE_DIR,
+} from '../constants/path.js'
 import type { BumpOptions } from '../interfaces/options.js'
 import { camelcaseKeys } from '../utils/camelcase-keys.js'
 import { getPackageJson, getRootPackageJson } from '../utils/pkg.js'
+import { resolveArgs } from './resolve-args.js'
 
-// FIXME: rc priority: 1. monorepo rc file 2. root rc file 3. monorepo package field 4. root package field
+// FIXME: rc priority: 0. custom rc path 1. monorepo rc file 2. root rc file 3. monorepo package field 4. root package field
 const checkConfigRcExist = () => {
+  const { rcPath } = resolveArgs()
+
+  if (rcPath) {
+    const customRcFilePath = path.resolve(ROOT_WORKSPACE_DIR, rcPath)
+    if (fs.existsSync(customRcFilePath)) {
+      return customRcFilePath
+    } else {
+      throw new ReferenceError(
+        `The custom rc file path you entered does not exist: ${customRcFilePath}`,
+      )
+    }
+  }
+
   return fs.existsSync(CONFIG_RC_PATH)
     ? CONFIG_RC_PATH
     : fs.existsSync(ROOT_CONFIG_RC_PATH)
@@ -59,12 +77,6 @@ export const resolveConfig = () => {
   // monorepo
   const mode = bumpOptions.mode || 'independent'
   const packages = bumpOptions.packages || []
-
-  if (mode === 'monorepo' && !packages.length) {
-    throw new ReferenceError(
-      'packages is required in monorepo mode, please add packages paths in `packages` filed.',
-    )
-  }
 
   return {
     leadingHooks,

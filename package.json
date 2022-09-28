@@ -25,7 +25,8 @@
   },
   "scripts": {
     "dev": "NODE_ENV=development tsx src/main.mts -- --dry-run",
-    "dev:monorepo": "NODE_ENV=development tsx src/main.mts -- --dry-run -f test/packages/core",
+    "dev:filter": "NODE_ENV=development tsx src/main.mts -- --dry-run -f test/packages/core",
+    "dev:monorepo": "NODE_ENV=development tsx src/main.mts -- --dry-run -c .monorepo.bumprc",
     "prebuild": "rm -rf dist",
     "build": "tsc && ncc build lib/src/main.mjs -o dist --external conventional-changelog",
     "test": "vitest"
