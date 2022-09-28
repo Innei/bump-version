@@ -13,7 +13,7 @@ export const precheck = async () => {
 
   {
     const result = await $`git status --porcelain`.quiet()
-    if (result.stdout) {
+    if (result.stdout && !__DEV__) {
       console.error(chalk.red('The git tree is not clean'))
       process.exit(-1)
     }
