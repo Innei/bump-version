@@ -2,13 +2,23 @@ import fs from 'fs'
 import inquirer from 'inquirer'
 import path from 'path'
 import type { ReleaseType } from 'semver'
-import { chalk } from 'zx'
+import { $, chalk } from 'zx'
 
 import { getNextVersion, getPackageJson, releaseTypes } from '../utils/pkg.js'
 import { resolveArgs } from './resolve-args.js'
 import { run } from './run.js'
 
 export const precheck = async () => {
+  // check git tree is clean
+
+  {
+    const result = await $`git status --porcelain`.quiet()
+    if (result.stdout) {
+      console.error(chalk.red('The git tree is not clean'))
+      process.exit(-1)
+    }
+  }
+
   const packageJson = getPackageJson()
   const currentVersion = packageJson.json.version
 
