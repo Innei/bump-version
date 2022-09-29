@@ -38,7 +38,7 @@ export const updatePackageJsonVersion = async (newVersion: string) => {
       )
 
       console.log(
-        `${chalk.cyan(json.name)}  ${chalk.gray(rootVersion)} -> ${chalk.green(
+        `${chalk.cyan(json.name)}  ${rootVersion} -> ${chalk.green(
           newVersion,
         )}`,
       )
@@ -61,9 +61,9 @@ export const updatePackageJsonVersion = async (newVersion: string) => {
             monorepoPath.replace(new RegExp(`^${ROOT_WORKSPACE_DIR}`), '')
 
           console.log(
-            `${' '.repeat(4)}${monorepoName.padEnd(15, ' ')}${chalk.gray(
-              monorepoPkg.version,
-            )} -> ${chalk.yellow(newVersion)}`,
+            `${' '.repeat(4)}${monorepoName.padEnd(15, ' ')}${
+              monorepoPkg.version
+            } -> ${chalk.yellow(newVersion)}`,
           )
 
           bumpFnRefs.push(async () => {
