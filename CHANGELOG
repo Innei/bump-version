@@ -1,3 +1,13 @@
+# [1.0.0-beta.0](https://github.com/Innei/bump-version/compare/v1.0.0-alpha.7...v1.0.0-beta.0) (2022-09-29)
+
+
+### Bug Fixes
+
+* bundled version ([4885297](https://github.com/Innei/bump-version/commit/48852974d0500b934cf69a163f3bdd5cba12d5d6))
+* publish command ([d098507](https://github.com/Innei/bump-version/commit/d0985079820adecc7d2a94fef5a702aad78e1056))
+
+
+
 # [1.0.0-alpha.7](https://github.com/Innei/bump-version/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2022-09-29)
 
 
