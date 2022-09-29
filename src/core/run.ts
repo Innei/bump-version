@@ -175,7 +175,7 @@ export async function run(newVersion: string) {
         // TODO custom changelog filename
         // fs.unlinkSync('CHANGELOG.md')
         writeFileSync(changelogPath, changelog)
-        await dryRun`git add ${changelogFilename}`
+        await dryRun`git add ${changelogPath}`
         await dryRun`git commit --amend --no-verify --no-edit`
         await $`git tag -d ${nextTagPrefix + newVersion}`.quiet().nothrow()
         await dryRun`git tag -a ${nextTagPrefix + newVersion} -m "Release ${
