@@ -198,6 +198,7 @@ export async function run(newVersion: string) {
     const packageManager = await detectPackage()
     const publishCommand = `${packageManager} publish --access public`
     console.log(chalk.green('Publishing to npm.'))
+    // @ts-ignore
     await dryRun([publishCommand])
   }
 }
