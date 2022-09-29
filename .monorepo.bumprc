@@ -8,7 +8,7 @@
   "publish": true,
   "changelog": true,
   "mode": "monorepo",
-  "allowed_branches": ["dev/*"],
+  "allowed_branches": ["dev/*", "master", "main"],
   "packages": [
     "test/packages/*"
   ]

@@ -84,6 +84,7 @@ export async function run(newVersion: string) {
     shouldGenerateChangeLog,
     taildingHooks,
     tagPrefix,
+    mode,
   } = resolveConfig()
   const { dryRun: dryMode, tagPrefix: tagPrefixArgs } = resolveArgs()
   const nextTagPrefix = tagPrefixArgs || tagPrefix
@@ -196,7 +197,10 @@ export async function run(newVersion: string) {
 
   if (doPublish) {
     const packageManager = await detectPackage()
-    const publishCommand = `${packageManager} publish --access public`
+    let publishCommand = `${packageManager} publish --access public`
+    if (packageManager === 'pnpm' && mode === 'monorepo') {
+      publishCommand += ' -r'
+    }
     console.log(chalk.green('Publishing to npm.'))
     // @ts-ignore
     await dryRun([publishCommand])
