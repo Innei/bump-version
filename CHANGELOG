@@ -1,3 +1,14 @@
+# [1.0.0-beta.1](https://github.com/Innei/bump-version/compare/v1.0.0-beta.0...v1.0.0-beta.1) (2022-09-29)
+
+
+### Bug Fixes
+
+* generate current preid semver ([1721f3f](https://github.com/Innei/bump-version/commit/1721f3fbda860806ab2b9c0bd14bf64a98ab7f04))
+* precheck argv version ([f292ddc](https://github.com/Innei/bump-version/commit/f292ddcefe5c67c6cd80efd141cbf93cc24cc454))
+* update version font color ([eb5abf2](https://github.com/Innei/bump-version/commit/eb5abf276c65a1d8d9cb579a3c40a0af1be8f383))
+
+
+
 # [1.0.0-beta.0](https://github.com/Innei/bump-version/compare/v1.0.0-alpha.7...v1.0.0-beta.0) (2022-09-29)
 
 
