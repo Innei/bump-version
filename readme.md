@@ -38,14 +38,17 @@ Define in package.json, add field `bump` or create `.bumprc`:
 }
 ```
 
-| Name             | Description                              | Type                 | Default                    |
-| ---------------- | ---------------------------------------- | -------------------- | -------------------------- |
-| leading          | Run script before change version         | string[]             | `[]`                       |
-| trailing         | Run script after change version          | string[]             | `[]`                       |
-| publish          | Publish package after bump               | boolean              | false                      |
-| tag              | Create git tag after bump                | boolean              | true                       |
-| push             | Push git commit after bump               | boolean              | true                       |
-| commit_message   | Commit message for new version tag       | string               | `release: v${NEW_VERSION}` |
-| changelog        | Generate changelog                       | boolean              | false                      |
-| allowed_branches | Allow run bump version on special branch | (RegExp \| string)[] | `["main", "master"]`       |
-| tag-prefix       | Git prefix tag                           | string               | `v`                        |
+| Name             | Description                              | Type                     | Default                    |
+| ---------------- | ---------------------------------------- | ------------------------ | -------------------------- |
+| leading          | Run script before change version         | string[]                 | `[]`                       |
+| trailing         | Run script after change version          | string[]                 | `[]`                       |
+| publish          | Publish package after bump               | boolean                  | false                      |
+| tag              | Create git tag after bump                | boolean                  | true                       |
+| push             | Push git commit after bump               | boolean                  | true                       |
+| commit_message   | Commit message for new version tag       | string                   | `release: v${NEW_VERSION}` |
+| changelog        | Generate changelog                       | boolean                  | false                      |
+| allowed_branches | Allow run bump version on special branch | (RegExp \| string)[]     | `["main", "master"]`       |
+| tag-prefix       | Git prefix tag                           | string                   | `v`                        |
+| mode             | Workspace mode                           | `independent` `monorepo` | `independent`              |
+| packages         | Monorepo mode packages path              | string[]                 | `[]`                       |
+
