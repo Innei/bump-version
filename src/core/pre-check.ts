@@ -10,6 +10,18 @@ import { resolveConfig } from './resolve-config.js'
 import { run } from './run.js'
 
 export const precheck = async () => {
+  const args = resolveArgs()
+  const config = resolveConfig()
+
+  if (typeof args.v == 'boolean' && args.v) {
+    const pkg = fs.readFileSync(path.resolve(process.cwd(), `./package.json`), {
+      encoding: 'utf-8',
+    })
+    console.log(JSON.parse(pkg).version)
+
+    process.exit(0)
+  }
+
   // check git tree is clean
 
   {
@@ -30,21 +42,9 @@ export const precheck = async () => {
     process.exit(-1)
   }
 
-  const args = resolveArgs()
-  const config = resolveConfig()
-
   if (args.dryRun) {
     console.warn(chalk.yellow(`Dry run mode. Will not exec commands.`))
     __DEV__ && console.log(args)
-  }
-
-  if (typeof args.v == 'boolean' && args.v) {
-    const pkg = fs.readFileSync(path.resolve(process.cwd(), `./package.json`), {
-      encoding: 'utf-8',
-    })
-    console.log(JSON.parse(pkg).version)
-
-    process.exit(0)
   }
 
   if (config.mode === 'monorepo') {
