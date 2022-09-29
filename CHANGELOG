@@ -1,3 +1,22 @@
+# [1.0.0-alpha.7](https://github.com/Innei/bump-version/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2022-09-29)
+
+
+### Bug Fixes
+
+* display version ([faffa29](https://github.com/Innei/bump-version/commit/faffa29f677f3be8c16c2c17bb6375c048464f27))
+* make ts happy ([2f29dec](https://github.com/Innei/bump-version/commit/2f29decdf286056441fc7746447cf95871804ef3))
+
+
+### Features
+
+* add version argv ([084849c](https://github.com/Innei/bump-version/commit/084849cb811d131e0fbdc27f4adff62e0f2769f3))
+* detect package manger ([d78f12e](https://github.com/Innei/bump-version/commit/d78f12e8ea31dc51277e4553dcd3b38ff0059174))
+* next preid ([bae5d24](https://github.com/Innei/bump-version/commit/bae5d24075f0b7ea09faf16bd283345c872c7162))
+* pre-check git tree ([7a285b8](https://github.com/Innei/bump-version/commit/7a285b80474b95ba94471ee0af81f1f3223c0997))
+* support monorepo mode ([#3](https://github.com/Innei/bump-version/issues/3)) ([018c865](https://github.com/Innei/bump-version/commit/018c865c73dac41235a378cc1cba4d8a7ef8330c))
+
+
+
 # [1.0.0-alpha.6](https://github.com/Innei/bump-version/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2022-09-27)
 
 
