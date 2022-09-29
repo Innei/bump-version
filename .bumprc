@@ -1,10 +1,11 @@
 {
   "leading": [
     "git pull --rebase",
-    "pnpm i",
+    "pnpm i"
+  ],
+  "trailing": [
     "npm run build"
   ],
-  "trailing": [],
   "publish": true,
   "changelog": true,
   "allowed_branches": [

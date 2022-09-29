@@ -176,7 +176,7 @@ export async function run(newVersion: string) {
         writeFileSync(changelogPath, changelog)
         await dryRun`git add ${changelogFilename}`
         await dryRun`git commit --amend --no-verify --no-edit`
-        await $`git tag -d ${nextTagPrefix + newVersion}`
+        await $`git tag -d ${nextTagPrefix + newVersion}`.quiet().nothrow()
         await dryRun`git tag -a ${nextTagPrefix + newVersion} -m "Release ${
           nextTagPrefix + newVersion
         }"`
@@ -184,7 +184,7 @@ export async function run(newVersion: string) {
     }
 
     if (dryMode) {
-      await $`git tag -d ${nextTagPrefix + newVersion}`.nothrow()
+      await $`git tag -d ${nextTagPrefix + newVersion}`.nothrow().quiet()
     }
 
     if (doGitPush) {
