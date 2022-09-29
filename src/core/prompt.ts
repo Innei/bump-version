@@ -20,8 +20,9 @@ const nextIdentifierMap = {
 export const promptMain = async () => {
   const packageJson = getPackageJson()
   const currentVersion = packageJson.json.version as string
+  const identifier = currentVersion.match(/\d+\.\d+\.\d+-(.*?)\.\d+/)?.[1]
 
-  const versions = generateReleaseTypes(currentVersion)
+  const versions = generateReleaseTypes(currentVersion, undefined, identifier)
 
   const selectItems: AsyncDynamicQuestionProperty<
     DistinctChoice<any, ListChoiceMap<any>>[],
@@ -31,7 +32,6 @@ export const promptMain = async () => {
     name: version.name,
   }))
 
-  const identifier = currentVersion.match(/\d+\.\d+\.\d+-(.*?)\.\d+/)?.[1]
   // console.log(identifier)
   if (identifier) {
     const nextIdentifier = nextIdentifierMap[identifier]
