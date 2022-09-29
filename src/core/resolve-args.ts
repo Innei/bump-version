@@ -8,13 +8,15 @@ export const resolveArgs = memoReturnValueFunction(() => {
    * -f packages/query
    */
 
-  const filter = argv['f'] || argv['filter']
-  const dryRun = argv['dry-run'] || argv['dryRun']
-  const tagPrefix = argv['tag-prefix'] || argv['t']
-  const v = argv['v'] || argv['version']
+  const filter: string = argv['f'] || argv['filter']
+  const dryRun: boolean = argv['dry-run'] || argv['dryRun']
+  const tagPrefix: string = argv['tag-prefix'] || argv['t']
+  const v: boolean = argv['v'] || argv['version']
+  const customRcFile: string = argv['c'] || argv['config']
 
   return {
     v,
+    rcPath: customRcFile,
 
     // argv
     filter,

@@ -4,7 +4,7 @@ export const memoReturnValueFunction = <T extends (...args: any[]) => any>(
   let cache: any = undefined
   return ((...args: any[]) => {
     if (cache === undefined) {
-      cache = fn(...args)
+      cache = Object.freeze(fn(...args))
     }
     return cache
   }) as T

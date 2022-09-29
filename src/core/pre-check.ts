@@ -6,6 +6,7 @@ import { $, chalk } from 'zx'
 
 import { getNextVersion, getPackageJson, releaseTypes } from '../utils/pkg.js'
 import { resolveArgs } from './resolve-args.js'
+import { resolveConfig } from './resolve-config.js'
 import { run } from './run.js'
 
 export const precheck = async () => {
@@ -30,6 +31,7 @@ export const precheck = async () => {
   }
 
   const args = resolveArgs()
+  const config = resolveConfig()
 
   if (args.dryRun) {
     console.warn(chalk.yellow(`Dry run mode. Will not exec commands.`))
@@ -43,6 +45,24 @@ export const precheck = async () => {
     console.log(JSON.parse(pkg).version)
 
     process.exit(0)
+  }
+
+  if (config.mode === 'monorepo') {
+    if (!config.packages.length) {
+      throw new ReferenceError(
+        'packages is required in monorepo mode, please add packages paths in `packages` filed.',
+      )
+    }
+    if (args.filter) {
+      console.error(
+        chalk.red(`\`-f\` \`--filter\` argv can't used in monorepo mode.`),
+      )
+      process.exit(3)
+    }
+
+    console.warn(
+      chalk.yellow(`You are in monorepo mode, only root version will be read.`),
+    )
   }
 
   const keys = Object.keys(args)

@@ -16,4 +16,7 @@ export interface BumpOptions {
   changelog: boolean
   allowedBranches: string[]
   tagPrefix: string
+
+  mode: 'monorepo' | 'independent'
+  packages: string[]
 }
