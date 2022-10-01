@@ -160,11 +160,11 @@ export async function run(newVersion: string) {
       const defaultChangelogFilename = 'CHANGELOG'
       let changelogFilename = defaultChangelogFilename
 
-      let changelogPath = pathJoin(WORKSPACE_DIR, defaultChangelogFilename)
+      let changelogPath = pathJoin(WORKSPACE_DIR, changelogFilename)
       if (hasExistChangeFile) {
         // FIXME
         changelogFilename = hasExistChangeFile
-        changelogPath = pathJoin(WORKSPACE_DIR, hasExistChangeFile)
+        changelogPath = pathJoin(WORKSPACE_DIR, changelogFilename)
         !dryMode && fs.unlinkSync(changelogPath)
       }
 
