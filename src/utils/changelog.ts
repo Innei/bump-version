@@ -23,6 +23,9 @@ export const generateChangeLog = (
   })
 }
 
+/**
+ * get existed changelog name
+ */
 export const isExistChangelogFile = () => {
   return ['changelog.md', 'changelog', 'CHANGELOG', 'CHANGELOG.md'].reduce(
     (filename, currentFilename) => {

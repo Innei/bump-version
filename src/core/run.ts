@@ -4,7 +4,7 @@ import { join as pathJoin } from 'path'
 import semver from 'semver'
 import { $, chalk, fs } from 'zx'
 
-import { WORKSPACE_DIR } from '../constants/path.js'
+import { ROOT_WORKSPACE_DIR, WORKSPACE_DIR } from '../constants/path.js'
 import { generateChangeLog, isExistChangelogFile } from '../utils/changelog.js'
 import { detectPackage } from '../utils/detect-package.js'
 import { getCurrentGitBranch } from '../utils/git.js'
@@ -86,6 +86,7 @@ export async function run(newVersion: string) {
     tagPrefix,
     mode,
   } = resolveConfig()
+  const isMonorepo = mode === 'monorepo'
   const { dryRun: dryMode, tagPrefix: tagPrefixArgs } = resolveArgs()
   const nextTagPrefix = tagPrefixArgs || tagPrefix
 
@@ -157,14 +158,15 @@ export async function run(newVersion: string) {
       })
 
       const hasExistChangeFile = isExistChangelogFile()
-      const defaultChangelogFilename = 'CHANGELOG'
+      const defaultChangelogFilename = 'CHANGELOG.md'
       let changelogFilename = defaultChangelogFilename
 
-      let changelogPath = pathJoin(WORKSPACE_DIR, changelogFilename)
+      const changelogInFolder = isMonorepo ? ROOT_WORKSPACE_DIR : WORKSPACE_DIR
+      let changelogPath = pathJoin(changelogInFolder, changelogFilename)
       if (hasExistChangeFile) {
         // FIXME
         changelogFilename = hasExistChangeFile
-        changelogPath = pathJoin(WORKSPACE_DIR, changelogFilename)
+        changelogPath = pathJoin(changelogInFolder, changelogFilename)
         !dryMode && fs.unlinkSync(changelogPath)
       }
 
@@ -173,7 +175,8 @@ export async function run(newVersion: string) {
         console.log(`changelog location: \n`, changelogPath)
       } else {
         // TODO custom changelog filename
-        // fs.unlinkSync('CHANGELOG.md')
+
+        console.log(chalk.green('Generating changelog.'))
         writeFileSync(changelogPath, changelog)
         await dryRun`git add ${changelogPath}`
         await dryRun`git commit --amend --no-verify --no-edit`
@@ -198,7 +201,7 @@ export async function run(newVersion: string) {
   if (doPublish) {
     const packageManager = await detectPackage()
     let publishCommand = `${packageManager} publish --access public`
-    if (packageManager === 'pnpm' && mode === 'monorepo') {
+    if (packageManager === 'pnpm' && isMonorepo) {
       publishCommand += ' -r'
     }
     console.log(chalk.green('Publishing to npm.'))
