@@ -7,11 +7,12 @@ export const generateChangeLog = (
   options?: Parameters<typeof conventionalChangelog>[0],
 ) => {
   return new Promise<string>((resolve) => {
-    let changelog = ''
+    let changelog = '# CHANGELOG\n\n'
     conventionalChangelog({
       preset: 'angular',
       releaseCount: 0,
       skipUnstable: false,
+
       ...options,
     })
       .on('data', (chunk: any) => {
