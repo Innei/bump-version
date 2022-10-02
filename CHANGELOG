@@ -1,3 +1,13 @@
+# [1.0.0](https://github.com/Innei/bump-version/compare/v1.0.0-beta.1...v1.0.0) (2022-10-02)
+
+
+### Bug Fixes
+
+* changelog path ([827243b](https://github.com/Innei/bump-version/commit/827243b1c59d7e611e843948eea8c269d708bdcf))
+* git add changelog path ([121a8a5](https://github.com/Innei/bump-version/commit/121a8a58dedf4f63dad7237d9608302a2757a4de))
+
+
+
 # [1.0.0-beta.1](https://github.com/Innei/bump-version/compare/v1.0.0-beta.0...v1.0.0-beta.1) (2022-09-29)
 
 
