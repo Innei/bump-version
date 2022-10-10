@@ -208,4 +208,6 @@ export async function run(newVersion: string) {
     // @ts-ignore
     await dryRun([publishCommand])
   }
+
+  process.exit(0)
 }
