@@ -8,7 +8,7 @@ specifiers:
   '@innei/prettier': 0.9.4
   '@types/conventional-changelog': 3.1.1
   '@types/inquirer': 9.0.1
-  '@types/semver': 7.3.12
+  '@types/semver': 7.3.13
   '@vercel/ncc': 0.34.0
   conventional-changelog: 3.1.25
   husky: 8.0.1
@@ -24,11 +24,11 @@ dependencies:
   conventional-changelog: 3.1.25
 
 devDependencies:
-  '@innei/eslint-config-ts': 0.9.4_typescript@4.8.3
+  '@innei/eslint-config-ts': 0.9.4
   '@innei/prettier': 0.9.4
   '@types/conventional-changelog': 3.1.1
   '@types/inquirer': 9.0.1
-  '@types/semver': 7.3.12
+  '@types/semver': 7.3.13
   '@vercel/ncc': 0.34.0
   husky: 8.0.1
   inquirer: 9.1.2
@@ -320,10 +320,8 @@ packages:
       - supports-color
     dev: true
 
-  /@innei/eslint-config-ts/0.9.4_typescript@4.8.3:
+  /@innei/eslint-config-ts/0.9.4:
     resolution: {integrity: sha512-T52M6omBVNP6CbRN0sWNf8TjEEocuPTSN+FnVUY7c1P8JfgOTH9PFOG8fEt59UZLxZEIjy26pHGDqATv9inGVA==}
-    peerDependencies:
-      typescript: '>=4'
     dependencies:
       '@typescript-eslint/eslint-plugin': 5.30.7_wsb62dxj2oqwgas4kadjymcmry
       '@typescript-eslint/parser': 5.38.0_irgkl5vooow2ydyo6aokmferha
@@ -507,8 +505,8 @@ packages:
     resolution: {integrity: sha512-ZREFYlpUmPQJ0esjxoG1fMvB2HNaD3z+mjqdSosZvd3RalncI9NEur73P8ZJz4YQdL64CmV1w0RuqoRUlhQRBw==}
     dev: true
 
-  /@types/semver/7.3.12:
-    resolution: {integrity: sha512-WwA1MW0++RfXmCr12xeYOOC5baSC9mSb0ZqCquFzKhcoF4TvHu5MKOuXsncgZcpVFhB1pXd5hZmM0ryAoCp12A==}
+  /@types/semver/7.3.13:
+    resolution: {integrity: sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw==}
     dev: true
 
   /@types/through/0.0.30:
@@ -1160,8 +1158,8 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
-      JSONStream: 1.3.5
       is-text-path: 1.0.1
+      JSONStream: 1.3.5
       lodash: 4.17.21
       meow: 8.1.2
       split2: 3.2.2
