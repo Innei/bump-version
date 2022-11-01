@@ -71,6 +71,8 @@ export const updatePackageJsonVersion = async (newVersion: string) => {
               fs.writeJson(monorepoPkgPath, {
                 ...monorepoPkg,
                 version: newVersion,
+              }, {
+                spaces: tabIntent || 2,
               })
           })
         }),
