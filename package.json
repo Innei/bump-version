@@ -35,7 +35,7 @@
     "@innei/eslint-config-ts": "0.9.4",
     "@innei/prettier": "0.9.5",
     "@types/conventional-changelog": "3.1.1",
-    "@types/inquirer": "9.0.1",
+    "@types/inquirer": "9.0.3",
     "@types/semver": "7.3.13",
     "@vercel/ncc": "0.34.0",
     "husky": "8.0.1",

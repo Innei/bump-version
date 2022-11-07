@@ -7,7 +7,7 @@ specifiers:
   '@innei/eslint-config-ts': 0.9.4
   '@innei/prettier': 0.9.5
   '@types/conventional-changelog': 3.1.1
-  '@types/inquirer': 9.0.1
+  '@types/inquirer': 9.0.3
   '@types/semver': 7.3.13
   '@vercel/ncc': 0.34.0
   conventional-changelog: 3.1.25
@@ -27,7 +27,7 @@ devDependencies:
   '@innei/eslint-config-ts': 0.9.4
   '@innei/prettier': 0.9.5
   '@types/conventional-changelog': 3.1.1
-  '@types/inquirer': 9.0.1
+  '@types/inquirer': 9.0.3
   '@types/semver': 7.3.13
   '@vercel/ncc': 0.34.0
   husky: 8.0.1
@@ -468,8 +468,8 @@ packages:
       '@types/node': 18.7.18
     dev: true
 
-  /@types/inquirer/9.0.1:
-    resolution: {integrity: sha512-I4eZdYXpFHj0pAzMndJFQMu/4hCc6Z340au9lvxHofGJnFmVgckxR/t9jRzsOVviajsOmEL+OABx+e0e28IbNw==}
+  /@types/inquirer/9.0.3:
+    resolution: {integrity: sha512-CzNkWqQftcmk2jaCWdBTf9Sm7xSw4rkI1zpU/Udw3HX5//adEZUIm9STtoRP1qgWj0CWQtJ9UTvqmO2NNjhMJw==}
     dependencies:
       '@types/through': 0.0.30
       rxjs: 7.5.6
