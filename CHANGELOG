@@ -1,5 +1,14 @@
 # CHANGELOG
 
+# [1.1.0](https://github.com/Innei/bump-version/compare/v1.0.2...v1.1.0) (2022-11-08)
+
+
+### Features
+
+* support branch allowed type ([#18](https://github.com/Innei/bump-version/issues/18)) ([1148cd2](https://github.com/Innei/bump-version/commit/1148cd2da95aad3cbb21410eccc66b348f388757))
+
+
+
 ## [1.0.2](https://github.com/Innei/bump-version/compare/v1.0.1...v1.0.2) (2022-11-01)
 
 
