@@ -11,6 +11,14 @@
   "allowed_branches": [
     "master",
     "main",
-    "dev/*"
+    {
+      "name": "dev/*",
+      "allow_types": [
+        "premajor",
+        "preminor",
+        "prepatch",
+        "prerelease"
+      ]
+    }
   ]
 }

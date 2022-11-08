@@ -69,10 +69,10 @@ export async function cutsomVersionRun() {
     process.exit(0)
   }
 
-  return run(nextVersion)
+  return run(nextVersion, currentVersion)
 }
 
-export async function run(newVersion: string) {
+export async function run(newVersion: string, currentVersion: string) {
   const { originFile } = getPackageJson()
   const {
     allowedBranches,
@@ -97,9 +97,44 @@ export async function run(newVersion: string) {
     defaultAllowedBranches.push('test', 'dev')
   }
   const isAllowedBranch = allowedBranches
-    ? allowedBranches.some((regexpString) =>
-        new RegExp(regexpString).test(currentBranch),
-      )
+    ? allowedBranches.some((options) => {
+        let name: string
+
+        if (typeof options !== 'string') {
+          name = options.name
+
+          const { allowTypes, disallowTypes } = options
+
+          // 1. check disallowTypes
+          if (disallowTypes?.length) {
+            const isDisallowed = disallowTypes.some((type) => {
+              return semver.inc(currentVersion, type) === newVersion
+            })
+
+            if (isDisallowed) {
+              throw new Error(
+                `The version you entered is not allowed to be released on the current branch`,
+              )
+
+              // 2. then check allowTypes
+            } else if (allowTypes?.length) {
+              const isAllowed = allowTypes.some((type) => {
+                return semver.inc(currentVersion, type) === newVersion
+              })
+
+              if (!isAllowed) {
+                throw new Error(
+                  `The version you entered is not allowed to be released on the current branch`,
+                )
+              }
+            }
+          }
+        } else {
+          name = options
+        }
+
+        return new RegExp(name).test(currentBranch)
+      })
     : defaultAllowedBranches.includes(currentBranch)
 
   if (!isAllowedBranch) {

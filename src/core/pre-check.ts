@@ -88,7 +88,7 @@ export const precheck = async () => {
         const result = answer.confirm
 
         if (result) {
-          run(nextVersion)
+          run(nextVersion, currentVersion)
         } else {
           process.exit(0)
         }
