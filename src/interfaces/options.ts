@@ -14,9 +14,24 @@ export interface BumpOptions {
   commitMessage: string
   publish: string
   changelog: boolean
-  allowedBranches: string[]
+  allowedBranches: (AllowedBranchesOptions | string)[]
   tagPrefix: string
 
   mode: 'monorepo' | 'independent'
   packages: string[]
+}
+
+type ReleaseType =
+  | 'patch'
+  | 'minor'
+  | 'major'
+  | 'premajor'
+  | 'preminor'
+  | 'prepatch'
+  | 'prerelease'
+
+export interface AllowedBranchesOptions {
+  name: string
+  disallowTypes: ReleaseType[]
+  allowTypes: ReleaseType[]
 }
