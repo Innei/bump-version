@@ -112,21 +112,30 @@ export async function run(newVersion: string, currentVersion: string) {
             })
 
             if (isDisallowed) {
-              throw new Error(
-                `The version you entered is not allowed to be released on the current branch`,
+              console.error(
+                chalk.red(
+                  `The version you entered is not allowed to be released on the current branch`,
+                ),
               )
 
-              // 2. then check allowTypes
-            } else if (allowTypes?.length) {
-              const isAllowed = allowTypes.some((type) => {
-                return semver.inc(currentVersion, type) === newVersion
-              })
+              process.exit(-2)
 
-              if (!isAllowed) {
-                throw new Error(
-                  `The version you entered is not allowed to be released on the current branch`,
-                )
-              }
+              // 2. then check allowTypes
+            }
+          } else if (allowTypes?.length) {
+            const isAllowed = allowTypes.some((type) => {
+              return semver.inc(currentVersion, type) === newVersion
+            })
+
+            if (!isAllowed) {
+              console.log(
+                chalk.red(
+                  `The version you entered is not allowed to be released on the current branch,`,
+                  `allowed types: ${allowTypes.join(', ')}`,
+                ),
+              )
+
+              process.exit(-2)
             }
           }
         } else {
