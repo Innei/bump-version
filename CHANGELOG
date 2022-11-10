@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.1.1-alpha.0](https://github.com/Innei/bump-version/compare/v1.1.0...v1.1.1-alpha.0) (2022-11-10)
+
+
+### Bug Fixes
+
+* cjs ([cc739cd](https://github.com/Innei/bump-version/commit/cc739cd108e245fb61427b6b76d62dfc67c384fd))
+
+
+
 # [1.1.0](https://github.com/Innei/bump-version/compare/v1.0.2...v1.1.0) (2022-11-08)
 
 

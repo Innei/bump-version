@@ -6,7 +6,7 @@
     "bump": "dist/index.js",
     "vv": "dist/index.js"
   },
-  "version": "1.1.0",
+  "version": "1.1.1-alpha.0",
   "files": [
     "dist",
     "package.json",
