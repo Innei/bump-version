@@ -1,11 +1,10 @@
 {
   "name": "@innei/bump-version",
-  "type": "module",
   "packageManager": "pnpm@7.1.0",
   "homepage": "https://github.com/Innei/bump-version",
   "bin": {
-    "bump": "dist/index.mjs",
-    "vv": "dist/index.mjs"
+    "bump": "dist/index.js",
+    "vv": "dist/index.js"
   },
   "version": "1.1.0",
   "files": [
@@ -29,7 +28,7 @@
     "dev:filter": "NODE_ENV=development tsx src/main.mts -- --dry-run -f test/packages/core",
     "dev:monorepo": "NODE_ENV=development tsx src/main.mts -- --dry-run -c .monorepo.bumprc",
     "prebuild": "rm -rf dist",
-    "build": "tsc && ncc build lib/src/main.mjs -o dist --external conventional-changelog",
+    "build": "tsc && ncc build lib/src/main.js -o dist --external conventional-changelog",
     "test": "vitest"
   },
   "devDependencies": {

@@ -2,9 +2,8 @@
   "compilerOptions": {
     "jsx": "preserve",
     "target": "esnext",
-    "module": "NodeNext",
+    "module": "CommonJS",
     "esModuleInterop": true,
-    "moduleResolution": "NodeNext",
     "resolveJsonModule": true,
     "allowJs": true,
     "outDir": "./lib",
