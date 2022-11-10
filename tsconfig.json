@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
-    "jsx": "preserve",
-    "target": "esnext",
+    "target": "ES2017",
     "module": "CommonJS",
     "esModuleInterop": true,
     "resolveJsonModule": true,

@@ -14,6 +14,13 @@ export const resolveArgs = memoReturnValueFunction(() => {
   const v: boolean = argv['v'] || argv['version']
   const customRcFile: string = argv['c'] || argv['config']
 
+  const _ = argv['_']
+  const _set = new Set(_)
+
+  const getVersionTypeFlag = (type: string): boolean => {
+    return _set.has(type) || argv[type] || false
+  }
+
   return {
     v,
     rcPath: customRcFile,
@@ -24,12 +31,12 @@ export const resolveArgs = memoReturnValueFunction(() => {
     tagPrefix,
 
     // version controll
-    prerelease: argv['prerelease'] || argv['alpha'] || false,
-    patch: argv['patch'] || false,
-    minor: argv['minor'] || false,
-    major: argv['major'] || false,
-    premajor: argv['premajor'] || false,
-    preminor: argv['preminor'] || false,
-    prepatch: argv['prepatch'] || false,
+    prerelease: getVersionTypeFlag('alpha') || getVersionTypeFlag('prerelease'),
+    patch: getVersionTypeFlag('patch'),
+    minor: getVersionTypeFlag('minor'),
+    major: getVersionTypeFlag('major'),
+    premajor: getVersionTypeFlag('premajor'),
+    preminor: getVersionTypeFlag('preminor'),
+    prepatch: getVersionTypeFlag('prepatch'),
   }
 })
