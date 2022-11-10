@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.1.1-alpha.1](https://github.com/Innei/bump-version/compare/v1.1.1-alpha.0...v1.1.1-alpha.1) (2022-11-10)
+
+
+### Bug Fixes
+
+* pkg read ([7f56f91](https://github.com/Innei/bump-version/commit/7f56f91583048a9a88cf7f866e8920fb4555fa94))
+
+
+
 ## [1.1.1-alpha.0](https://github.com/Innei/bump-version/compare/v1.1.0...v1.1.1-alpha.0) (2022-11-10)
 
 
