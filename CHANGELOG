@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.1.1-alpha.2](https://github.com/Innei/bump-version/compare/v1.1.1-alpha.1...v1.1.1-alpha.2) (2022-11-11)
+
+
+### Bug Fixes
+
+* tsconfig ([d3a3f81](https://github.com/Innei/bump-version/commit/d3a3f81408753cd5b1a0373be5d097e342ccf6a5))
+
+
+
 ## [1.1.1-alpha.1](https://github.com/Innei/bump-version/compare/v1.1.1-alpha.0...v1.1.1-alpha.1) (2022-11-10)
 
 
