@@ -4,6 +4,7 @@
     "module": "CommonJS",
     "esModuleInterop": true,
     "resolveJsonModule": true,
+    "moduleResolution": "Node",
     "allowJs": true,
     "outDir": "./lib",
     "skipLibCheck": true
