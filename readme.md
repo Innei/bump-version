@@ -2,6 +2,8 @@
 
 Bump version, change package.json version.
 
+<img width="508" alt="image" src="https://user-images.githubusercontent.com/41265413/201814822-669fb5f9-35a7-4f4d-a553-9c22a7a264ef.png">
+
 ## How to use
 
 ```bash
