@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.2.1](https://github.com/Innei/bump-version/compare/v1.2.0...v1.2.1) (2022-11-21)
+
+
+### Bug Fixes
+
+* absolute env path of shebang ([728b0ed](https://github.com/Innei/bump-version/commit/728b0ed437d9c22a4aa692f60624e5322cbf7921))
+
+
+
 # [1.2.0](https://github.com/Innei/bump-version/compare/v1.1.0...v1.2.0) (2022-11-11)
 
 
