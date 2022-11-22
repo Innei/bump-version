@@ -38,5 +38,7 @@ export const resolveArgs = memoReturnValueFunction(() => {
     premajor: getVersionTypeFlag('premajor'),
     preminor: getVersionTypeFlag('preminor'),
     prepatch: getVersionTypeFlag('prepatch'),
+
+    branch: getVersionTypeFlag('branch'),
   }
 })

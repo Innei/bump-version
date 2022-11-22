@@ -26,6 +26,7 @@ vv # or bv, bump, bp
 | `prepatch`               | Create prepatch version                                   |                    |
 | `preminor`               | Create preminor version                                   |                    |
 | `premajor`               | Create premajor version                                   |                    |
+| `branch`                 | Create version based on git branch (1.2.2-dev-perid.0)    |                    |
 
 ## Config
 
@@ -71,5 +72,4 @@ export interface AllowedBranchesOptions {
   disallowTypes: ReleaseType[]
   allowTypes: ReleaseType[]
 }
-
 ```
