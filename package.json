@@ -49,6 +49,7 @@
     "zx": "^7.0.8"
   },
   "dependencies": {
-    "conventional-changelog": "3.1.25"
+    "conventional-changelog": "3.1.25",
+    "slugify": "^1.6.5"
   }
 }
