@@ -1,5 +1,19 @@
 # CHANGELOG
 
+# [1.3.0-alpha.0](https://github.com/Innei/bump-version/compare/v1.2.1...v1.3.0-alpha.0) (2022-11-22)
+
+
+### Bug Fixes
+
+* resolve args ([49c3743](https://github.com/Innei/bump-version/commit/49c3743a22ea15fc08ff6a2a5008925426ebba93))
+
+
+### Features
+
+* add branch version ([b08063c](https://github.com/Innei/bump-version/commit/b08063c2162ea23896d44d722d010e9d68799906))
+
+
+
 ## [1.2.1](https://github.com/Innei/bump-version/compare/v1.2.0...v1.2.1) (2022-11-21)
 
 
