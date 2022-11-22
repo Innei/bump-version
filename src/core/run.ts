@@ -11,6 +11,7 @@ import { getCurrentGitBranch } from '../utils/git.js'
 import { getPackageJson } from '../utils/pkg.js'
 import { dryRun } from '../utils/run.js'
 import { snakecase } from '../utils/snakecase.js'
+import { context } from './context.js'
 import { resolveArgs } from './resolve-args.js'
 import { resolveConfig } from './resolve-config.js'
 import { updatePackageJsonVersion } from './update-pkg.js'
@@ -69,10 +70,10 @@ export async function cutsomVersionRun() {
     process.exit(0)
   }
 
-  return run(nextVersion, currentVersion)
+  return run(nextVersion)
 }
 
-export async function run(newVersion: string, currentVersion: string) {
+export async function run(newVersion: string) {
   const { originFile } = getPackageJson()
   const {
     allowedBranches,
@@ -105,16 +106,22 @@ export async function run(newVersion: string, currentVersion: string) {
 
           const { allowTypes, disallowTypes } = options
 
+          // 0. skip if release type is undefined, custom version
+          // eslint-disable-next-line no-empty
+          if (typeof context.selectedReleaseType === 'undefined') {
+          }
           // 1. check disallowTypes
-          if (disallowTypes?.length) {
+          else if (disallowTypes?.length) {
             const isDisallowed = disallowTypes.some((type) => {
-              return semver.inc(currentVersion, type) === newVersion
+              return context.selectedReleaseType === type
             })
 
             if (isDisallowed) {
               console.error(
                 chalk.red(
-                  `The version you entered is not allowed to be released on the current branch`,
+                  `The version you entered is not allowed to be released on the current branch, selected release type is ${
+                    context.selectedReleaseType
+                  }, disallow types: ${disallowTypes.join(',')}`,
                 ),
               )
 
@@ -124,13 +131,13 @@ export async function run(newVersion: string, currentVersion: string) {
             }
           } else if (allowTypes?.length) {
             const isAllowed = allowTypes.some((type) => {
-              return semver.inc(currentVersion, type) === newVersion
+              return context.selectedReleaseType === type
             })
 
             if (!isAllowed) {
               console.log(
                 chalk.red(
-                  `The version you entered is not allowed to be released on the current branch,`,
+                  `The version you entered is not allowed to be released on the current branch, selected release type is ${context.selectedReleaseType},`,
                   `allowed types: ${allowTypes.join(', ')}`,
                 ),
               )

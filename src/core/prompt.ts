@@ -5,33 +5,23 @@ import type {
 } from 'inquirer'
 import inquirer from 'inquirer'
 import semver from 'semver'
-import slugify from 'slugify'
 import { chalk } from 'zx'
 
-import { getCurrentGitBranch, isMainBranch } from '../utils/git.js'
+import { getBranchVersion, isMainBranch } from '../utils/git.js'
 import { generateReleaseTypes, getPackageJson } from '../utils/pkg.js'
+import { getIdentifier, nextIdentifierMap } from '../utils/version.js'
+import { context } from './context.js'
 import { cutsomVersionRun, run } from './run.js'
-
-const nextIdentifierMap = {
-  alpha: 'beta',
-  beta: 'canary',
-  canary: 'rc',
-}
 
 export const promptMain = async () => {
   const packageJson = getPackageJson()
   const currentVersion = packageJson.json.version as string
-  const identifier = currentVersion.match(/\d+\.\d+\.\d+-(.*?)\.\d+/)?.[1]
-
-  const versions = generateReleaseTypes(currentVersion, undefined, identifier)
+  const identifier = getIdentifier(currentVersion)
 
   const selectItems: AsyncDynamicQuestionProperty<
     DistinctChoice<any, ListChoiceMap<any>>[],
     any
-  > = versions.map((version) => ({
-    value: version.value,
-    name: version.name,
-  }))
+  > = generateReleaseTypes(currentVersion, undefined, identifier)
 
   if (identifier) {
     const nextIdentifier = nextIdentifierMap[identifier]
@@ -45,22 +35,27 @@ export const promptMain = async () => {
       selectItems.push({
         name: `${nextIdentifier} - ${nextVersion}`,
         value: nextVersion,
+
+        extra: {
+          releaseType: 'prerelease',
+          pried: nextIdentifier,
+        },
       })
     }
   }
 
   if (!(await isMainBranch())) {
-    const branchName = await getCurrentGitBranch()
-    const slugifyTagName = slugify.default(branchName.replace(/\//g, '-'))
-
-    const privateVersion = `${semver.inc(
+    const { branchVersion, slugifyTagName } = await getBranchVersion(
       currentVersion,
-      'prerelease',
-      slugifyTagName,
-    )}`
+    )
     selectItems.push({
-      name: `branch version - ${privateVersion}`,
-      value: privateVersion,
+      name: `branch version - ${branchVersion}`,
+      value: branchVersion,
+
+      extra: {
+        releaseType: 'prerelease',
+        pried: slugifyTagName,
+      },
     })
 
     // hash version
@@ -82,10 +77,12 @@ export const promptMain = async () => {
 
   selectItems.push({
     value: 'Custom Version',
+    extra: {},
   })
 
   console.log(chalk.green(`Which version would you like to bump it?`))
   console.log(`Current version: ${currentVersion}`)
+
   const answer = await inquirer.prompt({
     name: 'nextVersion',
     message: 'Select a version',
@@ -95,9 +92,28 @@ export const promptMain = async () => {
     choices: [...selectItems],
   })
 
+  // TODO refactor
+  const nextVersion2RawMap = new Map<
+    string,
+    {
+      releaseType: string
+      pried: string
+    }
+  >()
+
+  for (const item of selectItems as any) {
+    nextVersion2RawMap.set(item.value, item.extra)
+  }
+
+  const nextVersionExtra = nextVersion2RawMap.get(answer.nextVersion)
+
+  context.selectedReleaseType = nextVersionExtra?.releaseType
+  context.selectedVersion = answer.nextVersion
+  context.selectedPried = nextVersionExtra?.pried
+
   if (answer.nextVersion === 'Custom Version') {
     cutsomVersionRun()
   } else {
-    run(answer.nextVersion, currentVersion)
+    run(answer.nextVersion)
   }
 }
