@@ -4,7 +4,9 @@ import path from 'path'
 import type { ReleaseType } from 'semver'
 import { $, chalk } from 'zx'
 
+import { getBranchVersion } from '../utils/git.js'
 import { getNextVersion, getPackageJson, releaseTypes } from '../utils/pkg.js'
+import { context } from './context.js'
 import { resolveArgs } from './resolve-args.js'
 import { resolveConfig } from './resolve-config.js'
 import { run } from './run.js'
@@ -42,6 +44,8 @@ export const precheck = async () => {
     process.exit(-1)
   }
 
+  context.currentVersion = currentVersion
+
   if (args.dryRun) {
     console.warn(chalk.yellow(`Dry run mode. Will not exec commands.`))
     __DEV__ && console.log(args)
@@ -67,15 +71,27 @@ export const precheck = async () => {
 
   const keys = Object.keys(args)
   const isReleaseType: ReleaseType = keys.find(
-    (key) => args[key] && releaseTypes.includes(key as ReleaseType),
+    (key) =>
+      args[key] && [...releaseTypes, 'branch'].includes(key as ReleaseType),
   ) as any
 
   if (isReleaseType) {
-    const nextVersion = getNextVersion(currentVersion, isReleaseType)
+    const { branchVersion } = await getBranchVersion(currentVersion)
+
+    const nextVersion =
+      (isReleaseType as any) === 'branch'
+        ? branchVersion
+        : getNextVersion(currentVersion, isReleaseType)
 
     console.log(
       `Current version: ${currentVersion}, New version: ${nextVersion}`,
     )
+
+    // TODO
+    context.selectedPried = 'alpha'
+    context.selectedReleaseType =
+      (isReleaseType as any) === 'branch' ? 'prerelease' : isReleaseType
+    context.selectedVersion = nextVersion
 
     return inquirer
       .prompt({
@@ -88,7 +104,7 @@ export const precheck = async () => {
         const result = answer.confirm
 
         if (result) {
-          run(nextVersion, currentVersion)
+          run(nextVersion)
         } else {
           process.exit(0)
         }

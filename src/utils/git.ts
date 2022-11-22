@@ -1,3 +1,5 @@
+import SemVer from 'semver'
+import slugify from 'slugify'
 import { $ } from 'zx'
 
 export const getCurrentGitBranch = async () => {
@@ -14,4 +16,17 @@ export const isMainBranch = async () => {
 export const getGitHeadShortHash = async () => {
   const gitHeadHash = await $`git rev-parse --short HEAD`.quiet()
   return gitHeadHash.stdout.trim()
+}
+
+export const getBranchVersion = async (currentVersion: string) => {
+  const branchName = await getCurrentGitBranch()
+  const slugifyTagName = slugify.default(branchName.replace(/\//g, '-'))
+
+  const branchVersion = SemVer.inc(currentVersion, 'prerelease', slugifyTagName)
+
+  return {
+    branchVersion,
+    slugifyTagName,
+    branchName,
+  }
 }

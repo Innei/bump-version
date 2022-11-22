@@ -4,6 +4,7 @@ import semver from 'semver'
 
 import { ROOT_WORKSPACE_DIR, WORKSPACE_DIR } from '../constants/path.js'
 import { memoReturnValueFunction } from './memo.js'
+import { getIdentifier } from './version.js'
 
 export const getPackageJson = memoReturnValueFunction(() => {
   const PKG_PATH = join(WORKSPACE_DIR, '/package.json')
@@ -37,8 +38,18 @@ export const releaseTypes: semver.ReleaseType[] = [
 export const getNextVersion = (
   currentVersion: string,
   releaseType: semver.ReleaseType,
+  identifier?: string,
 ) => {
-  return semver.inc(currentVersion, releaseType)
+  const nextIdentifier = getIdentifier(currentVersion)
+  return semver.inc(
+    currentVersion,
+    releaseType,
+    identifier || nextIdentifier
+      ? nextIdentifier
+      : releaseType.startsWith('pre')
+      ? 'alpha'
+      : undefined,
+  )
 }
 
 export function generateReleaseTypes(
@@ -46,11 +57,16 @@ export function generateReleaseTypes(
   types = releaseTypes,
   pried = 'alpha',
 ) {
-  return types.map((item) => {
-    const version = semver.inc(currentVersion, item, pried)
+  return types.map((releaseType) => {
+    const version = semver.inc(currentVersion, releaseType, pried)
     return {
-      name: `${item} - ${version}`,
+      name: `${releaseType} - ${version}`,
       value: version,
+
+      extra: {
+        releaseType,
+        pried,
+      },
     }
   })
 }
