@@ -5,12 +5,13 @@ import type {
 } from 'inquirer'
 import inquirer from 'inquirer'
 import semver from 'semver'
+import slugify from 'slugify'
 import { chalk } from 'zx'
 
+import { getCurrentGitBranch, isMainBranch } from '../utils/git.js'
 import { generateReleaseTypes, getPackageJson } from '../utils/pkg.js'
 import { cutsomVersionRun, run } from './run.js'
 
-// const preids = ['alpha', 'beta', 'canary' ,'rc']
 const nextIdentifierMap = {
   alpha: 'beta',
   beta: 'canary',
@@ -32,7 +33,6 @@ export const promptMain = async () => {
     name: version.name,
   }))
 
-  // console.log(identifier)
   if (identifier) {
     const nextIdentifier = nextIdentifierMap[identifier]
 
@@ -47,6 +47,37 @@ export const promptMain = async () => {
         value: nextVersion,
       })
     }
+  }
+
+  if (!(await isMainBranch())) {
+    const branchName = await getCurrentGitBranch()
+    const slugifyTagName = slugify.default(branchName.replace(/\//g, '-'))
+
+    const privateVersion = `${semver.inc(
+      currentVersion,
+      'prerelease',
+      slugifyTagName,
+    )}`
+    selectItems.push({
+      name: `branch version - ${privateVersion}`,
+      value: privateVersion,
+    })
+
+    // hash version
+
+    // if (!(await isMainBranch())) {
+    //   const branchName = await getCurrentGitBranch()
+    //   const slugifyTagName = slugify.default(branchName.replace(/\//g, '-'))
+    //   const hash = await getGitHeadShortHash()
+    //   const privateVersion = `${semver.inc(
+    //     currentVersion,
+    //     'patch',
+    //   )}-${slugifyTagName}+${hash}`
+    //   selectItems.push({
+    //     name: `hash version - ${privateVersion}`,
+    //     value: privateVersion,
+    //   })
+    // }
   }
 
   selectItems.push({
