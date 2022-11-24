@@ -86,6 +86,8 @@ export async function run(newVersion: string) {
     taildingHooks,
     tagPrefix,
     mode,
+
+    overrideChangelogOptions,
   } = resolveConfig()
   const isMonorepo = mode === 'monorepo'
   const { dryRun: dryMode, tagPrefix: tagPrefixArgs } = resolveArgs()
@@ -206,6 +208,7 @@ export async function run(newVersion: string) {
     if (shouldGenerateChangeLog) {
       const changelog = await generateChangeLog({
         tagPrefix: nextTagPrefix,
+        ...overrideChangelogOptions,
       })
 
       const hasExistChangeFile = isExistChangelogFile()

@@ -49,7 +49,7 @@ Define in package.json, add field `bump` or create `.bumprc`:
 | tag              | Create git tag after bump                | boolean                                        | true                       |
 | push             | Push git commit after bump               | boolean                                        | true                       |
 | commit_message   | Commit message for new version tag       | string                                         | `release: v${NEW_VERSION}` |
-| changelog        | Generate changelog                       | boolean                                        | false                      |
+| changelog        | Generate changelog                       | boolean \| ChangelogOptions                    | false                      |
 | allowed_branches | Allow run bump version on special branch | (RegExp \| string \| AllowedBranchesOptions)[] | `["main", "master"]`       |
 | tag-prefix       | Git prefix tag                           | string                                         | `v`                        |
 | mode             | Workspace mode                           | `independent` `monorepo`                       | `independent`              |
@@ -71,5 +71,12 @@ export interface AllowedBranchesOptions {
   name: string
   disallowTypes: ReleaseType[]
   allowTypes: ReleaseType[]
+}
+
+/**
+ * @see https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-core
+ */ 
+export type ChangelogOptions = Parameters<typeof conventionalChangelog>[0] & {
+  enable: boolean
 }
 ```

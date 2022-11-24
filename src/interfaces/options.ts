@@ -1,3 +1,5 @@
+import type conventionalChangelog from 'conventional-changelog'
+
 export interface BumpOptions {
   tag: string
   leading: string[]
@@ -13,7 +15,7 @@ export interface BumpOptions {
   push: boolean
   commitMessage: string
   publish: string
-  changelog: boolean
+  changelog: boolean | ChangelogOptions
   allowedBranches: (AllowedBranchesOptions | string)[]
   tagPrefix: string
 
@@ -34,4 +36,8 @@ export interface AllowedBranchesOptions {
   name: string
   disallowTypes: ReleaseType[]
   allowTypes: ReleaseType[]
+}
+
+export type ChangelogOptions = Parameters<typeof conventionalChangelog>[0] & {
+  enable: boolean
 }

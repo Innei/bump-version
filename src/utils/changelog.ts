@@ -6,6 +6,10 @@ import { WORKSPACE_DIR } from '../constants/path.js'
 export const generateChangeLog = (
   options?: Parameters<typeof conventionalChangelog>[0],
 ) => {
+  if (options) {
+    Reflect.deleteProperty(options, 'enable')
+  }
+
   return new Promise<string>((resolve) => {
     let changelog = '# CHANGELOG\n\n'
     conventionalChangelog({

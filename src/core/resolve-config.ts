@@ -5,7 +5,7 @@ import {
   ROOT_CONFIG_RC_PATH,
   ROOT_WORKSPACE_DIR,
 } from '../constants/path.js'
-import type { BumpOptions } from '../interfaces/options.js'
+import type { BumpOptions, ChangelogOptions } from '../interfaces/options.js'
 import { camelcaseKeys } from '../utils/camelcase-keys.js'
 import { getPackageJson, getRootPackageJson } from '../utils/pkg.js'
 import { resolveArgs } from './resolve-args.js'
@@ -72,7 +72,13 @@ export const resolveConfig = () => {
   const tagPrefix = bumpOptions.tagPrefix || 'v'
 
   // changelog
-  const shouldGenerateChangeLog = bumpOptions.changelog || false
+  const isChangelogOptions = typeof bumpOptions.changelog === 'object'
+  const shouldGenerateChangeLog = isChangelogOptions
+    ? (bumpOptions.changelog as ChangelogOptions).enable
+    : bumpOptions.changelog || false
+  const overrideChangelogOptions = isChangelogOptions
+    ? bumpOptions.changelog
+    : {}
 
   // monorepo
   const mode = bumpOptions.mode || 'independent'
@@ -90,5 +96,7 @@ export const resolveConfig = () => {
     tagPrefix,
     mode,
     packages,
+    // extra
+    overrideChangelogOptions,
   }
 }
