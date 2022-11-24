@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.3.1](https://github.com/Innei/bump-version/compare/v1.3.0...v1.3.1) (2022-11-24)
+
+
+### Features
+
+* add changelog options ([64288e6](https://github.com/Innei/bump-version/commit/64288e6fd250c7ed43b96ab71ed0343666f231e8))
+
+
+
 # [1.3.0](https://github.com/Innei/bump-version/compare/v1.2.1...v1.3.0) (2022-11-22)
 
 
@@ -50,14 +59,22 @@
 
 
 
-## [1.0.1](https://github.com/Innei/bump-version/compare/v1.0.0-beta.1...v1.0.1) (2022-10-10)
+## [1.0.1](https://github.com/Innei/bump-version/compare/v1.0.0...v1.0.1) (2022-10-10)
 
 
 ### Bug Fixes
 
 * add header of generated changelog ([b3b7ce2](https://github.com/Innei/bump-version/commit/b3b7ce210eadbe07fac71af2c1bd4591552200dd))
-* changelog path ([827243b](https://github.com/Innei/bump-version/commit/827243b1c59d7e611e843948eea8c269d708bdcf))
 * exit if done ([309b2b8](https://github.com/Innei/bump-version/commit/309b2b8af5752f30cfb78c8344f1fdd27f3ffe93))
+
+
+
+# [1.0.0](https://github.com/Innei/bump-version/compare/v1.0.0-beta.1...v1.0.0) (2022-10-02)
+
+
+### Bug Fixes
+
+* changelog path ([827243b](https://github.com/Innei/bump-version/commit/827243b1c59d7e611e843948eea8c269d708bdcf))
 * git add changelog path ([121a8a5](https://github.com/Innei/bump-version/commit/121a8a58dedf4f63dad7237d9608302a2757a4de))
 
 
