@@ -32,6 +32,18 @@ const checkConfigRcExist = () => {
     : false
 }
 
+const wrapHookArray = (hook) => {
+  if (typeof hook == 'string') {
+    return [hook]
+  }
+
+  if (Array.isArray(hook)) {
+    return hook
+  }
+
+  throw new TypeError(`Invalid hook type: ${typeof hook}`)
+}
+
 export const resolveConfig = () => {
   // FIXME monorepo read pkg json issue
   const { json: ROOT_PKG } = getRootPackageJson()
@@ -54,12 +66,15 @@ export const resolveConfig = () => {
   __DEV__ && console.log('bumpOptions', bumpOptions)
 
   // define options
-  const leadingHooks = bumpOptions.leading || bumpOptions.before || []
-  const taildingHooks =
+  const leadingHooks = wrapHookArray(
+    bumpOptions.leading || bumpOptions.before || [],
+  )
+  const taildingHooks = wrapHookArray(
     bumpOptions.trailing ||
-    (bumpOptions as any).tailing ||
-    bumpOptions.after ||
-    []
+      (bumpOptions as any).tailing ||
+      bumpOptions.after ||
+      [],
+  )
 
   // npm
   const doPublish = bumpOptions.publish || false
