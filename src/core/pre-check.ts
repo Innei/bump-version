@@ -99,14 +99,13 @@ export const precheck = async () => {
         message: 'Continue?',
         type: 'confirm',
       })
-      .then((answer) => {
+      .then(async (answer) => {
         const result = answer.confirm
 
         if (result) {
-          run(nextVersion)
-        } else {
-          process.exit(0)
+          await run(nextVersion)
         }
+        process.exit(0)
       })
   }
 }
