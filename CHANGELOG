@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.3.4](https://github.com/Innei/bump-version/compare/v1.3.3...v1.3.4) (2022-11-29)
+
+
+### Bug Fixes
+
+* precheck ([0d4adab](https://github.com/Innei/bump-version/commit/0d4adab01ecb9986878dec848ed9f16163ed3314))
+
+
+
 ## [1.3.3](https://github.com/Innei/bump-version/compare/v1.3.2...v1.3.3) (2022-11-29)
 
 
