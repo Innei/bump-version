@@ -4,6 +4,7 @@ import type {
   ListChoiceMap,
 } from 'inquirer'
 import inquirer from 'inquirer'
+import type { ReleaseType } from 'semver'
 import semver from 'semver'
 import { chalk } from 'zx'
 
@@ -53,7 +54,7 @@ export const promptMain = async () => {
       value: branchVersion,
 
       extra: {
-        releaseType: 'prerelease',
+        releaseType: 'branch',
         pried: slugifyTagName,
       },
     })
@@ -96,7 +97,7 @@ export const promptMain = async () => {
   const nextVersion2RawMap = new Map<
     string,
     {
-      releaseType: string
+      releaseType: ReleaseType
       pried: string
     }
   >()

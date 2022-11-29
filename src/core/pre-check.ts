@@ -89,8 +89,7 @@ export const precheck = async () => {
 
     // TODO
     context.selectedPried = 'alpha'
-    context.selectedReleaseType =
-      (isReleaseType as any) === 'branch' ? 'prerelease' : isReleaseType
+    context.selectedReleaseType = isReleaseType
     context.selectedVersion = nextVersion
 
     return inquirer

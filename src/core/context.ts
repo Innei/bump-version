@@ -1,6 +1,8 @@
+import type { ReleaseType } from 'semver'
+
 export const context = {
   currentVersion: '',
   selectedVersion: '',
-  selectedReleaseType: '',
+  selectedReleaseType: '' as ReleaseType | 'branch',
   selectedPried: '',
 }
