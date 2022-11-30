@@ -8,10 +8,15 @@ import type { ReleaseType } from 'semver'
 import semver from 'semver'
 import { chalk } from 'zx'
 
-import { getBranchVersion, isMainBranch } from '../utils/git.js'
+import {
+  getBranchVersion,
+  getCurrentGitBranch,
+  isMainBranch,
+} from '../utils/git.js'
 import { generateReleaseTypes, getPackageJson } from '../utils/pkg.js'
 import { getIdentifier, nextIdentifierMap } from '../utils/version.js'
 import { context } from './context.js'
+import { resolveConfig } from './resolve-config.js'
 import { cutsomVersionRun, run } from './run.js'
 
 export const promptMain = async () => {
@@ -19,10 +24,63 @@ export const promptMain = async () => {
   const currentVersion = packageJson.json.version as string
   const identifier = getIdentifier(currentVersion)
 
+  const nextReleaseType = new Set([
+    'patch',
+    'minor',
+    'major',
+
+    'premajor',
+    'preminor',
+    'prepatch',
+    'prerelease',
+  ])
+
+  const { allowedBranches } = resolveConfig()
+
+  if (allowedBranches) {
+    const currentGitBranch = await getCurrentGitBranch()
+    for (const branch of allowedBranches) {
+      if (typeof branch === 'string') {
+        // do noting
+      } else {
+        const thisIsCurrentBranchName = new RegExp(branch.name).test(
+          currentGitBranch,
+        )
+        if (!thisIsCurrentBranchName) {
+          continue
+        }
+        const { allowTypes, disallowTypes } = branch
+
+        // 1. check allow types
+
+        if (typeof allowTypes != 'undefined' && allowTypes.length) {
+          nextReleaseType.clear()
+
+          for (const type of allowTypes) {
+            nextReleaseType.add(type)
+          }
+          // 2. check disallow types
+        } else if (
+          typeof disallowTypes != 'undefined' &&
+          disallowTypes.length
+        ) {
+          for (const type of disallowTypes) {
+            nextReleaseType.delete(type)
+          }
+        }
+      }
+    }
+  }
+
   const selectItems: AsyncDynamicQuestionProperty<
     DistinctChoice<any, ListChoiceMap<any>>[],
     any
-  > = generateReleaseTypes(currentVersion, undefined, identifier)
+  > = generateReleaseTypes(
+    currentVersion,
+    undefined,
+    identifier,
+    Array.from(nextReleaseType) as any[],
+  )
 
   if (identifier) {
     const nextIdentifier = nextIdentifierMap[identifier]

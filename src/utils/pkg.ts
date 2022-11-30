@@ -56,8 +56,10 @@ export function generateReleaseTypes(
   currentVersion,
   types = releaseTypes,
   pried = 'alpha',
+
+  customReleaseTypes?: semver.ReleaseType[],
 ) {
-  return types.map((releaseType) => {
+  return (customReleaseTypes || types).map((releaseType) => {
     const version = semver.inc(currentVersion, releaseType, pried)
     return {
       name: `${releaseType} - ${version}`,

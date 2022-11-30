@@ -44,6 +44,23 @@ const wrapHookArray = (hook) => {
   throw new TypeError(`Invalid hook type: ${typeof hook}`)
 }
 
+const callOnceDev = (fn: (...args: any[]) => any) => {
+  let called = false
+  return (...args) => {
+    if (!__DEV__) {
+      return () => {}
+    }
+    if (!called) {
+      called = true
+      return fn.apply(this, args)
+    }
+  }
+}
+
+const logOption = callOnceDev((bumpOptions) =>
+  console.log('bumpOptions', bumpOptions),
+)
+
 export const resolveConfig = () => {
   // FIXME monorepo read pkg json issue
   const { json: ROOT_PKG } = getRootPackageJson()
@@ -63,7 +80,7 @@ export const resolveConfig = () => {
     bumpOptions = camelcaseKeys(PKG.bump || ROOT_PKG.bump || {})
   }
 
-  __DEV__ && console.log('bumpOptions', bumpOptions)
+  logOption(bumpOptions)
 
   // define options
   const leadingHooks = wrapHookArray(

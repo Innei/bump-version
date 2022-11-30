@@ -102,18 +102,21 @@ export async function run(newVersion: string) {
   const isAllowedBranch = allowedBranches
     ? allowedBranches.some((options) => {
         let name: string
+        let thisIsCurrentBranchName: boolean
 
         if (typeof options !== 'string') {
           name = options.name
 
           const { allowTypes, disallowTypes } = options
 
+          thisIsCurrentBranchName = new RegExp(name).test(currentBranch)
+
           // 0. skip if release type is undefined, custom version
           // eslint-disable-next-line no-empty
           if (typeof context.selectedReleaseType === 'undefined') {
           }
           // 1. check disallowTypes
-          else if (disallowTypes?.length) {
+          else if (disallowTypes?.length && thisIsCurrentBranchName) {
             const isDisallowed = disallowTypes.some((type) => {
               return context.selectedReleaseType === type
             })
@@ -131,7 +134,7 @@ export async function run(newVersion: string) {
 
               // 2. then check allowTypes
             }
-          } else if (allowTypes?.length) {
+          } else if (allowTypes?.length && thisIsCurrentBranchName) {
             const isAllowed = allowTypes.some((type) => {
               return context.selectedReleaseType === type
             })
@@ -149,9 +152,10 @@ export async function run(newVersion: string) {
           }
         } else {
           name = options
+          thisIsCurrentBranchName = new RegExp(name).test(currentBranch)
         }
 
-        return new RegExp(name).test(currentBranch)
+        return thisIsCurrentBranchName
       })
     : defaultAllowedBranches.includes(currentBranch)
 
