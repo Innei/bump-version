@@ -47,3 +47,19 @@ export const gitPushWithUpstream = async (branchName?: string) => {
     await dryRun`git push`
   }
 }
+
+/**
+ *
+ * @returns ['1.0.0', '1.2.3', '1.2.4', '1.2.5-0']
+ */
+export const getGitTags = async () => {
+  const pipe = await $`git tag | cat | grep -s "v"`.quiet()
+  return pipe.stdout
+    .trim()
+    .split('\n')
+    .map((tag) => tag.trim().slice(1))
+}
+
+export const fetchGitRemoteTags = async () => {
+  await $`git fetch --tags`.quiet()
+}
