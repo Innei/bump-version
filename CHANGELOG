@@ -1,6 +1,10 @@
 # CHANGELOG
 
-# [1.4.0-alpha.0](https://github.com/Innei/bump-version/compare/v1.3.4...v1.4.0-alpha.0) (2022-11-30)
+# [1.4.0](https://github.com/Innei/bump-version/compare/v1.3.4...v1.4.0) (2022-12-01)
+
+
+
+# 1.4.0-alpha.0 (2022-11-30)
 
 
 ### Features
@@ -105,7 +109,7 @@
 
 
 
-# [1.0.0](https://github.com/Innei/bump-version/compare/v1.0.0-beta.1...v1.0.0) (2022-10-02)
+# [1.0.0](https://github.com/Innei/bump-version/compare/v0.3.1...v1.0.0) (2022-10-02)
 
 
 ### Bug Fixes
@@ -115,7 +119,7 @@
 
 
 
-# [1.0.0-beta.1](https://github.com/Innei/bump-version/compare/v1.0.0-beta.0...v1.0.0-beta.1) (2022-09-29)
+# 1.0.0-beta.1 (2022-09-29)
 
 
 ### Bug Fixes
@@ -126,7 +130,7 @@
 
 
 
-# [1.0.0-beta.0](https://github.com/Innei/bump-version/compare/v1.0.0-alpha.7...v1.0.0-beta.0) (2022-09-29)
+# 1.0.0-beta.0 (2022-09-29)
 
 
 ### Bug Fixes
@@ -136,7 +140,7 @@
 
 
 
-# [1.0.0-alpha.7](https://github.com/Innei/bump-version/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2022-09-29)
+# 1.0.0-alpha.7 (2022-09-29)
 
 
 ### Bug Fixes
@@ -155,7 +159,7 @@
 
 
 
-# [1.0.0-alpha.6](https://github.com/Innei/bump-version/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2022-09-27)
+# 1.0.0-alpha.6 (2022-09-27)
 
 
 ### Bug Fixes
@@ -170,7 +174,7 @@
 
 
 
-# [1.0.0-alpha.5](https://github.com/Innei/bump-version/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2022-09-26)
+# 1.0.0-alpha.5 (2022-09-26)
 
 
 ### Features
@@ -179,7 +183,7 @@
 
 
 
-# [1.0.0-alpha.4](https://github.com/Innei/bump-version/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2022-09-26)
+# 1.0.0-alpha.4 (2022-09-26)
 
 
 ### Bug Fixes
@@ -188,7 +192,7 @@
 
 
 
-# [1.0.0-alpha.3](https://github.com/Innei/bump-version/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2022-09-26)
+# 1.0.0-alpha.3 (2022-09-26)
 
 
 ### Bug Fixes
@@ -206,7 +210,7 @@
 
 
 
-# [1.0.0-alpha.2](https://github.com/Innei/bump-version/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2022-09-25)
+# 1.0.0-alpha.2 (2022-09-25)
 
 
 ### Bug Fixes
@@ -217,7 +221,7 @@
 
 
 
-# [1.0.0-alpha.1](https://github.com/Innei/bump-version/compare/v1.0.0-alpha.0...v1.0.0-alpha.1) (2022-09-25)
+# 1.0.0-alpha.1 (2022-09-25)
 
 
 ### Bug Fixes
@@ -226,7 +230,7 @@
 
 
 
-# [1.0.0-alpha.0](https://github.com/Innei/bump-version/compare/v0.3.1...v1.0.0-alpha.0) (2022-09-25)
+# 1.0.0-alpha.0 (2022-09-25)
 
 
 ### Bug Fixes
