@@ -103,6 +103,7 @@ export const resolveConfig = () => {
   const allowedBranches = bumpOptions.allowedBranches
   const tagPrefix = bumpOptions.tagPrefix || 'v'
   const withTags = bumpOptions.withTags || false
+  const remoteTags = bumpOptions.remoteTags || false
 
   // changelog
   const isChangelogOptions = typeof bumpOptions.changelog === 'object'
@@ -130,6 +131,7 @@ export const resolveConfig = () => {
     mode,
     packages,
     withTags,
+    remoteTags,
     // extra
     overrideChangelogOptions,
   }

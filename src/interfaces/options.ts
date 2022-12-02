@@ -23,6 +23,7 @@ export interface BumpConfig {
   packages: string[]
 
   withTags: boolean
+  remoteTags: boolean
 }
 
 type ReleaseType =
