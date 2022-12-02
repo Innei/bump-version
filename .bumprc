@@ -11,6 +11,7 @@
     "enable": true,
     "skipUnstable": true
   },
+  "with_tags": true,
   "allowed_branches": [
     "master",
     "main",

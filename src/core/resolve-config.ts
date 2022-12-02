@@ -5,7 +5,7 @@ import {
   ROOT_CONFIG_RC_PATH,
   ROOT_WORKSPACE_DIR,
 } from '../constants/path.js'
-import type { BumpOptions, ChangelogOptions } from '../interfaces/options.js'
+import type { BumpConfig, ChangelogOptions } from '../interfaces/options.js'
 import { camelcaseKeys } from '../utils/camelcase-keys.js'
 import { getPackageJson, getRootPackageJson } from '../utils/pkg.js'
 import { resolveArgs } from './resolve-args.js'
@@ -65,7 +65,7 @@ export const resolveConfig = () => {
   // FIXME monorepo read pkg json issue
   const { json: ROOT_PKG } = getRootPackageJson()
   const { json: PKG } = getPackageJson()
-  let bumpOptions: Partial<BumpOptions>
+  let bumpOptions: Partial<BumpConfig>
 
   const rcPath = checkConfigRcExist()
 
@@ -102,6 +102,7 @@ export const resolveConfig = () => {
   const commitMessage = bumpOptions.commitMessage || 'release: v${NEW_VERSION}'
   const allowedBranches = bumpOptions.allowedBranches
   const tagPrefix = bumpOptions.tagPrefix || 'v'
+  const withTags = bumpOptions.withTags || false
 
   // changelog
   const isChangelogOptions = typeof bumpOptions.changelog === 'object'
@@ -128,6 +129,7 @@ export const resolveConfig = () => {
     tagPrefix,
     mode,
     packages,
+    withTags,
     // extra
     overrideChangelogOptions,
   }

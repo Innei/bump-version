@@ -13,11 +13,12 @@ import {
   getCurrentGitBranch,
   isMainBranch,
 } from '../utils/git.js'
-import { generateReleaseTypes, getPackageJson } from '../utils/pkg.js'
+import { getPackageJson } from '../utils/pkg.js'
 import { getIdentifier, nextIdentifierMap } from '../utils/version.js'
 import { context } from './context.js'
 import { resolveConfig } from './resolve-config.js'
 import { cutsomVersionRun, run } from './run.js'
+import { generateReleaseTypes } from './version.js'
 
 export const promptMain = async () => {
   const packageJson = getPackageJson()
@@ -41,7 +42,7 @@ export const promptMain = async () => {
     const currentGitBranch = await getCurrentGitBranch()
     for (const branch of allowedBranches) {
       if (typeof branch === 'string') {
-        // do noting
+        // do nothing
       } else {
         const thisIsCurrentBranchName = new RegExp(branch.name).test(
           currentGitBranch,
@@ -75,7 +76,7 @@ export const promptMain = async () => {
   const selectItems: AsyncDynamicQuestionProperty<
     DistinctChoice<any, ListChoiceMap<any>>[],
     any
-  > = generateReleaseTypes(
+  > = await generateReleaseTypes(
     currentVersion,
     undefined,
     identifier,
