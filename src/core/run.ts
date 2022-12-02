@@ -7,7 +7,7 @@ import { $, chalk, fs } from 'zx'
 import { ROOT_WORKSPACE_DIR, WORKSPACE_DIR } from '../constants/path.js'
 import { generateChangeLog, isExistChangelogFile } from '../utils/changelog.js'
 import { detectPackage } from '../utils/detect-package.js'
-import { getCurrentGitBranch } from '../utils/git.js'
+import { getCurrentGitBranch, gitPushWithUpstream } from '../utils/git.js'
 import { getPackageJson } from '../utils/pkg.js'
 import { dryRun } from '../utils/run.js'
 import { snakecase } from '../utils/snakecase.js'
@@ -207,8 +207,6 @@ export async function run(newVersion: string) {
       nextTagPrefix + newVersion
     }"`
 
-    // TODO
-
     if (shouldGenerateChangeLog) {
       const changelog = await generateChangeLog({
         tagPrefix: nextTagPrefix,
@@ -251,7 +249,7 @@ export async function run(newVersion: string) {
 
     if (doGitPush) {
       console.log(chalk.green('Pushing to remote.'))
-      await dryRun`git push`
+      await gitPushWithUpstream()
       await dryRun`git push --tags`
     }
   }
