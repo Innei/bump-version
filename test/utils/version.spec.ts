@@ -1,3 +1,4 @@
+import type { ReleaseType } from 'semver'
 import { describe, expect, it } from 'vitest'
 
 import { getNextVersionWithTags } from '../../src/utils/version.js'
@@ -18,94 +19,31 @@ const tags = [
   '1.3.4',         '1.4.0',         '1.4.0-alpha.0'
 ]
 
-describe.only('test version utils', () => {
-  it('should get the next version major', () => {
-    const currentVersion = '0.1.5'
-    const result = getNextVersionWithTags({
-      currentVersion,
-      tags,
-      releaseType: 'major',
+describe.each<[string, string, ReleaseType, (string[] | undefined)?]>([
+  ['0.1.5', '2.0.0', 'major'],
+  ['1.3.1', '1.3.5', 'patch'],
+  ['0.1.5', '0.4.0', 'minor'],
+  ['0.1.5', '0.4.0-alpha.0', 'preminor'],
+  ['1.3.1', '1.3.5-alpha.0', 'prepatch'],
+  ['0.1.5', '2.0.0-alpha.0', 'premajor'],
+  ['1.3.1-alpha.0', '1.3.5-alpha.0', 'prepatch'],
+  ['1.3.1-alpha.0', '1.3.1-alpha.1', 'prerelease'],
+  // prettier-ignore
+  ['1.3.1', '1.3.3-alpha.0', 'prerelease', ['1.3.1-alpha.0', '1.3.1-alpha.2', '1.3.2-alpha.2']], // fixme
+  // prettier-ignore
+  ['1.3.1', '1.3.3-alpha.0', 'prepatch', ['1.3.1-alpha.0', '1.3.1-alpha.2', '1.3.2-alpha.2']],
+  ['1.3.1-alpha.0', '1.3.1-alpha.1', 'prerelease', []],
+  ['1.3.1', '1.3.2-alpha.0', 'prerelease', []],
+])(
+  'test version utils',
+  (currentVersion, expectVersion, releaseType, _tags) => {
+    it(`${currentVersion}, releaseType: ${releaseType}`, () => {
+      const result = getNextVersionWithTags({
+        currentVersion,
+        tags: _tags || tags,
+        releaseType,
+      })
+      expect(result).toBe(expectVersion)
     })
-    expect(result).toBe('2.0.0')
-  })
-
-  it('should get the next version patch', () => {
-    const currentVersion = '1.3.1'
-    const result = getNextVersionWithTags({
-      currentVersion,
-      tags,
-      releaseType: 'patch',
-    })
-    expect(result).toBe('1.3.5')
-  })
-
-  it('should get the next version minor', () => {
-    const currentVersion = '0.1.5'
-    const result = getNextVersionWithTags({
-      currentVersion,
-      tags,
-      releaseType: 'minor',
-    })
-    expect(result).toBe('0.4.0')
-  })
-
-  it('should get the next version preminor', () => {
-    const currentVersion = '0.1.5'
-    const result = getNextVersionWithTags({
-      currentVersion,
-      tags,
-      releaseType: 'preminor',
-    })
-    expect(result).toBe('0.4.0-alpha.0')
-  })
-
-  it('should get the next version prepatch', () => {
-    const currentVersion = '1.3.1'
-    const result = getNextVersionWithTags({
-      currentVersion,
-      tags,
-      releaseType: 'prepatch',
-    })
-    expect(result).toBe('1.3.5-alpha.0')
-  })
-
-  it('should get the next version premajor', () => {
-    const currentVersion = '0.1.5'
-    const result = getNextVersionWithTags({
-      currentVersion,
-      tags,
-      releaseType: 'premajor',
-    })
-    expect(result).toBe('2.0.0-alpha.0')
-  })
-
-  it('should get the next version prepatch with identifier', () => {
-    const currentVersion = '1.3.1-alpha.0'
-    const result = getNextVersionWithTags({
-      currentVersion,
-      tags,
-      releaseType: 'prepatch',
-    })
-    expect(result).toBe('1.3.5-alpha.0')
-  })
-
-  it('should get the next version prerelease with identifier', () => {
-    const currentVersion = '1.3.1-alpha.0'
-    const result = getNextVersionWithTags({
-      currentVersion,
-      tags,
-      releaseType: 'prerelease',
-    })
-    expect(result).toBe('1.3.1-alpha.1')
-  })
-
-  it('should get the next version prerelease with identifier', () => {
-    const currentVersion = '1.3.1-alpha.0'
-    const result = getNextVersionWithTags({
-      currentVersion,
-      tags: ['1.3.1-alpha.0', '1.3.1-alpha.2'],
-      releaseType: 'prerelease',
-    })
-    expect(result).toBe('1.3.1-alpha.3')
-  })
-})
+  },
+)

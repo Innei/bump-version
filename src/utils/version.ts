@@ -41,7 +41,8 @@ export const getNextVersionWithTags = ({
   const reversedTags = sortedTags.reverse()
 
   const identifier = getIdentifier(currentVersion)
-  const nextVersion = SemVer.inc(currentVersion, releaseType, identifier)
+  const nextIdentifier = identifier || 'alpha'
+  const nextVersion = SemVer.inc(currentVersion, releaseType, nextIdentifier)
 
   const getNextVersion = () => {
     if (!sortedTags.length) {
@@ -77,7 +78,6 @@ export const getNextVersionWithTags = ({
       }
     }
 
-    const nextIdentifier = identifier || 'alpha'
     // 1. handle major minor patch
     switch (releaseType) {
       case 'premajor':
@@ -108,7 +108,6 @@ export const getNextVersionWithTags = ({
         return SemVer.inc(latest, releaseType, nextIdentifier)
       }
       case 'prepatch':
-      case 'prerelease':
       case 'patch': {
         // x.1.x
 
@@ -125,6 +124,26 @@ export const getNextVersionWithTags = ({
         }
 
         return SemVer.inc(latest, releaseType, nextIdentifier)
+      }
+      case 'prerelease': {
+        const minor = SemVer.minor(nextVersion)
+        const major = SemVer.major(nextVersion)
+
+        const latestIndex = reversedTags.findIndex((tag) => {
+          return (
+            SemVer.major(tag) === major &&
+            SemVer.minor(tag) === minor &&
+            identifier === getIdentifier(tag)
+          )
+        })
+
+        const lastest = reversedTags[latestIndex]
+
+        if (!lastest) {
+          return
+        }
+
+        return SemVer.inc(lastest, 'prerelease', identifier)
       }
     }
   }
