@@ -88,4 +88,24 @@ describe.only('test version utils', () => {
     })
     expect(result).toBe('1.3.5-alpha.0')
   })
+
+  it('should get the next version prerelease with identifier', () => {
+    const currentVersion = '1.3.1-alpha.0'
+    const result = getNextVersionWithTags({
+      currentVersion,
+      tags,
+      releaseType: 'prerelease',
+    })
+    expect(result).toBe('1.3.1-alpha.1')
+  })
+
+  it('should get the next version prerelease with identifier', () => {
+    const currentVersion = '1.3.1-alpha.0'
+    const result = getNextVersionWithTags({
+      currentVersion,
+      tags: ['1.3.1-alpha.0', '1.3.1-alpha.2'],
+      releaseType: 'prerelease',
+    })
+    expect(result).toBe('1.3.1-alpha.3')
+  })
 })

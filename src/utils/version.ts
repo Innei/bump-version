@@ -40,47 +40,99 @@ export const getNextVersionWithTags = ({
   const sortedTags = tags.concat().sort(SemVer.compare)
   const reversedTags = sortedTags.reverse()
 
-  const nextVersion = SemVer.inc(currentVersion, releaseType)
-
   const identifier = getIdentifier(currentVersion)
-  const nextIdentifier = identifier || 'alpha'
-  // 1. handle major minor patch
-  switch (releaseType) {
-    case 'premajor':
-    case 'major': {
-      // 1.x.x
+  const nextVersion = SemVer.inc(currentVersion, releaseType, identifier)
 
-      const latestOfMajor = reversedTags[0]
-
-      return SemVer.inc(latestOfMajor, releaseType, nextIdentifier)
+  const getNextVersion = () => {
+    if (!sortedTags.length) {
+      return nextVersion
     }
-    case 'preminor':
-    case 'minor': {
-      // x.1.x
+    // 0. handle prerelease if own identifier
+    if (identifier) {
+      switch (releaseType) {
+        case 'prerelease': {
+          // 1.0.0-alpha.0 -> 1.0.0-alpha.1
 
-      const major = SemVer.major(nextVersion)
-      const latestOfMajorIndex = reversedTags.findIndex((tag) => {
-        return SemVer.major(tag) === major
-      })
+          const minor = SemVer.minor(nextVersion)
+          const major = SemVer.major(nextVersion)
+          const patch = SemVer.patch(nextVersion)
 
-      const latestOfMajor = reversedTags[latestOfMajorIndex]
+          const latestIndex = reversedTags.findIndex((tag) => {
+            return (
+              SemVer.major(tag) === major &&
+              SemVer.minor(tag) === minor &&
+              SemVer.patch(tag) === patch &&
+              getIdentifier(tag) === identifier
+            )
+          })
 
-      return SemVer.inc(latestOfMajor, releaseType, nextIdentifier)
+          const lastest = reversedTags[latestIndex]
+
+          if (!lastest) {
+            return
+          }
+
+          return SemVer.inc(lastest, 'prerelease', identifier)
+        }
+      }
     }
-    case 'prepatch':
-    case 'patch': {
-      // x.1.x
 
-      const minor = SemVer.minor(nextVersion)
-      const major = SemVer.major(nextVersion)
-      const latestOfMajorIndex = reversedTags.findIndex((tag) => {
-        return SemVer.minor(tag) === minor && SemVer.major(tag) === major
-      })
+    const nextIdentifier = identifier || 'alpha'
+    // 1. handle major minor patch
+    switch (releaseType) {
+      case 'premajor':
+      case 'major': {
+        // 1.x.x
 
-      const latestOfMajor = reversedTags[latestOfMajorIndex]
+        const latestOfMajor = reversedTags[0]
 
-      return SemVer.inc(latestOfMajor, releaseType, nextIdentifier)
+        if (!latestOfMajor) {
+          return
+        }
+
+        return SemVer.inc(latestOfMajor, releaseType, nextIdentifier)
+      }
+      case 'preminor':
+      case 'minor': {
+        // x.1.x
+
+        const major = SemVer.major(nextVersion)
+        const lastIndex = reversedTags.findIndex((tag) => {
+          return SemVer.major(tag) === major
+        })
+
+        const latest = reversedTags[lastIndex]
+
+        if (!latest) return
+
+        return SemVer.inc(latest, releaseType, nextIdentifier)
+      }
+      case 'prepatch':
+      case 'prerelease':
+      case 'patch': {
+        // x.1.x
+
+        const minor = SemVer.minor(nextVersion)
+        const major = SemVer.major(nextVersion)
+        const lastIndex = reversedTags.findIndex((tag) => {
+          return SemVer.minor(tag) === minor && SemVer.major(tag) === major
+        })
+
+        const latest = reversedTags[lastIndex]
+
+        if (!latest) {
+          return
+        }
+
+        return SemVer.inc(latest, releaseType, nextIdentifier)
+      }
     }
+  }
+
+  const result = getNextVersion()
+
+  if (result) {
+    return result
   }
 
   const existIndex = sortedTags.findIndex((tag) => tag === nextVersion)
