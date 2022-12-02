@@ -2,7 +2,7 @@ import SemVer from 'semver'
 import slugify from 'slugify'
 import { $, chalk } from 'zx'
 
-import { dryRun } from './run.js'
+import { dryRun } from '../core/dry-run.js'
 
 export const getCurrentGitBranch = async () => {
   const branch = await $`git rev-parse --abbrev-ref HEAD`.quiet()
