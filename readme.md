@@ -54,7 +54,7 @@ Define in package.json, add field `bump` or create `.bumprc`:
 | tag-prefix       | Git prefix tag                                                                    | string                                         | `v`                        |
 | mode             | Workspace mode                                                                    | `independent` `monorepo`                       | `independent`              |
 | packages         | Monorepo mode packages path                                                       | string[]                                       | `[]`                       |
-| with_tags        | Generate next version based on git tags, maybe slowly.                            | boolean                                        | `false`                    |
+| with_tags        | [Generate next version based on git tags](https://github.com/Innei/bump-version/blob/master/test/utils/version.spec.ts), maybe slowly.                            | boolean                                        | `false`                    |
 | remote_tags      | Fetch git remote tags before version generate, only work when `with_tags` enable. | boolean                                        | `true`                     |
 
 ### Interface
