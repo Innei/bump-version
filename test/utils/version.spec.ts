@@ -29,7 +29,7 @@ describe.each<[string, string, ReleaseType, (string[] | undefined)?]>([
   ['1.3.1-alpha.0', '1.3.5-alpha.0', 'prepatch'],
   ['1.3.1-alpha.0', '1.3.1-alpha.1', 'prerelease'],
   // prettier-ignore
-  ['1.3.1', '1.3.3-alpha.0', 'prerelease', ['1.3.1-alpha.0', '1.3.1-alpha.2', '1.3.2-alpha.2']], // fixme
+  ['1.3.1', '1.3.3-alpha.0', 'prerelease', ['1.3.1-alpha.0', '1.3.1-alpha.2', '1.3.2-alpha.2']],
   // prettier-ignore
   ['1.3.1', '1.3.3-alpha.0', 'prepatch', ['1.3.1-alpha.0', '1.3.1-alpha.2', '1.3.2-alpha.2']],
   ['1.3.1-alpha.0', '1.3.1-alpha.1', 'prerelease', []],

@@ -130,11 +130,7 @@ export const getNextVersionWithTags = ({
         const major = SemVer.major(nextVersion)
 
         const latestIndex = reversedTags.findIndex((tag) => {
-          return (
-            SemVer.major(tag) === major &&
-            SemVer.minor(tag) === minor &&
-            identifier === getIdentifier(tag)
-          )
+          return SemVer.major(tag) === major && SemVer.minor(tag) === minor
         })
 
         const lastest = reversedTags[latestIndex]
@@ -143,7 +139,9 @@ export const getNextVersionWithTags = ({
           return
         }
 
-        return SemVer.inc(lastest, 'prerelease', identifier)
+        // this will be prepatch, is is not a bug
+
+        return SemVer.inc(lastest, 'prepatch', nextIdentifier)
       }
     }
   }
