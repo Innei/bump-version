@@ -1,8 +1,8 @@
 # Bump version
 
-Bump version, change package.json version.
+Simple Bump version CLI, bump package.json version and generate changlog, running hooks and publish.
 
-<img width="508" alt="image" src="https://user-images.githubusercontent.com/41265413/201814822-669fb5f9-35a7-4f4d-a553-9c22a7a264ef.png">
+<img width="448" alt="image" src="https://user-images.githubusercontent.com/41265413/205250027-59c6d398-5242-45b6-997f-df63ad34aae5.png">
 
 ## How to use
 
@@ -19,7 +19,7 @@ vv # or bv, bump, bp
 | `--dry-run`              | Dry run mode                                              |                    |
 | `-f` `--filter`          | Run in special monorepo workspace                         | `-f packages/core` |
 | `--alpha` `--prerelease` | Create prerelease version                                 |                    |
-| `tag-prefix`             | Custom git tag prefix, the priority is higher than rcfile |                    |
+| `--tag-prefix`           | Custom git tag prefix, the priority is higher than rcfile |                    |
 | `minor`                  | Create minor version                                      |                    |
 | `major`                  | Create major version                                      |                    |
 | `patch`                  | Create patch version                                      |                    |
@@ -75,7 +75,7 @@ export interface AllowedBranchesOptions {
 
 /**
  * @see https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-core
- */ 
+ */
 export type ChangelogOptions = Parameters<typeof conventionalChangelog>[0] & {
   enable: boolean
 }
