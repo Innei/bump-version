@@ -1,6 +1,6 @@
 import type conventionalChangelog from 'conventional-changelog'
 
-export interface BumpOptions {
+export interface BumpConfig {
   tag: string
   leading: string[]
   /**
@@ -21,6 +21,9 @@ export interface BumpOptions {
 
   mode: 'monorepo' | 'independent'
   packages: string[]
+
+  withTags: boolean
+  remoteTags: boolean
 }
 
 type ReleaseType =

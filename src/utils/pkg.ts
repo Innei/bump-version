@@ -51,24 +51,3 @@ export const getNextVersion = (
       : undefined,
   )
 }
-
-export function generateReleaseTypes(
-  currentVersion,
-  types = releaseTypes,
-  pried = 'alpha',
-
-  customReleaseTypes?: semver.ReleaseType[],
-) {
-  return (customReleaseTypes || types).map((releaseType) => {
-    const version = semver.inc(currentVersion, releaseType, pried)
-    return {
-      name: `${releaseType} - ${version}`,
-      value: version,
-
-      extra: {
-        releaseType,
-        pried,
-      },
-    }
-  })
-}

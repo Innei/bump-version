@@ -4,8 +4,13 @@ import path from 'path'
 import type { ReleaseType } from 'semver'
 import { $, chalk } from 'zx'
 
-import { getBranchVersion } from '../utils/git.js'
+import {
+  fetchGitRemoteTags,
+  getBranchVersion,
+  getGitSemVerTags,
+} from '../utils/git.js'
 import { getNextVersion, getPackageJson, releaseTypes } from '../utils/pkg.js'
+import { getNextVersionWithTags } from '../utils/version.js'
 import { context } from './context.js'
 import { resolveArgs } from './resolve-args.js'
 import { resolveConfig } from './resolve-config.js'
@@ -70,18 +75,27 @@ export const precheck = async () => {
   }
 
   const keys = Object.keys(args)
-  const isReleaseType: ReleaseType = keys.find(
+  const releaseType: ReleaseType = keys.find(
     (key) =>
       args[key] && [...releaseTypes, 'branch'].includes(key as ReleaseType),
   ) as any
 
-  if (isReleaseType) {
+  if (releaseType) {
     const { branchVersion } = await getBranchVersion(currentVersion)
 
+    if (config.withTags && config.remoteTags) {
+      await fetchGitRemoteTags()
+    }
     const nextVersion =
-      (isReleaseType as any) === 'branch'
+      (releaseType as any) === 'branch'
         ? branchVersion
-        : getNextVersion(currentVersion, isReleaseType)
+        : config.withTags
+        ? getNextVersionWithTags({
+            currentVersion,
+            releaseType,
+            tags: await getGitSemVerTags(),
+          })
+        : getNextVersion(currentVersion, releaseType)
 
     console.log(
       `Current version: ${currentVersion}, New version: ${nextVersion}`,
@@ -89,7 +103,7 @@ export const precheck = async () => {
 
     // TODO
     context.selectedPried = 'alpha'
-    context.selectedReleaseType = isReleaseType
+    context.selectedReleaseType = releaseType
     context.selectedVersion = nextVersion
 
     return inquirer
