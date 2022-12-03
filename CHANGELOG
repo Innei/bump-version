@@ -1,15 +1,12 @@
 # CHANGELOG
 
-## [1.4.1-alpha.0](https://github.com/Innei/bump-version/compare/v1.4.0...v1.4.1-alpha.0) (2022-12-02)
-
-
-
-## 1.4.1-alpha.0 (2022-12-02)
+# [1.5.0](https://github.com/Innei/bump-version/compare/v1.4.0...v1.5.0) (2022-12-03)
 
 
 ### Features
 
-* git push with upstream ([25976ea](https://github.com/Innei/bump-version/commit/25976ea2f49e819486f8616de965199ba3f68df4))
+* generate version with git tags ([#26](https://github.com/Innei/bump-version/issues/26)) ([64918d8](https://github.com/Innei/bump-version/commit/64918d86fbd86a5c40bf319ce255a82ee182a2ee))
+* git push with upstream ([#25](https://github.com/Innei/bump-version/issues/25)) ([10a0a40](https://github.com/Innei/bump-version/commit/10a0a40414a2f078442ee0c5114e597786ac06d4))
 
 
 
