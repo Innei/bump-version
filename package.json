@@ -41,7 +41,7 @@
     "@vercel/ncc": "0.34.0",
     "husky": "8.0.2",
     "inquirer": "^9.1.4",
-    "lint-staged": "13.0.4",
+    "lint-staged": "13.1.0",
     "semver": "^7.3.8",
     "typescript": "4.8.4",
     "vite": "3.2.4",
