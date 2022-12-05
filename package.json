@@ -45,7 +45,7 @@
     "semver": "^7.3.8",
     "typescript": "4.8.4",
     "vite": "3.2.5",
-    "vitest": "0.25.3",
+    "vitest": "0.25.4",
     "zx": "^7.0.8"
   },
   "dependencies": {
