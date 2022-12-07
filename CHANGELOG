@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.5.1](https://github.com/Innei/bump-version/compare/v1.5.0...v1.5.1) (2022-12-07)
+
+
+### Bug Fixes
+
+* **config:** logical judgment ([d36360b](https://github.com/Innei/bump-version/commit/d36360b81e80936bde197b90f38b76e73fa41ff2))
+
+
+
 # [1.5.0](https://github.com/Innei/bump-version/compare/v1.4.0...v1.5.0) (2022-12-03)
 
 
