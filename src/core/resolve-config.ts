@@ -94,22 +94,22 @@ export const resolveConfig = () => {
   )
 
   // npm
-  const doPublish = bumpOptions.publish || false
+  const doPublish = bumpOptions.publish ?? false
 
   // git
-  const createGitTag = bumpOptions.tag || true
-  const doGitPush = bumpOptions.push || true
+  const createGitTag = bumpOptions.tag ?? true
+  const doGitPush = bumpOptions.push ?? true
   const commitMessage = bumpOptions.commitMessage || 'release: v${NEW_VERSION}'
   const allowedBranches = bumpOptions.allowedBranches
   const tagPrefix = bumpOptions.tagPrefix || 'v'
-  const withTags = bumpOptions.withTags || false
-  const remoteTags = bumpOptions.remoteTags || false
+  const withTags = bumpOptions.withTags ?? false
+  const remoteTags = bumpOptions.remoteTags ?? false
 
   // changelog
   const isChangelogOptions = typeof bumpOptions.changelog === 'object'
   const shouldGenerateChangeLog = isChangelogOptions
     ? (bumpOptions.changelog as ChangelogOptions).enable
-    : bumpOptions.changelog || false
+    : (bumpOptions.changelog ?? false)
   const overrideChangelogOptions = isChangelogOptions
     ? bumpOptions.changelog
     : {}
