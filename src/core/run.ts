@@ -2,7 +2,7 @@ import { writeFileSync } from 'fs'
 import inquirer from 'inquirer'
 import { join as pathJoin } from 'path'
 import semver from 'semver'
-import { $, chalk, fs } from 'zx'
+import { $, cd, chalk, fs } from 'zx'
 
 import { ROOT_WORKSPACE_DIR, WORKSPACE_DIR } from '../constants/path.js'
 import { generateChangeLog, isExistChangelogFile } from '../utils/changelog.js'
@@ -255,6 +255,11 @@ export async function run(newVersion: string) {
   }
 
   if (doPublish) {
+    if (!isMonorepo) {
+      // should do publish in workdir
+      cd(WORKSPACE_DIR)
+    }
+
     const packageManager = await detectPackage()
     let publishCommand = `${packageManager} publish --access public`
     if (packageManager === 'pnpm' && isMonorepo) {
