@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.5.2](https://github.com/Innei/bump-version/compare/v1.5.1...v1.5.2) (2022-12-10)
+
+
+### Bug Fixes
+
+* change dir before do publish ([edd930e](https://github.com/Innei/bump-version/commit/edd930e656e482a906216b80bfcbc0425136e73c))
+
+
+
 ## [1.5.1](https://github.com/Innei/bump-version/compare/v1.5.0...v1.5.1) (2022-12-07)
 
 
