@@ -196,62 +196,66 @@ export async function run(newVersion: string) {
     process.exit(1)
   }
 
+  console.log(chalk.green('Creating git tag.'))
+  await dryRun`git add package.json`
+  await dryRun`git commit -a -m ${commitMessage.replace(
+    '${NEW_VERSION}',
+    newVersion,
+  )} --no-verify`
+
   if (createGitTag) {
-    console.log(chalk.green('Creating git tag.'))
-    await dryRun`git add package.json`
-    await dryRun`git commit -a -m ${commitMessage.replace(
-      '${NEW_VERSION}',
-      newVersion,
-    )} --no-verify`
     await $`git tag -a ${nextTagPrefix + newVersion} -m "Release ${
       nextTagPrefix + newVersion
     }"`
+  }
 
-    if (shouldGenerateChangeLog) {
-      const changelog = await generateChangeLog({
-        tagPrefix: nextTagPrefix,
-        ...overrideChangelogOptions,
-      })
+  if (shouldGenerateChangeLog) {
+    const changelog = await generateChangeLog({
+      tagPrefix: nextTagPrefix,
+      ...overrideChangelogOptions,
+    })
 
-      const hasExistChangeFile = isExistChangelogFile()
-      const defaultChangelogFilename = 'CHANGELOG.md'
-      let changelogFilename = defaultChangelogFilename
+    const hasExistChangeFile = isExistChangelogFile()
+    const defaultChangelogFilename = 'CHANGELOG.md'
+    let changelogFilename = defaultChangelogFilename
 
-      const changelogInFolder = isMonorepo ? ROOT_WORKSPACE_DIR : WORKSPACE_DIR
-      let changelogPath = pathJoin(changelogInFolder, changelogFilename)
-      if (hasExistChangeFile) {
-        // FIXME
-        changelogFilename = hasExistChangeFile
-        changelogPath = pathJoin(changelogInFolder, changelogFilename)
-        !dryMode && fs.unlinkSync(changelogPath)
-      }
+    const changelogInFolder = isMonorepo ? ROOT_WORKSPACE_DIR : WORKSPACE_DIR
+    let changelogPath = pathJoin(changelogInFolder, changelogFilename)
+    if (hasExistChangeFile) {
+      // FIXME
+      changelogFilename = hasExistChangeFile
+      changelogPath = pathJoin(changelogInFolder, changelogFilename)
+      !dryMode && fs.unlinkSync(changelogPath)
+    }
 
-      if (dryMode) {
-        console.log(`changelog generate: \n`, changelog)
-        console.log(`changelog location: \n`, changelogPath)
-      } else {
-        // TODO custom changelog filename
+    if (dryMode) {
+      console.log(`changelog generate: \n`, changelog)
+      console.log(`changelog location: \n`, changelogPath)
+    } else {
+      // TODO custom changelog filename
 
-        console.log(chalk.green('Generating changelog.'))
-        writeFileSync(changelogPath, changelog)
-        await dryRun`git add ${changelogPath}`
-        await dryRun`git commit --amend --no-verify --no-edit`
+      console.log(chalk.green('Generating changelog.'))
+      writeFileSync(changelogPath, changelog)
+      await dryRun`git add ${changelogPath}`
+      await dryRun`git commit --amend --no-verify --no-edit`
+
+      if (createGitTag) {
         await $`git tag -d ${nextTagPrefix + newVersion}`.quiet().nothrow()
         await dryRun`git tag -a ${nextTagPrefix + newVersion} -m "Release ${
           nextTagPrefix + newVersion
         }"`
       }
     }
+  }
 
-    if (dryMode) {
-      await $`git tag -d ${nextTagPrefix + newVersion}`.nothrow().quiet()
-    }
+  if (dryMode && createGitTag) {
+    await $`git tag -d ${nextTagPrefix + newVersion}`.nothrow().quiet()
+  }
 
-    if (doGitPush) {
-      console.log(chalk.green('Pushing to remote.'))
-      await gitPushWithUpstream()
-      await dryRun`git push --tags`
-    }
+  if (doGitPush) {
+    console.log(chalk.green('Pushing to remote.'))
+    await gitPushWithUpstream()
+    createGitTag && (await dryRun`git push --tags`)
   }
 
   if (doPublish) {
