@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.5.3](https://github.com/Innei/bump-version/compare/v1.5.2...v1.5.3) (2022-12-10)
+
+
+### Bug Fixes
+
+* disable tag should push and commit ([99579de](https://github.com/Innei/bump-version/commit/99579de0a08fc9f6a2bbab00a451cb4de716d64f))
+
+
+
 ## [1.5.2](https://github.com/Innei/bump-version/compare/v1.5.1...v1.5.2) (2022-12-10)
 
 
