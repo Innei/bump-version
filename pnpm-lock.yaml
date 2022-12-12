@@ -14,7 +14,7 @@ specifiers:
   semver: ^7.3.8
   slugify: ^1.6.5
   typescript: 4.9.4
-  vite: 4.0.0
+  vite: 4.0.1
   vitest: 0.25.7
   zx: ^7.1.1
 
@@ -34,7 +34,7 @@ devDependencies:
   lint-staged: 13.1.0
   semver: 7.3.8
   typescript: 4.9.4
-  vite: 4.0.0
+  vite: 4.0.1
   vitest: 0.25.7
   zx: 7.1.1
 
@@ -3086,8 +3086,8 @@ packages:
     engines: {node: '>=4'}
     dev: false
 
-  /postcss/8.4.19:
-    resolution: {integrity: sha512-h+pbPsyhlYj6N2ozBmHhHrs9DzGmbaarbLvWipMRO7RLS+v4onj26MPFXA5OBYFxyqYhUJK456SwDcY9H2/zsA==}
+  /postcss/8.4.20:
+    resolution: {integrity: sha512-6Q04AXR1212bXr5fh03u8aAwbLxAQNGQ/Q1LNa0VfOI06ZAlhPHtQvE4OIdpj4kLThXilalPnmDSOD65DcHt+g==}
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
       nanoid: 3.3.4
@@ -3758,8 +3758,8 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: false
 
-  /vite/4.0.0:
-    resolution: {integrity: sha512-ynad+4kYs8Jcnn8J7SacS9vAbk7eMy0xWg6E7bAhS1s79TK+D7tVFGXVZ55S7RNLRROU1rxoKlvZ/qjaB41DGA==}
+  /vite/4.0.1:
+    resolution: {integrity: sha512-kZQPzbDau35iWOhy3CpkrRC7It+HIHtulAzBhMqzGHKRf/4+vmh8rPDDdv98SWQrFWo6//3ozwsRmwQIPZsK9g==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -3784,15 +3784,15 @@ packages:
         optional: true
     dependencies:
       esbuild: 0.16.4
-      postcss: 8.4.19
+      postcss: 8.4.20
       resolve: 1.22.1
       rollup: 3.7.2
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
 
-  /vite/4.0.0_@types+node@18.11.12:
-    resolution: {integrity: sha512-ynad+4kYs8Jcnn8J7SacS9vAbk7eMy0xWg6E7bAhS1s79TK+D7tVFGXVZ55S7RNLRROU1rxoKlvZ/qjaB41DGA==}
+  /vite/4.0.1_@types+node@18.11.12:
+    resolution: {integrity: sha512-kZQPzbDau35iWOhy3CpkrRC7It+HIHtulAzBhMqzGHKRf/4+vmh8rPDDdv98SWQrFWo6//3ozwsRmwQIPZsK9g==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -3818,7 +3818,7 @@ packages:
     dependencies:
       '@types/node': 18.11.12
       esbuild: 0.16.4
-      postcss: 8.4.19
+      postcss: 8.4.20
       resolve: 1.22.1
       rollup: 3.7.2
     optionalDependencies:
@@ -3860,7 +3860,7 @@ packages:
       tinybench: 2.3.1
       tinypool: 0.3.0
       tinyspy: 1.0.2
-      vite: 4.0.0_@types+node@18.11.12
+      vite: 4.0.1_@types+node@18.11.12
     transitivePeerDependencies:
       - less
       - sass
