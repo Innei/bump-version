@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.5.4](https://github.com/Innei/bump-version/compare/v1.5.3...v1.5.4) (2022-12-12)
+
+
+### Bug Fixes
+
+* catch get git tags error ([47a2ebb](https://github.com/Innei/bump-version/commit/47a2ebbcbc6012a9537168006c673571df2202c9))
+
+
+
 ## [1.5.3](https://github.com/Innei/bump-version/compare/v1.5.2...v1.5.3) (2022-12-10)
 
 
