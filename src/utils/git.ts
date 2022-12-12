@@ -53,7 +53,11 @@ export const gitPushWithUpstream = async (branchName?: string) => {
  * @returns ['1.0.0', '1.2.3', '1.2.4', '1.2.5-0']
  */
 export const getGitSemVerTags = async () => {
-  const pipe = await $`git tag | cat | grep -s "v"`.quiet()
+  const pipe = await $`git tag | cat | grep -s "v"`.quiet().nothrow()
+
+  if (!pipe.stdout) {
+    return []
+  }
   return pipe.stdout
     .trim()
     .split('\n')
