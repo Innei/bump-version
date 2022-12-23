@@ -1,7 +1,7 @@
 {
   "name": "@innei/bump-version",
   "type": "module",
-  "packageManager": "pnpm@7.17.1",
+  "packageManager": "pnpm@7.19.0",
   "homepage": "https://github.com/Innei/bump-version",
   "bin": {
     "bump": "dist/index.mjs",
