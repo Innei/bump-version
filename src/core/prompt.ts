@@ -13,7 +13,7 @@ import {
   getCurrentGitBranch,
   isMainBranch,
 } from '../utils/git.js'
-import { getPackageJson } from '../utils/pkg.js'
+import { memoedPackageJson } from '../utils/pkg.js'
 import { getIdentifier, nextIdentifierMap } from '../utils/version.js'
 import { context } from './context.js'
 import { resolveConfig } from './resolve-config.js'
@@ -21,7 +21,7 @@ import { cutsomVersionRun, run } from './run.js'
 import { generateReleaseTypes } from './version.js'
 
 export const promptMain = async () => {
-  const packageJson = getPackageJson()
+  const packageJson = memoedPackageJson
   const currentVersion = packageJson.json.version as string
   const identifier = getIdentifier(currentVersion)
 

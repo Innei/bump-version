@@ -9,7 +9,11 @@ import {
   getBranchVersion,
   getGitSemVerTags,
 } from '../utils/git.js'
-import { getNextVersion, getPackageJson, releaseTypes } from '../utils/pkg.js'
+import {
+  getNextVersion,
+  memoedPackageJson,
+  releaseTypes,
+} from '../utils/pkg.js'
 import { getNextVersionWithTags } from '../utils/version.js'
 import { context } from './context.js'
 import { resolveArgs } from './resolve-args.js'
@@ -39,8 +43,7 @@ export const precheck = async () => {
     }
   }
 
-  const packageJson = getPackageJson()
-  const currentVersion = packageJson.json.version
+  const currentVersion = memoedPackageJson.json.version
 
   if (!currentVersion) {
     console.error(

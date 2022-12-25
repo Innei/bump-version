@@ -7,7 +7,8 @@ import {
 } from '../constants/path.js'
 import type { BumpConfig, ChangelogOptions } from '../interfaces/options.js'
 import { camelcaseKeys } from '../utils/camelcase-keys.js'
-import { getPackageJson, getRootPackageJson } from '../utils/pkg.js'
+import { memoReturnValueFunction } from '../utils/memo.js'
+import { memoedPackageJson, memoedRootPackageJson } from '../utils/pkg.js'
 import { resolveArgs } from './resolve-args.js'
 
 // FIXME: rc priority: 0. custom rc path 1. monorepo rc file 2. root rc file 3. monorepo package field 4. root package field
@@ -44,27 +45,10 @@ const wrapHookArray = (hook) => {
   throw new TypeError(`Invalid hook type: ${typeof hook}`)
 }
 
-const callOnceDev = (fn: (...args: any[]) => any) => {
-  let called = false
-  return (...args) => {
-    if (!__DEV__) {
-      return () => {}
-    }
-    if (!called) {
-      called = true
-      return fn.apply(this, args)
-    }
-  }
-}
-
-const logOption = callOnceDev((bumpOptions) =>
-  console.log('bumpOptions', bumpOptions),
-)
-
-export const resolveConfig = () => {
+export const resolveConfig = memoReturnValueFunction(() => {
   // FIXME monorepo read pkg json issue
-  const { json: ROOT_PKG } = getRootPackageJson()
-  const { json: PKG } = getPackageJson()
+  const { json: ROOT_PKG } = memoedRootPackageJson
+  const { json: PKG } = memoedPackageJson
   let bumpOptions: Partial<BumpConfig>
 
   const rcPath = checkConfigRcExist()
@@ -80,7 +64,9 @@ export const resolveConfig = () => {
     bumpOptions = camelcaseKeys(PKG.bump || ROOT_PKG.bump || {})
   }
 
-  logOption(bumpOptions)
+  if (__DEV__) {
+    console.log(bumpOptions)
+  }
 
   // define options
   const leadingHooks = wrapHookArray(
@@ -109,7 +95,7 @@ export const resolveConfig = () => {
   const isChangelogOptions = typeof bumpOptions.changelog === 'object'
   const shouldGenerateChangeLog = isChangelogOptions
     ? (bumpOptions.changelog as ChangelogOptions).enable
-    : (bumpOptions.changelog ?? false)
+    : bumpOptions.changelog ?? false
   const overrideChangelogOptions = isChangelogOptions
     ? bumpOptions.changelog
     : {}
@@ -135,4 +121,4 @@ export const resolveConfig = () => {
     // extra
     overrideChangelogOptions,
   }
-}
+})

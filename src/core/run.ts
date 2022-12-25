@@ -8,7 +8,7 @@ import { ROOT_WORKSPACE_DIR, WORKSPACE_DIR } from '../constants/path.js'
 import { generateChangeLog, isExistChangelogFile } from '../utils/changelog.js'
 import { detectPackage } from '../utils/detect-package.js'
 import { getCurrentGitBranch, gitPushWithUpstream } from '../utils/git.js'
-import { getPackageJson } from '../utils/pkg.js'
+import { memoedPackageJson } from '../utils/pkg.js'
 import { snakecase } from '../utils/snakecase.js'
 import { context } from './context.js'
 import { dryRun } from './dry-run.js'
@@ -49,7 +49,7 @@ export async function cutsomVersionRun() {
   })
   const nextVersion = answers.customVersion.trim()
 
-  const currentVersion = getPackageJson().json.version
+  const currentVersion = memoedPackageJson.json.version
 
   if (lte(nextVersion, currentVersion)) {
     console.log(
@@ -74,7 +74,7 @@ export async function cutsomVersionRun() {
 }
 
 export async function run(newVersion: string) {
-  const { originFile } = getPackageJson()
+  const { originFile } = memoedPackageJson
   const {
     allowedBranches,
     commitMessage,
@@ -181,7 +181,7 @@ export async function run(newVersion: string) {
 
   await execCmd(leadingHooks, cmdContext)
 
-  const { path } = getPackageJson()
+  const { path } = memoedPackageJson
   await updatePackageJsonVersion(newVersion)
 
   console.log(chalk.green('Running tailding hooks.'))
