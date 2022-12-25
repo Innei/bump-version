@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.5.5](https://github.com/Innei/bump-version/compare/v1.5.4...v1.5.5) (2022-12-25)
+
+
+### Bug Fixes
+
+* don't memo package json in update json ([044ee15](https://github.com/Innei/bump-version/commit/044ee153d405506d7ca41667be4aff77db84589f))
+
+
+
 ## [1.5.4](https://github.com/Innei/bump-version/compare/v1.5.3...v1.5.4) (2022-12-12)
 
 
