@@ -85,7 +85,7 @@ To enable it.
 }
 ```
 
-Now if your local or remote tags has tag `1.0.1`, but project version current version is `1.0.0`, but the next patch version will be generate as `1.0.2`.
+Now if your local or remote tags has tag `1.0.1`, but project current version is `1.0.0`, but the next patch version will be generate as `1.0.2`.
 
 ## Args
 
