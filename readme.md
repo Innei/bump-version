@@ -85,7 +85,11 @@ To enable it.
 }
 ```
 
-Now if your local or remote tags has tag `1.0.1`, but project current version is `1.0.0`, but the next patch version will be generate as `1.0.2`.
+Now if your local or remote tags has tag `1.0.1`, but project current version is `1.0.0`, so the next patch version will be generate as `1.0.2`.
+
+Another example, if remote tags has tag `1.2.0` `1.3.0`, project current version is `1.1.0`, the next minor version is `1.2.0` theoretically, but if you enable this feature, it will generate a non-conflicting version as `1.4.0`.
+
+Other information, please see the [test suit](https://github.com/Innei/bump-version/blob/master/test/utils/version.spec.ts).
 
 ## Args
 
@@ -133,7 +137,7 @@ There is a example configuration.
 | tag-prefix       | Git prefix tag                                                                                                                         | string                                         | `v`                        |
 | mode             | Workspace mode                                                                                                                         | `independent` `monorepo`                       | `independent`              |
 | packages         | Monorepo mode packages path                                                                                                            | string[]                                       | `[]`                       |
-| with_tags        | [Generate next version based on git tags](https://github.com/Innei/bump-version/blob/master/test/utils/version.spec.ts), maybe slowly. | boolean                                        | `false`                    |
+| with_tags        | Generate next version based on git tags, maybe slowly. | boolean                                        | `false`                    |
 | remote_tags      | Fetch git remote tags before version generate, only work when `with_tags` enable.                                                      | boolean                                        | `true`                     |
 
 ### Interface
