@@ -163,7 +163,8 @@ export async function run(newVersion: string) {
     console.log(
       chalk.red(
         `Current branch ${currentBranch} is not allowed to release. ${(
-          allowedBranches || defaultAllowedBranches
+          allowedBranches.map((br) => (typeof br == 'string' ? br : br.name)) ||
+          defaultAllowedBranches
         )
           .map((b) => chalk.green(b))
           .join(', ')} is allowed.`,
