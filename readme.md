@@ -68,13 +68,13 @@ The bump version allows you ban special branch run it, such as you don't want to
 }
 ```
 
-Either, you can also use `disallowed_branches`.
-
 ### Git Tag Mode
 
-If the project maintains by a team and other developers can publish their own unstable version, the publish action will create a git tag based on new version. So, if another developer bump version at same time, he will got a conflict error because of git tag is exist on remote tags.
+If the project maintains by a team and other developers can publish their own unstable version, the publish action will create a git tag based on new version. So, if another developer bump version at same time, he will got a conflict error because of git tag is exist on remote repository.
 
-So, this cli provide git tag mode, it can fetch remote git tags, and gerenate the correct version according to the git tags (or remote) sequence, and no conflicting tags are generated.
+For example, if Developer A and Developer B checkout two private branches from the master branch and fix a bug that requires release new version. At this point, the projects are both at version 1.0.0, and A has created a Git Tag 1.0.0-alpha.0 on the private branch and pushed it to the remote repository, while B has also created a Git Tag 1.0.0-alpha.0 on the private branch, and there is a conflict.
+
+So, the tool provide git tag mode, it can fetch remote git tags, and gerenate the correct version according to the git tags (or remote) sequence, and no conflicting tags are generated.
 
 To enable it.
 
