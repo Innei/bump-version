@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.5.6](https://github.com/Innei/bump-version/compare/v1.5.5...v1.5.6) (2023-01-05)
+
+
+### Bug Fixes
+
+* add padding ([a42a936](https://github.com/Innei/bump-version/commit/a42a93615287da2fbbc3e5628882e2d2bb8ecb39))
+
+
+
 ## [1.5.5](https://github.com/Innei/bump-version/compare/v1.5.4...v1.5.5) (2022-12-25)
 
 
