@@ -95,19 +95,20 @@ Other information, please see the [test suit](https://github.com/Innei/bump-vers
 
 This is args passed in cli command. e.g. `vv --dry-run`.
 
-| Args                     | Description                                               | Example            |
-| ------------------------ | --------------------------------------------------------- | ------------------ |
-| `--dry-run`              | Dry run mode                                              |                    |
-| `-f` `--filter`          | Run in special monorepo workspace                         | `-f packages/core` |
-| `--alpha` `--prerelease` | Create prerelease version                                 |                    |
-| `--tag-prefix`           | Custom git tag prefix, the priority is higher than rcfile |                    |
-| `minor`                  | Create minor version                                      |                    |
-| `major`                  | Create major version                                      |                    |
-| `patch`                  | Create patch version                                      |                    |
-| `prepatch`               | Create prepatch version                                   |                    |
-| `preminor`               | Create preminor version                                   |                    |
-| `premajor`               | Create premajor version                                   |                    |
-| `branch`                 | Create version based on git branch (1.2.2-dev-perid.0)    |                    |
+| Args                     | Description                                                 | Example            |
+| ------------------------ | ----------------------------------------------------------- | ------------------ |
+| `--dry-run`              | Dry run mode                                                |                    |
+| `-f` `--filter`          | Run in special monorepo workspace                           | `-f packages/core` |
+| `--alpha` `--prerelease` | Create prerelease version                                   |                    |
+| `--tag-prefix`           | Custom git tag prefix, the priority is higher than rcfile   |                    |
+| `--no-verify`            | Force bump version, no verify allowed branches or disallow. |                    |
+| `minor`                  | Create minor version                                        |                    |
+| `major`                  | Create major version                                        |                    |
+| `patch`                  | Create patch version                                        |                    |
+| `prepatch`               | Create prepatch version                                     |                    |
+| `preminor`               | Create preminor version                                     |                    |
+| `premajor`               | Create premajor version                                     |                    |
+| `branch`                 | Create version based on git branch (1.2.2-dev-perid.0)      |                    |
 
 ## Configuration
 
@@ -124,21 +125,21 @@ There is a example configuration.
 }
 ```
 
-| Name             | Description                                                                                                                            | Type                                           | Default                    |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- | -------------------------- |
-| leading          | Run script before change version                                                                                                       | string[]                                       | `[]`                       |
-| trailing         | Run script after change version                                                                                                        | string[]                                       | `[]`                       |
-| publish          | Publish package after bump                                                                                                             | boolean                                        | false                      |
-| tag              | Create git tag after bump                                                                                                              | boolean                                        | true                       |
-| push             | Push git commit after bump                                                                                                             | boolean                                        | true                       |
-| commit_message   | Commit message for new version tag                                                                                                     | string                                         | `release: v${NEW_VERSION}` |
-| changelog        | Generate changelog                                                                                                                     | boolean \| ChangelogOptions                    | false                      |
-| allowed_branches | Allow run bump version on special branch                                                                                               | (RegExp \| string \| AllowedBranchesOptions)[] | `["main", "master"]`       |
-| tag-prefix       | Git prefix tag                                                                                                                         | string                                         | `v`                        |
-| mode             | Workspace mode                                                                                                                         | `independent` `monorepo`                       | `independent`              |
-| packages         | Monorepo mode packages path                                                                                                            | string[]                                       | `[]`                       |
-| with_tags        | Generate next version based on git tags, maybe slowly. | boolean                                        | `false`                    |
-| remote_tags      | Fetch git remote tags before version generate, only work when `with_tags` enable.                                                      | boolean                                        | `true`                     |
+| Name             | Description                                                                       | Type                                           | Default                    |
+| ---------------- | --------------------------------------------------------------------------------- | ---------------------------------------------- | -------------------------- |
+| leading          | Run script before change version                                                  | string[]                                       | `[]`                       |
+| trailing         | Run script after change version                                                   | string[]                                       | `[]`                       |
+| publish          | Publish package after bump                                                        | boolean                                        | false                      |
+| tag              | Create git tag after bump                                                         | boolean                                        | true                       |
+| push             | Push git commit after bump                                                        | boolean                                        | true                       |
+| commit_message   | Commit message for new version tag                                                | string                                         | `release: v${NEW_VERSION}` |
+| changelog        | Generate changelog                                                                | boolean \| ChangelogOptions                    | false                      |
+| allowed_branches | Allow run bump version on special branch                                          | (RegExp \| string \| AllowedBranchesOptions)[] | `["main", "master"]`       |
+| tag-prefix       | Git prefix tag                                                                    | string                                         | `v`                        |
+| mode             | Workspace mode                                                                    | `independent` `monorepo`                       | `independent`              |
+| packages         | Monorepo mode packages path                                                       | string[]                                       | `[]`                       |
+| with_tags        | Generate next version based on git tags, maybe slowly.                            | boolean                                        | `false`                    |
+| remote_tags      | Fetch git remote tags before version generate, only work when `with_tags` enable. | boolean                                        | `true`                     |
 
 ### Interface
 

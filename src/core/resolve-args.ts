@@ -13,6 +13,7 @@ export const resolveArgs = memoReturnValueFunction(() => {
   const tagPrefix: string = argv['tag-prefix'] || argv['t']
   const v: boolean = argv['v'] || argv['version']
   const customRcFile: string = argv['c'] || argv['config']
+  const noVerify: boolean = argv['no-verify'] || argv['noVerify'] || false
 
   const _ = argv['_']
   const _set = new Set(_)
@@ -29,6 +30,7 @@ export const resolveArgs = memoReturnValueFunction(() => {
     filter,
     dryRun,
     tagPrefix,
+    noVerify,
 
     // version controll
     prerelease: getVersionTypeFlag('alpha') || getVersionTypeFlag('prerelease'),

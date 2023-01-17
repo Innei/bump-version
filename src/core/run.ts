@@ -90,7 +90,7 @@ export async function run(newVersion: string) {
     overrideChangelogOptions,
   } = resolveConfig()
   const isMonorepo = mode === 'monorepo'
-  const { dryRun: dryMode, tagPrefix: tagPrefixArgs } = resolveArgs()
+  const { dryRun: dryMode, tagPrefix: tagPrefixArgs, noVerify } = resolveArgs()
   const nextTagPrefix = tagPrefixArgs || tagPrefix
 
   // check allowed branches
@@ -159,7 +159,13 @@ export async function run(newVersion: string) {
       })
     : defaultAllowedBranches.includes(currentBranch)
 
-  if (!isAllowedBranch) {
+  if (noVerify) {
+    console.log(
+      chalk.yellow(
+        'You are running in no-verify mode. Skip verify which branch can bump.',
+      ),
+    )
+  } else if (!isAllowedBranch) {
     console.log(
       chalk.red(
         `Current branch ${currentBranch} is not allowed to release. ${(
