@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.5.8](https://github.com/Innei/bump-version/compare/v1.5.7...v1.5.8) (2023-01-17)
+
+
+### Features
+
+* add `no-verify` argv ([9ecaaab](https://github.com/Innei/bump-version/commit/9ecaaab286e4098066528331e48a7b34ff6df0c7))
+
+
+
 ## [1.5.7](https://github.com/Innei/bump-version/compare/v1.5.6...v1.5.7) (2023-01-17)
 
 
