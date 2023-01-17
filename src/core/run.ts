@@ -47,7 +47,7 @@ export async function cutsomVersionRun() {
       return valid(input) ? true : 'Please enter a valid version'
     },
   })
-  const nextVersion = answers.customVersion.trim()
+  const nextVersion = answers.customVersion.replace(/^v/, '').trim()
 
   const currentVersion = memoedPackageJson.json.version
 
