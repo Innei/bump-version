@@ -43,7 +43,7 @@
     "inquirer": "^9.1.4",
     "lint-staged": "13.1.0",
     "semver": "^7.3.8",
-    "typescript": "4.9.4",
+    "typescript": "4.9.5",
     "vite": "4.0.4",
     "vitest": "0.26.3",
     "zx": "^7.1.1"
