@@ -70,10 +70,10 @@ export async function cutsomVersionRun() {
     process.exit(0)
   }
 
-  return run(nextVersion)
+  return runBump(nextVersion)
 }
 
-export async function run(newVersion: string) {
+export async function runBump(newVersion: string) {
   const { originFile } = memoedPackageJson
   const {
     allowedBranches,

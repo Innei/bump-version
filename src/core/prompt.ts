@@ -17,7 +17,7 @@ import { memoedPackageJson } from '../utils/pkg.js'
 import { getIdentifier, nextIdentifierMap } from '../utils/version.js'
 import { context } from './context.js'
 import { resolveConfig } from './resolve-config.js'
-import { cutsomVersionRun, run } from './run.js'
+import { cutsomVersionRun, runBump } from './run.js'
 import { generateReleaseTypes } from './version.js'
 
 export const promptMain = async () => {
@@ -174,6 +174,6 @@ export const promptMain = async () => {
   if (answer.nextVersion === 'Custom Version') {
     cutsomVersionRun()
   } else {
-    run(answer.nextVersion)
+    runBump(answer.nextVersion)
   }
 }

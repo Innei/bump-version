@@ -69,3 +69,13 @@ export const fetchGitRemoteTags = async () => {
   console.log(chalk.green(`Fetching git remote tags...`))
   await $`git fetch --tags`.quiet()
 }
+
+export const getLatestGitTag = async () => {
+  const { stdout } = await $`git describe --abbrev=0 --tags`.quiet().nothrow()
+  return stdout.trim()
+}
+
+export const hasCommitBeforeTag = async (tagName: string) => {
+  const { stdout } = await $`git rev-list -n 1 ${tagName}`.quiet().nothrow()
+  return !!stdout
+}

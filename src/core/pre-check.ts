@@ -8,6 +8,8 @@ import {
   fetchGitRemoteTags,
   getBranchVersion,
   getGitSemVerTags,
+  getLatestGitTag,
+  hasCommitBeforeTag,
 } from '../utils/git.js'
 import {
   getNextVersion,
@@ -18,7 +20,7 @@ import { getNextVersionWithTags } from '../utils/version.js'
 import { context } from './context.js'
 import { resolveArgs } from './resolve-args.js'
 import { resolveConfig } from './resolve-config.js'
-import { run } from './run.js'
+import { runBump } from './run.js'
 
 export const precheck = async () => {
   const args = resolveArgs()
@@ -40,6 +42,27 @@ export const precheck = async () => {
     if (result.stdout && !__DEV__) {
       console.error(chalk.red('The git tree is not clean'))
       process.exit(-1)
+    }
+  }
+
+  if (config.createGitTag) {
+    const latestTag = await getLatestGitTag().catch(() => null)
+
+    if (latestTag) {
+      const hasCommitBetween = await hasCommitBeforeTag(latestTag)
+
+      if (!hasCommitBetween) {
+        const { confirm } = await inquirer.prompt({
+          type: 'confirm',
+          name: 'confirm',
+          message: `The latest tag is ${latestTag}, but there is no commit between the latest tag and the current commit, do you want to continue?`,
+          default: false,
+        })
+
+        if (!confirm) {
+          return process.exit(0)
+        }
+      }
     }
   }
 
@@ -120,7 +143,7 @@ export const precheck = async () => {
         const result = answer.confirm
 
         if (result) {
-          await run(nextVersion)
+          await runBump(nextVersion)
         }
         process.exit(0)
       })

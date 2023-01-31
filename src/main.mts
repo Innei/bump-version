@@ -2,7 +2,7 @@
 import { precheck } from './core/pre-check.js'
 import { promptMain } from './core/prompt.js'
 
-import './utils/error.js'
+// import './utils/error.js'
 
 process.env.FORCE_COLOR = 3 as any
 
