@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.5.9](https://github.com/Innei/bump-version/compare/v1.5.8...v1.5.9) (2023-01-31)
+
+
+### Features
+
+* confirm if no commit beween ([53de102](https://github.com/Innei/bump-version/commit/53de102d1d17814ef1c27e6b0b12b7b06759fe40))
+
+
+
 ## [1.5.8](https://github.com/Innei/bump-version/compare/v1.5.7...v1.5.8) (2023-01-17)
 
 

@@ -7,7 +7,7 @@
     "bump": "dist/index.mjs",
     "vv": "dist/index.mjs"
   },
-  "version": "1.5.8",
+  "version": "1.5.9",
   "files": [
     "dist",
     "package.json",
