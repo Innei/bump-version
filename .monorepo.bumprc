@@ -10,6 +10,6 @@
   "mode": "monorepo",
   "allowed_branches": ["dev/*", "master", "main"],
   "packages": [
-    "test/packages/*"
+    "test/packages/**"
   ]
 }
