@@ -34,6 +34,7 @@ export const updatePackageJsonVersion = async (newVersion: string) => {
           absolute: true,
           onlyDirectories: true,
           unique: true,
+          ignore: ['**/node_modules/**'],
         },
       )
 
