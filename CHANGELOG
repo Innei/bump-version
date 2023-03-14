@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## [1.5.10](https://github.com/Innei/bump-version/compare/v1.5.9...v1.5.10) (2023-03-14)
+
+
+### Bug Fixes
+
+* ignore node_module in globby ([912567b](https://github.com/Innei/bump-version/commit/912567be62999d1d33b4a773ebe3df1628e7e53c))
+
+
+
 ## [1.5.9](https://github.com/Innei/bump-version/compare/v1.5.8...v1.5.9) (2023-01-31)
 
 
