@@ -9,7 +9,7 @@ specifiers:
   '@vercel/ncc': 0.36.1
   conventional-changelog: 3.1.25
   husky: 8.0.3
-  inquirer: ^9.1.4
+  inquirer: ^9.1.5
   lint-staged: 13.2.0
   semver: ^7.3.8
   slugify: ^1.6.5
@@ -30,7 +30,7 @@ devDependencies:
   '@types/semver': 7.3.13
   '@vercel/ncc': 0.36.1
   husky: 8.0.3
-  inquirer: 9.1.4
+  inquirer: 9.1.5
   lint-staged: 13.2.0
   semver: 7.3.8
   typescript: 4.9.5
@@ -2397,9 +2397,9 @@ packages:
     resolution: {integrity: sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==}
     dev: false
 
-  /inquirer/9.1.4:
-    resolution: {integrity: sha512-9hiJxE5gkK/cM2d1mTEnuurGTAoHebbkX0BYl3h7iEg7FYfuNIom+nDfBCSWtvSnoSrWCeBxqqBZu26xdlJlXA==}
-    engines: {node: '>=12.0.0'}
+  /inquirer/9.1.5:
+    resolution: {integrity: sha512-3ygAIh8gcZavV9bj6MTdYddG2zPSYswP808fKS46NOwlF0zZljVpnLCHODDqItWJDbDpLb3aouAxGaJbkxoppA==}
+    engines: {node: '>=14.18.0'}
     dependencies:
       ansi-escapes: 6.0.0
       chalk: 5.2.0
@@ -2408,7 +2408,7 @@ packages:
       external-editor: 3.1.0
       figures: 5.0.0
       lodash: 4.17.21
-      mute-stream: 0.0.8
+      mute-stream: 1.0.0
       ora: 6.1.2
       run-async: 2.4.1
       rxjs: 7.8.0
@@ -2928,8 +2928,9 @@ packages:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
     dev: true
 
-  /mute-stream/0.0.8:
-    resolution: {integrity: sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==}
+  /mute-stream/1.0.0:
+    resolution: {integrity: sha512-avsJQhyd+680gKXyG/sQc0nXaC6rBkPOfyHYcFb9+hdkqQkR9bdnkJ0AMZhke0oesPqIO+mFFJ+IdBc7mst4IA==}
+    engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
     dev: true
 
   /nanoid/3.3.4:
