@@ -1,4 +1,4 @@
-# Bump version
+# [New] Bump version
 
 A small command line tool to simplify releasing software by updating all version strings in your source code by the correct increment. Out of box, UI friendly and configure easily. And with other features:
 
@@ -12,13 +12,13 @@ A small command line tool to simplify releasing software by updating all version
 ## Install
 
 ```bash
-npm i -g @innei/bump-version
+npm i -g nbump
 ```
 
 ## Usage
 
 ```bash
-vv # or bv, bump, bp
+vv # or bump
 vv alpha # bump to next prerelease version, other args please see below.
 ```
 
