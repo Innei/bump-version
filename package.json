@@ -33,8 +33,8 @@
     "test": "vitest"
   },
   "devDependencies": {
-    "@innei/eslint-config-ts": "0.9.8",
-    "@innei/prettier": "0.9.8",
+    "@innei/eslint-config-ts": "0.9.9",
+    "@innei/prettier": "0.9.9",
     "@types/conventional-changelog": "3.1.1",
     "@types/inquirer": "9.0.3",
     "@types/semver": "7.3.13",
@@ -46,7 +46,7 @@
     "typescript": "4.9.5",
     "vite": "4.1.4",
     "vitest": "0.29.8",
-    "zx": "^7.2.1"
+    "zx": "^7.2.2"
   },
   "dependencies": {
     "conventional-changelog": "3.1.25",
