@@ -9,7 +9,7 @@ specifiers:
   '@vercel/ncc': 0.36.1
   conventional-changelog: 3.1.25
   husky: 8.0.3
-  inquirer: ^9.2.0
+  inquirer: ^9.2.1
   lint-staged: 13.2.2
   semver: ^7.5.0
   slugify: ^1.6.6
@@ -30,7 +30,7 @@ devDependencies:
   '@types/semver': 7.3.13
   '@vercel/ncc': 0.36.1
   husky: 8.0.3
-  inquirer: 9.2.0
+  inquirer: 9.2.1
   lint-staged: 13.2.2
   semver: 7.5.0
   typescript: 4.9.5
@@ -1006,8 +1006,8 @@ packages:
       type-fest: 0.21.3
     dev: true
 
-  /ansi-escapes/6.1.0:
-    resolution: {integrity: sha512-bQyg9bzRntwR/8b89DOEhGwctcwCrbWW/TuqTQnpqpy5Fz3aovcOTj5i8NJV6AHc8OGNdMaqdxAWww8pz2kiKg==}
+  /ansi-escapes/6.2.0:
+    resolution: {integrity: sha512-kzRaCqXnpzWs+3z5ABPQiVke+iq0KXkHo8xiWV4RPTi5Yli0l97BEQuhXV1s7+aSU/fu1kUuxgS4MsQ0fRuygw==}
     engines: {node: '>=14.16'}
     dependencies:
       type-fest: 3.7.2
@@ -2484,11 +2484,11 @@ packages:
     resolution: {integrity: sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==}
     dev: false
 
-  /inquirer/9.2.0:
-    resolution: {integrity: sha512-WWERbVqjsTXjXub1ZW0ZHDit1dyHqy0T9XIkky9TnmKAPrjU9Jkd59nZPK0dUuM3s73GZAZu2Jo4iFU3XSPVLA==}
+  /inquirer/9.2.1:
+    resolution: {integrity: sha512-M7LcHl1GcKt8na7NKNvqkiB3btN73+Z5NjhbckpTi9Yr8Ul7sTHXe7cFEudH0WMPcvHfQ4pHjpVOnhaQ4IC4fw==}
     engines: {node: '>=14.18.0'}
     dependencies:
-      ansi-escapes: 6.1.0
+      ansi-escapes: 6.2.0
       chalk: 5.2.0
       cli-cursor: 4.0.0
       cli-width: 4.0.0
@@ -2498,7 +2498,7 @@ packages:
       mute-stream: 1.0.0
       ora: 6.3.0
       run-async: 2.4.1
-      rxjs: 7.8.0
+      rxjs: 7.8.1
       string-width: 5.1.2
       strip-ansi: 7.0.1
       through: 2.3.8
@@ -2820,7 +2820,7 @@ packages:
       log-update: 4.0.0
       p-map: 4.0.0
       rfdc: 1.3.0
-      rxjs: 7.8.0
+      rxjs: 7.8.1
       through: 2.3.8
       wrap-ansi: 7.0.0
     dev: true
@@ -3592,6 +3592,12 @@ packages:
 
   /rxjs/7.8.0:
     resolution: {integrity: sha512-F2+gxDshqmIub1KdvZkaEfGDwLNpPvk9Fs6LD/MyQxNgMds/WH9OdDDXOmxUZpME+iSK3rQCctkL0DYyytUqMg==}
+    dependencies:
+      tslib: 2.5.0
+    dev: true
+
+  /rxjs/7.8.1:
+    resolution: {integrity: sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==}
     dependencies:
       tslib: 2.5.0
     dev: true
