@@ -5,7 +5,7 @@ specifiers:
   '@innei/prettier': 0.9.11
   '@types/conventional-changelog': 3.1.1
   '@types/inquirer': 9.0.3
-  '@types/semver': 7.3.13
+  '@types/semver': 7.5.0
   '@vercel/ncc': 0.36.1
   conventional-changelog: 3.1.25
   husky: 8.0.3
@@ -27,7 +27,7 @@ devDependencies:
   '@innei/prettier': 0.9.11
   '@types/conventional-changelog': 3.1.1
   '@types/inquirer': 9.0.3
-  '@types/semver': 7.3.13
+  '@types/semver': 7.5.0
   '@vercel/ncc': 0.36.1
   husky: 8.0.3
   inquirer: 9.2.2
@@ -646,8 +646,8 @@ packages:
     resolution: {integrity: sha512-ZREFYlpUmPQJ0esjxoG1fMvB2HNaD3z+mjqdSosZvd3RalncI9NEur73P8ZJz4YQdL64CmV1w0RuqoRUlhQRBw==}
     dev: true
 
-  /@types/semver/7.3.13:
-    resolution: {integrity: sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw==}
+  /@types/semver/7.5.0:
+    resolution: {integrity: sha512-G8hZ6XJiHnuhQKR7ZmysCeJWE08o8T0AXtk5darsCaTVsYZhhgUrq53jizaR2FvsoeCwJhlmwTjkXBY5Pn/ZHw==}
     dev: true
 
   /@types/through/0.0.30:
@@ -804,7 +804,7 @@ packages:
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0_eslint@8.37.0
       '@types/json-schema': 7.0.11
-      '@types/semver': 7.3.13
+      '@types/semver': 7.5.0
       '@typescript-eslint/scope-manager': 5.59.2
       '@typescript-eslint/types': 5.59.2
       '@typescript-eslint/typescript-estree': 5.59.2_typescript@4.9.5
