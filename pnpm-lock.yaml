@@ -9,12 +9,12 @@ specifiers:
   '@vercel/ncc': 0.36.1
   conventional-changelog: 3.1.25
   husky: 8.0.3
-  inquirer: ^9.2.3
+  inquirer: ^9.2.4
   lint-staged: 13.2.2
   semver: ^7.5.1
   slugify: ^1.6.6
   typescript: 4.9.5
-  vite: 4.3.7
+  vite: 4.3.8
   vitest: 0.31.1
   zx: ^7.2.2
 
@@ -30,11 +30,11 @@ devDependencies:
   '@types/semver': 7.5.0
   '@vercel/ncc': 0.36.1
   husky: 8.0.3
-  inquirer: 9.2.3
+  inquirer: 9.2.4
   lint-staged: 13.2.2
   semver: 7.5.1
   typescript: 4.9.5
-  vite: 4.3.7
+  vite: 4.3.8
   vitest: 0.31.1
   zx: 7.2.2
 
@@ -2368,8 +2368,8 @@ packages:
     resolution: {integrity: sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==}
     dev: false
 
-  /inquirer/9.2.3:
-    resolution: {integrity: sha512-/Et0+d28D7hnTYaqeCQkp3FYuD/X5cc2qbM6BzFdC5zs30oByoU5W/pmLc493FVVMwYmAILKjPBEmwRKTtknSQ==}
+  /inquirer/9.2.4:
+    resolution: {integrity: sha512-Q2KnguYUxC/GqkAWJBTWpXH1E3Qqh5VZaCqxK5HYYnQmaePKGLgscVfb3L3/32oF6NRW5VpGqUr75uDjtHHqRw==}
     engines: {node: '>=14.18.0'}
     dependencies:
       ansi-escapes: 4.3.2
@@ -4006,7 +4006,7 @@ packages:
       mlly: 1.2.0
       pathe: 1.1.0
       picocolors: 1.0.0
-      vite: 4.3.7_@types+node@18.16.3
+      vite: 4.3.8_@types+node@18.16.3
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -4017,8 +4017,8 @@ packages:
       - terser
     dev: true
 
-  /vite/4.3.7:
-    resolution: {integrity: sha512-MTIFpbIm9v7Hh5b0wSBgkcWzSBz7SAa6K/cBTwS4kUiQJfQLFlZZRJRQgqunCVzhTPCk674tW+0Qaqh3Q00dBg==}
+  /vite/4.3.8:
+    resolution: {integrity: sha512-uYB8PwN7hbMrf4j1xzGDk/lqjsZvCDbt/JC5dyfxc19Pg8kRm14LinK/uq+HSLNswZEoKmweGdtpbnxRtrAXiQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -4049,8 +4049,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vite/4.3.7_@types+node@18.16.3:
-    resolution: {integrity: sha512-MTIFpbIm9v7Hh5b0wSBgkcWzSBz7SAa6K/cBTwS4kUiQJfQLFlZZRJRQgqunCVzhTPCk674tW+0Qaqh3Q00dBg==}
+  /vite/4.3.8_@types+node@18.16.3:
+    resolution: {integrity: sha512-uYB8PwN7hbMrf4j1xzGDk/lqjsZvCDbt/JC5dyfxc19Pg8kRm14LinK/uq+HSLNswZEoKmweGdtpbnxRtrAXiQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -4135,7 +4135,7 @@ packages:
       strip-literal: 1.0.1
       tinybench: 2.5.0
       tinypool: 0.5.0
-      vite: 4.3.7_@types+node@18.16.3
+      vite: 4.3.8_@types+node@18.16.3
       vite-node: 0.31.1_@types+node@18.16.3
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
