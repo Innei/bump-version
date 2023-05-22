@@ -9,7 +9,7 @@ specifiers:
   '@vercel/ncc': 0.36.1
   conventional-changelog: 3.1.25
   husky: 8.0.3
-  inquirer: ^9.2.5
+  inquirer: ^9.2.6
   lint-staged: 13.2.2
   semver: ^7.5.1
   slugify: ^1.6.6
@@ -30,7 +30,7 @@ devDependencies:
   '@types/semver': 7.5.0
   '@vercel/ncc': 0.36.1
   husky: 8.0.3
-  inquirer: 9.2.5
+  inquirer: 9.2.6
   lint-staged: 13.2.2
   semver: 7.5.1
   typescript: 5.0.4
@@ -2433,8 +2433,8 @@ packages:
     resolution: {integrity: sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==}
     dev: false
 
-  /inquirer/9.2.5:
-    resolution: {integrity: sha512-Vy3qZFUPKILCgfeg6eEfKSlv4QbwwfGmdoAYqXYGlPEhY4HH0jQv+ynHkEYYE4eBDCDMWKHs77ByfHcy1GyDfA==}
+  /inquirer/9.2.6:
+    resolution: {integrity: sha512-y71l237eJJKS4rl7sQcEUiMhrR0pB/ZnRMMTxLpjJhWL4hdWCT03a6jJnC1w6qIPSRZWEozuieGt3v7XaEJYFw==}
     engines: {node: '>=14.18.0'}
     dependencies:
       ansi-escapes: 4.3.2
