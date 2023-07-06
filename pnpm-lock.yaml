@@ -53,8 +53,8 @@ devDependencies:
     specifier: 0.31.4
     version: 0.31.4
   zx:
-    specifier: ^7.2.2
-    version: 7.2.2
+    specifier: ^7.2.3
+    version: 7.2.3
 
 packages:
 
@@ -697,7 +697,7 @@ packages:
     resolution: {integrity: sha512-MxObHvNl4A69ofaTRU8DFqvgzzv8s9yRtaPPm5gud9HDNvpB3GPQFvNuTWAI59B9huVGV5jXYJwbCsmBsOGYWA==}
     dependencies:
       '@types/jsonfile': 6.1.1
-      '@types/node': 18.16.18
+      '@types/node': 20.3.2
     dev: true
 
   /@types/git-raw-commits@2.0.1:
@@ -724,7 +724,7 @@ packages:
   /@types/jsonfile@6.1.1:
     resolution: {integrity: sha512-GSgiRCVeapDN+3pqA35IkQwasaCh/0YFH5dEF6S88iDvEn901DjOeH3/QPY+XYP1DFzDZPvIvfeEgk+7br5png==}
     dependencies:
-      '@types/node': 18.16.18
+      '@types/node': 20.3.2
     dev: true
 
   /@types/minimist@1.2.2:
@@ -4375,8 +4375,8 @@ packages:
     engines: {node: '>=12.20'}
     dev: true
 
-  /zx@7.2.2:
-    resolution: {integrity: sha512-50Gjicd6ijTt7Zcz5fNX+rHrmE0uVqC+X6lYKhf2Cu8wIxDpNIzXwTmzchNdW+JY3LFsRcU43B1lHE4HBMmKgQ==}
+  /zx@7.2.3:
+    resolution: {integrity: sha512-QODu38nLlYXg/B/Gw7ZKiZrvPkEsjPN3LQ5JFXM7h0JvwhEdPNNl+4Ao1y4+o3CLNiDUNcwzQYZ4/Ko7kKzCMA==}
     engines: {node: '>= 16.0.0'}
     hasBin: true
     dependencies:
