@@ -1,7 +1,7 @@
 {
   "name": "nbump",
   "type": "module",
-  "packageManager": "pnpm@8.6.11",
+  "packageManager": "pnpm@8.6.12",
   "homepage": "https://github.com/Innei/bump-version",
   "bin": {
     "bump": "dist/index.mjs",
@@ -40,7 +40,7 @@
     "@types/semver": "7.5.0",
     "@vercel/ncc": "0.36.1",
     "husky": "8.0.3",
-    "inquirer": "^9.2.9",
+    "inquirer": "^9.2.10",
     "lint-staged": "13.2.3",
     "semver": "^7.5.4",
     "typescript": "5.1.6",
