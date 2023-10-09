@@ -23,8 +23,8 @@ devDependencies:
     specifier: 3.1.3
     version: 3.1.3
   '@types/inquirer':
-    specifier: 9.0.3
-    version: 9.0.3
+    specifier: 9.0.4
+    version: 9.0.4
   '@types/semver':
     specifier: 7.5.3
     version: 7.5.3
@@ -722,8 +722,8 @@ packages:
       '@types/node': 20.3.2
     dev: true
 
-  /@types/inquirer@9.0.3:
-    resolution: {integrity: sha512-CzNkWqQftcmk2jaCWdBTf9Sm7xSw4rkI1zpU/Udw3HX5//adEZUIm9STtoRP1qgWj0CWQtJ9UTvqmO2NNjhMJw==}
+  /@types/inquirer@9.0.4:
+    resolution: {integrity: sha512-x8UgutCLm5tsp995aeYB8dlT+sGBCtv0zE43tHvo7OljtlA2Rn4+COyLKe9+YjB20uy0G14y0C9vCD2KtNtyGA==}
     dependencies:
       '@types/through': 0.0.30
       rxjs: 7.8.1
