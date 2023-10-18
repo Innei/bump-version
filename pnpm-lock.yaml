@@ -20,14 +20,14 @@ devDependencies:
     specifier: 0.11.1
     version: 0.11.1
   '@types/conventional-changelog':
-    specifier: 3.1.3
-    version: 3.1.3
+    specifier: 3.1.4
+    version: 3.1.4
   '@types/inquirer':
-    specifier: 9.0.4
-    version: 9.0.4
+    specifier: 9.0.6
+    version: 9.0.6
   '@types/semver':
-    specifier: 7.5.3
-    version: 7.5.3
+    specifier: 7.5.4
+    version: 7.5.4
   '@vercel/ncc':
     specifier: 0.36.1
     version: 0.36.1
@@ -686,8 +686,8 @@ packages:
       '@types/node': 20.3.2
     dev: true
 
-  /@types/conventional-changelog@3.1.3:
-    resolution: {integrity: sha512-QlI0mf3cuG43DMIoCU0BouLhpPYF/N3qRrtluW9Y7beVgaQ9IwwiNtDfVr7tEtBR8CAPLhplsI205WvNtRxfAA==}
+  /@types/conventional-changelog@3.1.4:
+    resolution: {integrity: sha512-imWdLUAbDB+IJsA12u3wUrMkYGP3aLyf9l/697o6OFB20PKd5SMMvugPuAW44P6TDesm8M3m8Hh6+uhTeNqRPw==}
     dependencies:
       '@types/conventional-changelog-core': 4.2.2
       '@types/conventional-changelog-writer': 4.0.3
@@ -722,8 +722,8 @@ packages:
       '@types/node': 20.3.2
     dev: true
 
-  /@types/inquirer@9.0.4:
-    resolution: {integrity: sha512-x8UgutCLm5tsp995aeYB8dlT+sGBCtv0zE43tHvo7OljtlA2Rn4+COyLKe9+YjB20uy0G14y0C9vCD2KtNtyGA==}
+  /@types/inquirer@9.0.6:
+    resolution: {integrity: sha512-1Go1AAP/yOy3Pth5Xf1DC3nfZ03cJLCPx6E2YnSN/5I3w1jHBVH4170DkZ+JxfmA7c9kL9+bf9z3FRGa4kNAqg==}
     dependencies:
       '@types/through': 0.0.30
       rxjs: 7.8.1
@@ -770,8 +770,8 @@ packages:
     resolution: {integrity: sha512-ZREFYlpUmPQJ0esjxoG1fMvB2HNaD3z+mjqdSosZvd3RalncI9NEur73P8ZJz4YQdL64CmV1w0RuqoRUlhQRBw==}
     dev: true
 
-  /@types/semver@7.5.3:
-    resolution: {integrity: sha512-OxepLK9EuNEIPxWNME+C6WwbRAOOI2o2BaQEGzz5Lu2e4Z5eDnEo+/aVEDMIXywoJitJ7xWd641wrGLZdtwRyw==}
+  /@types/semver@7.5.4:
+    resolution: {integrity: sha512-MMzuxN3GdFwskAnb6fz0orFvhfqi752yjaXylr0Rp4oDg5H0Zn1IuyRhDVvYOwAXoJirx2xuS16I3WjxnAIHiQ==}
     dev: true
 
   /@types/through@0.0.30:
@@ -898,7 +898,7 @@ packages:
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@8.44.0)
       '@types/json-schema': 7.0.12
-      '@types/semver': 7.5.3
+      '@types/semver': 7.5.4
       '@typescript-eslint/scope-manager': 6.0.0
       '@typescript-eslint/types': 6.0.0
       '@typescript-eslint/typescript-estree': 6.0.0(typescript@5.2.2)
