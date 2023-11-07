@@ -20,8 +20,8 @@ devDependencies:
     specifier: 0.11.1
     version: 0.11.1
   '@types/conventional-changelog':
-    specifier: 3.1.4
-    version: 3.1.4
+    specifier: 3.1.5
+    version: 3.1.5
   '@types/inquirer':
     specifier: 9.0.6
     version: 9.0.6
@@ -686,8 +686,8 @@ packages:
       '@types/node': 20.3.2
     dev: true
 
-  /@types/conventional-changelog@3.1.4:
-    resolution: {integrity: sha512-imWdLUAbDB+IJsA12u3wUrMkYGP3aLyf9l/697o6OFB20PKd5SMMvugPuAW44P6TDesm8M3m8Hh6+uhTeNqRPw==}
+  /@types/conventional-changelog@3.1.5:
+    resolution: {integrity: sha512-MTCB1VD8XriLLROFOkhUwMvj8kkqsHbPLGQo+U4fKBY2qfyty5qnkNP44L9qrN8B5SiVXono8uwG1vz62RVDig==}
     dependencies:
       '@types/conventional-changelog-core': 4.2.2
       '@types/conventional-changelog-writer': 4.0.3
