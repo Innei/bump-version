@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## [1.5.11](https://github.com/Innei/bump-version/compare/v1.5.10...v1.5.11) (2024-01-10)
+
+
+### Bug Fixes
+
+* ci ([eaec088](https://github.com/Innei/bump-version/commit/eaec0886493e61054e8c9987efc6e9c4fc47e0fb))
+* **deps:** update dependency conventional-changelog to v5 ([#147](https://github.com/Innei/bump-version/issues/147)) ([b0ab23a](https://github.com/Innei/bump-version/commit/b0ab23af554e627bf1acd2caa7d7ebb17e93cc5c))
+* **deps:** update dependency slugify to ^1.6.6 ([cf64796](https://github.com/Innei/bump-version/commit/cf64796c97d2807a9117e0baf72079db296a1a4e))
+* only push single tag ([d33cd26](https://github.com/Innei/bump-version/commit/d33cd264a02fd8976126bc6d88277790a1a41a22))
+
+
+
 ## [1.5.10](https://github.com/Innei/bump-version/compare/v1.5.9...v1.5.10) (2023-03-14)
 
 
