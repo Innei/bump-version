@@ -1,6 +1,6 @@
 import { writeFileSync } from 'fs'
-import inquirer from 'inquirer'
 import { join as pathJoin } from 'path'
+import inquirer from 'inquirer'
 import semver from 'semver'
 import { $, cd, chalk, fs } from 'zx'
 
@@ -262,7 +262,8 @@ export async function runBump(newVersion: string) {
   if (doGitPush) {
     console.log(chalk.green('Pushing to remote.'))
     await gitPushWithUpstream()
-    createGitTag && (await dryRun`git push --tags`)
+    createGitTag &&
+      (await dryRun`git push origin ${nextTagPrefix + newVersion}`)
   }
 
   if (doPublish) {
