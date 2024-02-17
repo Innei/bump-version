@@ -39,7 +39,7 @@
     "@types/inquirer": "9.0.7",
     "@types/semver": "7.5.7",
     "@vercel/ncc": "0.38.1",
-    "husky": "8.0.3",
+    "husky": "9.0.11",
     "inquirer": "^9.2.14",
     "lint-staged": "15.2.2",
     "semver": "^7.6.0",
