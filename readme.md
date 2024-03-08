@@ -171,4 +171,4 @@ export type ChangelogOptions = Parameters<typeof conventionalChangelog>[0] & {
 
 2022 © Innei, Released under the MIT License.
 
-> [Personal Website](https://innei.ren/) · GitHub [@Innei](https://github.com/innei/)
+> [Personal Website](https://innei.in/) · GitHub [@Innei](https://github.com/innei/)
