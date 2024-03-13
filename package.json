@@ -40,7 +40,7 @@
     "@types/semver": "7.5.8",
     "@vercel/ncc": "0.38.1",
     "husky": "9.0.11",
-    "inquirer": "^9.2.15",
+    "inquirer": "^9.2.16",
     "lint-staged": "15.2.2",
     "semver": "^7.6.0",
     "typescript": "5.3.3",
