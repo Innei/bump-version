@@ -8,7 +8,7 @@ export const findPackageJSONPath = (
   // e.g. packages/core
   packagePath?: string,
 ): string => {
-  const nextDir = (() => {
+  const normalizeDir = (() => {
     if (packagePath) {
       return dir.endsWith(packagePath)
         ? dir.replace(new RegExp(`${packagePath}$`), '')
@@ -18,7 +18,12 @@ export const findPackageJSONPath = (
     return dir
   })()
 
-  const packageJSONPath = path.join(nextDir, packagePath || '', 'package.json')
+  const packageJSONPath = path.join(
+    normalizeDir,
+    packagePath || '',
+    'package.json',
+  )
+
   if (fs.existsSync(packageJSONPath)) {
     return packageJSONPath
   }

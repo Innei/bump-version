@@ -1,0 +1,32 @@
+{
+  "name": "@x/pkg",
+  "version": "100.1.1",
+  "bump": {
+    "leading": [
+      "git pull --rebase",
+      "pnpm i"
+    ],
+    "trailing": [
+      "npm run build"
+    ],
+    "publish": true,
+    "changelog": {
+      "enable": true,
+      "skipUnstable": true
+    },
+    "with_tags": true,
+    "allowed_branches": [
+      "master",
+      "main",
+      {
+        "name": "dev/*",
+        "allow_types": [
+          "premajor",
+          "preminor",
+          "prepatch",
+          "prerelease"
+        ]
+      }
+    ]
+  }
+}

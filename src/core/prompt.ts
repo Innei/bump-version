@@ -1,12 +1,12 @@
+import inquirer from 'inquirer'
+import semver from 'semver'
+import { chalk } from 'zx'
 import type {
   AsyncDynamicQuestionProperty,
   DistinctChoice,
   ListChoiceMap,
 } from 'inquirer'
-import inquirer from 'inquirer'
 import type { ReleaseType } from 'semver'
-import semver from 'semver'
-import { chalk } from 'zx'
 
 import {
   getBranchVersion,
@@ -36,7 +36,7 @@ export const promptMain = async () => {
     'prerelease',
   ])
 
-  const { allowedBranches } = resolveConfig()
+  const { allowedBranches } = await resolveConfig()
 
   if (allowedBranches) {
     const currentGitBranch = await getCurrentGitBranch()
@@ -105,9 +105,8 @@ export const promptMain = async () => {
   }
 
   if (!(await isMainBranch())) {
-    const { branchVersion, slugifyTagName } = await getBranchVersion(
-      currentVersion,
-    )
+    const { branchVersion, slugifyTagName } =
+      await getBranchVersion(currentVersion)
     selectItems.push({
       name: `branch version - ${branchVersion}`,
       value: branchVersion,

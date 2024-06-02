@@ -1,5 +1,5 @@
-import type { ReleaseType } from 'semver'
 import SemVer from 'semver'
+import type { ReleaseType } from 'semver'
 
 import { fetchGitRemoteTags, getGitSemVerTags } from '../utils/git.js'
 import { releaseTypes } from '../utils/pkg.js'
@@ -13,7 +13,7 @@ export async function generateReleaseTypes(
 
   customReleaseTypes?: ReleaseType[],
 ) {
-  const { withTags, remoteTags } = resolveConfig()
+  const { withTags, remoteTags } = await resolveConfig()
 
   if (remoteTags) {
     await fetchGitRemoteTags()

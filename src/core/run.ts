@@ -88,7 +88,7 @@ export async function runBump(newVersion: string) {
     mode,
 
     overrideChangelogOptions,
-  } = resolveConfig()
+  } = await resolveConfig()
   const isMonorepo = mode === 'monorepo'
   const { dryRun: dryMode, tagPrefix: tagPrefixArgs, noVerify } = resolveArgs()
   const nextTagPrefix = tagPrefixArgs || tagPrefix

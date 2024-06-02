@@ -1,4 +1,7 @@
 #!/usr/bin/env node
+import { chalk } from 'zx'
+
+import { ROOT_WORKSPACE_DIR, WORKSPACE_DIR } from './constants/path.js'
 import { precheck } from './core/pre-check.js'
 import { promptMain } from './core/prompt.js'
 
@@ -11,5 +14,8 @@ globalThis.__DEV__ = process.env.NODE_ENV === 'development'
 
 // precheck
 precheck().then(() => {
+  console.log(`Workspace dir: ${chalk.yellow(WORKSPACE_DIR)}`)
+  console.log(`Root workspace dir: ${chalk.yellow(ROOT_WORKSPACE_DIR)}`)
+
   promptMain()
 })

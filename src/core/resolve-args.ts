@@ -12,7 +12,7 @@ export const resolveArgs = memoReturnValueFunction(() => {
   const dryRun: boolean = argv['dry-run'] || argv['dryRun']
   const tagPrefix: string = argv['tag-prefix'] || argv['t']
   const v: boolean = argv['v'] || argv['version']
-  const customRcFile: string = argv['c'] || argv['config']
+  const configPath: string = argv['c'] || argv['config']
   const noVerify: boolean = argv['no-verify'] || argv['noVerify'] || false
 
   const _ = argv['_']
@@ -24,7 +24,7 @@ export const resolveArgs = memoReturnValueFunction(() => {
 
   return {
     v,
-    rcPath: customRcFile,
+    configPath,
 
     // argv
     filter,

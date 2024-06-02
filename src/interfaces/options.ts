@@ -14,7 +14,7 @@ export interface BumpConfig {
   trailing: string[]
   push: boolean
   commitMessage: string
-  publish: string
+  publish: boolean
   changelog: boolean | ChangelogOptions
   allowedBranches: (AllowedBranchesOptions | string)[]
   tagPrefix: string

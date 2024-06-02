@@ -8,7 +8,7 @@ import { resolveConfig } from './resolve-config.js'
 
 export const updatePackageJsonVersion = async (newVersion: string) => {
   const { dryRun: dryMode } = resolveArgs()
-  const { mode, packages } = resolveConfig()
+  const { mode, packages } = await resolveConfig()
 
   switch (mode) {
     case 'independent': {

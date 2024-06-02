@@ -15,6 +15,30 @@ A small command line tool to simplify releasing software by updating all version
 npm i -g nbump
 ```
 
+## Setup
+
+Define in package.json add field `bump` or create `bump.config.js` in root dir:
+
+> [!NOTE]
+> The configuration loader by [c12](https://github.com/unjs/c12)
+
+There is a example configuration.
+
+```ts
+// bump.config.ts
+import { defineConfig } from 'nbump'
+
+export default defineConfig({
+  leading: ['git pull --rebase', 'pnpm i', 'npm run build'],
+  trailing: [],
+  publish: true,
+  changelog: true,
+  mode: 'monorepo',
+  allowedBranches: ['dev/*', 'master', 'main'],
+  packages: ['test/packages/**'],
+})
+```
+
 ## Usage
 
 ```bash
@@ -95,35 +119,22 @@ Other information, please see the [test suit](https://github.com/Innei/bump-vers
 
 This is args passed in cli command. e.g. `vv --dry-run`.
 
-| Args                     | Description                                                 | Example            |
-| ------------------------ | ----------------------------------------------------------- | ------------------ |
-| `--dry-run`              | Dry run mode                                                |                    |
-| `-f` `--filter`          | Run in special monorepo workspace                           | `-f packages/core` |
-| `--alpha` `--prerelease` | Create prerelease version                                   |                    |
-| `--tag-prefix`           | Custom git tag prefix, the priority is higher than rcfile   |                    |
-| `--no-verify`            | Force bump version, no verify allowed branches or disallow. |                    |
-| `minor`                  | Create minor version                                        |                    |
-| `major`                  | Create major version                                        |                    |
-| `patch`                  | Create patch version                                        |                    |
-| `prepatch`               | Create prepatch version                                     |                    |
-| `preminor`               | Create preminor version                                     |                    |
-| `premajor`               | Create premajor version                                     |                    |
-| `branch`                 | Create version based on git branch (1.2.2-dev-perid.0)      |                    |
+| Args                     | Description                                                    | Example            |
+| ------------------------ | -------------------------------------------------------------- | ------------------ |
+| `--dry-run`              | Dry run mode                                                   |                    |
+| `-f` `--filter`          | Run in special monorepo workspace                              | `-f packages/core` |
+| `--alpha` `--prerelease` | Create prerelease version                                      |                    |
+| `--tag-prefix`           | Custom git tag prefix, the priority is higher than config file |                    |
+| `--no-verify`            | Force bump version, no verify allowed branches or disallow.    |                    |
+| `minor`                  | Create minor version                                           |                    |
+| `major`                  | Create major version                                           |                    |
+| `patch`                  | Create patch version                                           |                    |
+| `prepatch`               | Create prepatch version                                        |                    |
+| `preminor`               | Create preminor version                                        |                    |
+| `premajor`               | Create premajor version                                        |                    |
+| `branch`                 | Create version based on git branch (1.2.2-dev-perid.0)         |                    |
 
 ## Configuration
-
-Define in package.json, add field `bump` or create `.bumprc` in root dir:
-
-There is a example configuration.
-
-```json
-{
-  "leading": ["git pull --rebase", "pnpm i", "npm run build"],
-  "trailing": ["sh ./scripts/create-tags.sh", "npm publish --access=public"],
-  "changelog": true,
-  "publish": true
-}
-```
 
 | Name             | Description                                                                       | Type                                           | Default                    |
 | ---------------- | --------------------------------------------------------------------------------- | ---------------------------------------------- | -------------------------- |
@@ -167,8 +178,10 @@ export type ChangelogOptions = Parameters<typeof conventionalChangelog>[0] & {
 }
 ```
 
+<!-- ## Migrate 1.x to 2.x -->
+
 ## License
 
-2022 © Innei, Released under the MIT License.
+2024 © Innei, Released under the MIT License.
 
 > [Personal Website](https://innei.in/) · GitHub [@Innei](https://github.com/innei/)

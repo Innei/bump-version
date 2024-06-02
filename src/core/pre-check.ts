@@ -1,8 +1,8 @@
 import fs from 'fs'
-import inquirer from 'inquirer'
 import path from 'path'
-import type { ReleaseType } from 'semver'
+import inquirer from 'inquirer'
 import { $, chalk } from 'zx'
+import type { ReleaseType } from 'semver'
 
 import {
   fetchGitRemoteTags,
@@ -24,7 +24,7 @@ import { runBump } from './run.js'
 
 export const precheck = async () => {
   const args = resolveArgs()
-  const config = resolveConfig()
+  const config = await resolveConfig()
 
   if (typeof args.v == 'boolean' && args.v) {
     const pkg = fs.readFileSync(path.resolve(process.cwd(), `./package.json`), {
@@ -116,12 +116,12 @@ export const precheck = async () => {
       (releaseType as any) === 'branch'
         ? branchVersion
         : config.withTags
-        ? getNextVersionWithTags({
-            currentVersion,
-            releaseType,
-            tags: await getGitSemVerTags(),
-          })
-        : getNextVersion(currentVersion, releaseType)
+          ? getNextVersionWithTags({
+              currentVersion,
+              releaseType,
+              tags: await getGitSemVerTags(),
+            })
+          : getNextVersion(currentVersion, releaseType)
 
     console.log(
       `Current version: ${currentVersion}, New version: ${nextVersion}`,
