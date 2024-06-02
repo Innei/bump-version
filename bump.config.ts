@@ -1,4 +1,4 @@
-import { defineConfig } from './src/core/resolve-config.js'
+import { defineConfig } from './src/index.mjs'
 
 export default defineConfig({
   leading: ['git pull --rebase', 'pnpm i', 'npm run build'],
