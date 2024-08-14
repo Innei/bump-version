@@ -20,14 +20,15 @@ const { valid, lte } = semver
 
 type CmdContext = {
   nextVersion: string
+  newVersion: string
 }
 
 export async function execCmd(cmds: string[], context: CmdContext) {
   const ctxKeys = Object.keys(context)
   for (const cmd of cmds) {
     const handledCmd = ctxKeys.reduce((cmd, nextKey) => {
-      return cmd.replace(
-        `$\{${snakecase(nextKey).toUpperCase()}}`,
+      return cmd.replaceAll(
+        `\${${snakecase(nextKey).toUpperCase()}}`,
         context[nextKey],
       )
     }, cmd)
@@ -184,6 +185,7 @@ export async function runBump(newVersion: string) {
 
   const cmdContext: CmdContext = {
     nextVersion: newVersion,
+    newVersion,
   }
 
   await execCmd(leadingHooks, cmdContext)
