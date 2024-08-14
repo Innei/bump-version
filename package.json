@@ -1,7 +1,7 @@
 {
   "name": "nbump",
   "type": "module",
-  "packageManager": "pnpm@9.7.0",
+  "packageManager": "pnpm@9.7.1",
   "homepage": "https://github.com/Innei/bump-version",
   "bin": {
     "bump": "dist/index.mjs",
