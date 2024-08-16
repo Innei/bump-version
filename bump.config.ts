@@ -7,7 +7,6 @@ export default defineConfig({
   ],
   publish: true,
   changelog: false,
-  mode: 'monorepo',
+  mode: 'independent',
   allowedBranches: ['dev/*', 'master', 'main'],
-  packages: ['test/packages/**'],
 })
