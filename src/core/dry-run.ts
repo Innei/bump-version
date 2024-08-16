@@ -25,7 +25,13 @@ export const dryRun = async (pieces: TemplateStringsArray, ...args: any[]) => {
     })
     return
   }
-  return $(pieces, ...args)
+
+  try {
+    return await $(pieces, ...args)
+  } catch (p) {
+    console.log(`Exit code: ${p.exitCode}`)
+    console.log(p.stderr)
+  }
 }
 
 function substitute(arg) {
