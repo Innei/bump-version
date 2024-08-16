@@ -78,7 +78,7 @@ export const resolveConfig = memoReturnValueAsyncFunction(async () => {
   const createGitTag = bumpOptions.tag ?? true
   const doGitPush = bumpOptions.push ?? true
   const commitMessage = bumpOptions.commitMessage || 'release: v${NEW_VERSION}'
-  const allowedBranches = bumpOptions.allowedBranches ?? ['main']
+  const allowedBranches = bumpOptions.allowedBranches ?? ['main', 'master']
   const tagPrefix = bumpOptions.tagPrefix || 'v'
   const withTags = bumpOptions.withTags ?? false
   const remoteTags = bumpOptions.remoteTags ?? false
