@@ -1,5 +1,6 @@
 import { $ } from 'zx'
 import { log } from 'zx/core'
+import type { ProcessOutput } from 'zx/core'
 
 import { resolveArgs } from './resolve-args.js'
 
@@ -28,9 +29,11 @@ export const dryRun = async (pieces: TemplateStringsArray, ...args: any[]) => {
 
   try {
     return await $(pieces, ...args)
-  } catch (p) {
-    console.log(`Exit code: ${p.exitCode}`)
-    console.log(p.stderr)
+  } catch (p: any) {
+    const error = p as ProcessOutput
+    console.log(`Exit code: ${error.exitCode}`)
+    console.log(error.stderr)
+    process.exit(error.exitCode)
   }
 }
 
