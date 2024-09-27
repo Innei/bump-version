@@ -40,8 +40,8 @@ importers:
         specifier: 9.1.6
         version: 9.1.6
       inquirer:
-        specifier: ^9.3.6
-        version: 9.3.6
+        specifier: ^9.3.7
+        version: 9.3.7
       lint-staged:
         specifier: 15.2.10
         version: 15.2.10
@@ -1703,8 +1703,8 @@ packages:
   inherits@2.0.4:
     resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==}
 
-  inquirer@9.3.6:
-    resolution: {integrity: sha512-riK/iQB2ctwkpWYgjjWIRv3MBLt2gzb2Sj0JNQNbyTXgyXsLWcDPJ5WS5ZDTCx7BRFnJsARtYh+58fjP5M2Y0Q==}
+  inquirer@9.3.7:
+    resolution: {integrity: sha512-LJKFHCSeIRq9hanN14IlOtPSTe3lNES7TYDTE2xxdAy1LS5rYphajK1qtwvj3YmQXvvk0U2Vbmcni8P9EIQW9w==}
     engines: {node: '>=18'}
 
   internal-slot@1.0.7:
@@ -4690,7 +4690,7 @@ snapshots:
 
   inherits@2.0.4: {}
 
-  inquirer@9.3.6:
+  inquirer@9.3.7:
     dependencies:
       '@inquirer/figures': 1.0.5
       ansi-escapes: 4.3.2
