@@ -24,6 +24,12 @@ export interface BumpConfig {
 
   withTags: boolean
   remoteTags: boolean
+
+  /**
+   * Allow to bump version even if the git tree is dirty
+   * @default false
+   */
+  allowDirty: boolean
 }
 
 type ReleaseType =

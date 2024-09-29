@@ -36,12 +36,13 @@ export const precheck = async () => {
   }
 
   // check git tree is clean
-
-  {
-    const result = await $`git status --porcelain`.quiet()
-    if (result.stdout && !__DEV__) {
-      console.error(chalk.red('The git tree is not clean'))
-      process.exit(-1)
+  if (!config.allowDirty) {
+    {
+      const result = await $`git status --porcelain`.quiet()
+      if (result.stdout && !__DEV__) {
+        console.error(chalk.red('The git tree is not clean'))
+        process.exit(-1)
+      }
     }
   }
 

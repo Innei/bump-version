@@ -96,6 +96,8 @@ export const resolveConfig = memoReturnValueAsyncFunction(async () => {
   const mode = bumpOptions.mode || 'independent'
   const packages = bumpOptions.packages || []
 
+  const allowDirty = bumpOptions.allowDirty ?? false
+
   return {
     leadingHooks,
     taildingHooks,
@@ -110,6 +112,7 @@ export const resolveConfig = memoReturnValueAsyncFunction(async () => {
     packages,
     withTags,
     remoteTags,
+    allowDirty,
     // extra
     overrideChangelogOptions,
   }
