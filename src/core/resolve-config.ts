@@ -97,6 +97,7 @@ export const resolveConfig = memoReturnValueAsyncFunction(async () => {
   const packages = bumpOptions.packages || []
 
   const allowDirty = bumpOptions.allowDirty ?? false
+  const commit = bumpOptions.commit ?? true
 
   return {
     leadingHooks,
@@ -113,6 +114,7 @@ export const resolveConfig = memoReturnValueAsyncFunction(async () => {
     withTags,
     remoteTags,
     allowDirty,
+    commit,
     // extra
     overrideChangelogOptions,
   }

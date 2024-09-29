@@ -24,6 +24,7 @@ export interface BumpConfig {
 
   withTags: boolean
   remoteTags: boolean
+  commit: boolean
 
   /**
    * Allow to bump version even if the git tree is dirty

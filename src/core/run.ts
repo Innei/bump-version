@@ -87,6 +87,7 @@ export async function runBump(newVersion: string) {
     taildingHooks,
     tagPrefix,
     mode,
+    commit,
 
     overrideChangelogOptions,
   } = await resolveConfig()
@@ -205,14 +206,16 @@ export async function runBump(newVersion: string) {
     process.exit(1)
   }
 
-  console.log(chalk.green('Creating git tag.'))
-  await dryRun`git add package.json`
-  await dryRun`git commit -a -m ${commitMessage.replace(
-    '${NEW_VERSION}',
-    newVersion,
-  )} --no-verify`
+  if (commit) {
+    await dryRun`git add package.json`
+    await dryRun`git commit -a -m ${commitMessage.replace(
+      '${NEW_VERSION}',
+      newVersion,
+    )} --no-verify`
+  }
 
-  if (createGitTag) {
+  if (createGitTag && commit) {
+    console.log(chalk.green('Creating git tag.'))
     await $`git tag -a ${nextTagPrefix + newVersion} -m "Release ${
       nextTagPrefix + newVersion
     }"`
@@ -245,10 +248,11 @@ export async function runBump(newVersion: string) {
 
       console.log(chalk.green('Generating changelog.'))
       writeFileSync(changelogPath, changelog)
-      await dryRun`git add ${changelogPath}`
-      await dryRun`git commit --amend --no-verify --no-edit`
-
-      if (createGitTag) {
+      if (commit) {
+        await dryRun`git add ${changelogPath}`
+        await dryRun`git commit --amend --no-verify --no-edit`
+      }
+      if (createGitTag && commit) {
         await $`git tag -d ${nextTagPrefix + newVersion}`.quiet().nothrow()
         await dryRun`git tag -a ${nextTagPrefix + newVersion} -m "Release ${
           nextTagPrefix + newVersion
