@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       c12:
-        specifier: ^1.11.2
-        version: 1.11.2
+        specifier: ^2.0.1
+        version: 2.0.1
       conventional-changelog:
         specifier: 6.0.0
         version: 6.0.0(conventional-commits-filter@5.0.0)
@@ -50,7 +50,7 @@ importers:
         version: 7.6.3
       tsup:
         specifier: ^8.2.4
-        version: 8.2.4(jiti@1.21.6)(postcss@8.4.44)(typescript@5.5.4)(yaml@2.6.1)
+        version: 8.2.4(jiti@2.4.1)(postcss@8.4.44)(typescript@5.5.4)(yaml@2.6.1)
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -976,10 +976,10 @@ packages:
     peerDependencies:
       esbuild: '>=0.18'
 
-  c12@1.11.2:
-    resolution: {integrity: sha512-oBs8a4uvSDO9dm8b7OCFW7+dgtVrwmwnrVXYzLm43ta7ep2jCn/0MhoUFygIWtxhyy6+/MG7/agvpY0U1Iemew==}
+  c12@2.0.1:
+    resolution: {integrity: sha512-Z4JgsKXHG37C6PYUtIxCfLJZvo6FyhHJoClwwb9ftUkLpPSkuYqn6Tr+vnaN8hymm0kIbcg6Ey3kv/Q71k5w/A==}
     peerDependencies:
-      magicast: ^0.3.4
+      magicast: ^0.3.5
     peerDependenciesMeta:
       magicast:
         optional: true
@@ -1024,6 +1024,10 @@ packages:
   chokidar@3.6.0:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
     engines: {node: '>= 8.10.0'}
+
+  chokidar@4.0.1:
+    resolution: {integrity: sha512-n8enUVCED/KVRQlab1hr3MVpcVMvxtZjmEa956u+4YijlmQED223XMSYj2tLuKvr4jcCTzNNMpQDUer72MMmzA==}
+    engines: {node: '>= 14.16.0'}
 
   chownr@2.0.0:
     resolution: {integrity: sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==}
@@ -1843,8 +1847,8 @@ packages:
     resolution: {integrity: sha512-kWmLKn2tRtfYMF/BakihVVRzBKOxz4gJMiL2Rj91WnAB5TPZumSH99R/Yf1qE1u4uRimvCSJfm6hnxohXeEXjQ==}
     engines: {node: '>=14'}
 
-  jiti@1.21.6:
-    resolution: {integrity: sha512-2yTgeWTWzMWkHu6Jp9NKgePDaYHbntiwvYuuJLbbN9vl7DC9DvXKOB2BC3ZZ92D3cvV/aflH0osDfwpHepQ53w==}
+  jiti@2.4.1:
+    resolution: {integrity: sha512-yPBThwecp1wS9DmoA4x4KR2h3QoslacnDR8ypuFM962kI4/456Iy1oHx2RAgh4jfZNdn0bctsdadceiBUgpU1g==}
     hasBin: true
 
   joycon@3.1.1:
@@ -2116,8 +2120,8 @@ packages:
     resolution: {integrity: sha512-yBYjY9QX2hnRmZHAjG/f13MzmBzxzYgQhFrke06TTyKY5zSTEqkOeukBzIdVA3j3ulu8Qa3MbVFShV7T2RmGtQ==}
     engines: {node: '>= 0.4'}
 
-  ohash@1.1.3:
-    resolution: {integrity: sha512-zuHHiGTYTA1sYJ/wZN+t5HKZaH23i4yI1HMwbuXm24Nid7Dv0KcuRlKoNKS9UNfAVSBlnGLcuQrnOKWOZoEGaw==}
+  ohash@1.1.4:
+    resolution: {integrity: sha512-FlDryZAahJmEF3VR3w1KogSEdWX3WhA5GPakFx4J81kEAiHyLMpdLLElS8n8dfNadMgAne/MywcvmogzscVt4g==}
 
   once@1.4.0:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
@@ -2375,6 +2379,10 @@ packages:
   readdirp@3.6.0:
     resolution: {integrity: sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==}
     engines: {node: '>=8.10.0'}
+
+  readdirp@4.0.2:
+    resolution: {integrity: sha512-yDMz9g+VaZkqBYS/ozoBJwaBhTbZo3UNYQHNRw1D3UFQB8oHB4uS/tAODO+ZLjGWmUbKnIlOWO+aaIiAxrUWHA==}
+    engines: {node: '>= 14.16.0'}
 
   regexp.prototype.flags@1.5.2:
     resolution: {integrity: sha512-NcDiDkTLuPR+++OCKB0nWafEmhg/Da8aUPLPMQbK+bxKKCm1/S5he+AqYa4PlMCVBalb4/yxIRub6qkEx5yJbw==}
@@ -3807,16 +3815,16 @@ snapshots:
       esbuild: 0.23.0
       load-tsconfig: 0.2.5
 
-  c12@1.11.2:
+  c12@2.0.1:
     dependencies:
-      chokidar: 3.6.0
+      chokidar: 4.0.1
       confbox: 0.1.7
       defu: 6.1.4
       dotenv: 16.4.5
       giget: 1.2.3
-      jiti: 1.21.6
+      jiti: 2.4.1
       mlly: 1.7.1
-      ohash: 1.1.3
+      ohash: 1.1.4
       pathe: 1.1.2
       perfect-debounce: 1.0.0
       pkg-types: 1.2.0
@@ -3876,6 +3884,10 @@ snapshots:
       readdirp: 3.6.0
     optionalDependencies:
       fsevents: 2.3.3
+
+  chokidar@4.0.1:
+    dependencies:
+      readdirp: 4.0.2
 
   chownr@2.0.0: {}
 
@@ -4558,7 +4570,7 @@ snapshots:
       defu: 6.1.4
       node-fetch-native: 1.6.4
       nypm: 0.3.8
-      ohash: 1.1.3
+      ohash: 1.1.4
       pathe: 1.1.2
       tar: 6.2.1
 
@@ -4828,7 +4840,7 @@ snapshots:
     optionalDependencies:
       '@pkgjs/parseargs': 0.11.0
 
-  jiti@1.21.6: {}
+  jiti@2.4.1: {}
 
   joycon@3.1.1: {}
 
@@ -4995,7 +5007,7 @@ snapshots:
     dependencies:
       acorn: 8.11.3
       pathe: 1.1.2
-      pkg-types: 1.1.1
+      pkg-types: 1.2.0
       ufo: 1.5.3
 
   mlly@1.7.1:
@@ -5094,7 +5106,7 @@ snapshots:
       define-properties: 1.2.1
       es-object-atoms: 1.0.0
 
-  ohash@1.1.3: {}
+  ohash@1.1.4: {}
 
   once@1.4.0:
     dependencies:
@@ -5217,11 +5229,11 @@ snapshots:
 
   possible-typed-array-names@1.0.0: {}
 
-  postcss-load-config@6.0.1(jiti@1.21.6)(postcss@8.4.44)(yaml@2.6.1):
+  postcss-load-config@6.0.1(jiti@2.4.1)(postcss@8.4.44)(yaml@2.6.1):
     dependencies:
       lilconfig: 3.1.2
     optionalDependencies:
-      jiti: 1.21.6
+      jiti: 2.4.1
       postcss: 8.4.44
       yaml: 2.6.1
 
@@ -5308,6 +5320,8 @@ snapshots:
   readdirp@3.6.0:
     dependencies:
       picomatch: 2.3.1
+
+  readdirp@4.0.2: {}
 
   regexp.prototype.flags@1.5.2:
     dependencies:
@@ -5631,7 +5645,7 @@ snapshots:
 
   tslib@2.6.2: {}
 
-  tsup@8.2.4(jiti@1.21.6)(postcss@8.4.44)(typescript@5.5.4)(yaml@2.6.1):
+  tsup@8.2.4(jiti@2.4.1)(postcss@8.4.44)(typescript@5.5.4)(yaml@2.6.1):
     dependencies:
       bundle-require: 5.0.0(esbuild@0.23.0)
       cac: 6.7.14
@@ -5643,7 +5657,7 @@ snapshots:
       globby: 11.1.0
       joycon: 3.1.1
       picocolors: 1.0.1
-      postcss-load-config: 6.0.1(jiti@1.21.6)(postcss@8.4.44)(yaml@2.6.1)
+      postcss-load-config: 6.0.1(jiti@2.4.1)(postcss@8.4.44)(yaml@2.6.1)
       resolve-from: 5.0.0
       rollup: 4.20.0
       source-map: 0.8.0-beta.0
