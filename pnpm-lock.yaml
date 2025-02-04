@@ -25,8 +25,8 @@ importers:
         specifier: 0.12.6
         version: 0.12.6
       '@types/conventional-changelog':
-        specifier: 3.1.5
-        version: 3.1.5
+        specifier: 6.0.0
+        version: 6.0.0
       '@types/inquirer':
         specifier: 9.0.7
         version: 9.0.7
@@ -638,8 +638,8 @@ packages:
   '@types/conventional-changelog-writer@4.0.10':
     resolution: {integrity: sha512-EK654IW1SBqTZSzN9+PlB6SKSYlDhsrCv1olfeEXvt/FHcmd7kvFWW0cFvMtnWalR/D7baYzY3FJ2TSt7UUySg==}
 
-  '@types/conventional-changelog@3.1.5':
-    resolution: {integrity: sha512-MTCB1VD8XriLLROFOkhUwMvj8kkqsHbPLGQo+U4fKBY2qfyty5qnkNP44L9qrN8B5SiVXono8uwG1vz62RVDig==}
+  '@types/conventional-changelog@6.0.0':
+    resolution: {integrity: sha512-7mCc+WlxXs7Wmm/1FdYyWwjUmX4mOGM5zOys4p/xZAMQ12x074IQVSiX2/AU+0924lIkZmhEAkvPMDS2XnCZaw==}
 
   '@types/conventional-commits-parser@5.0.0':
     resolution: {integrity: sha512-loB369iXNmAZglwWATL+WRe+CRMmmBPtpolYzIebFaX4YA3x+BEfLqhUAV9WanycKI3TG1IMr5bMJDajDKLlUQ==}
@@ -3421,7 +3421,7 @@ snapshots:
       '@types/conventional-commits-parser': 5.0.0
       '@types/node': 20.12.13
 
-  '@types/conventional-changelog@3.1.5':
+  '@types/conventional-changelog@6.0.0':
     dependencies:
       '@types/conventional-changelog-core': 4.2.8
       '@types/conventional-changelog-writer': 4.0.10
@@ -3441,7 +3441,7 @@ snapshots:
   '@types/fs-extra@11.0.4':
     dependencies:
       '@types/jsonfile': 6.1.4
-      '@types/node': 18.19.33
+      '@types/node': 20.12.13
 
   '@types/git-raw-commits@2.0.4':
     dependencies:
@@ -3458,7 +3458,7 @@ snapshots:
 
   '@types/jsonfile@6.1.4':
     dependencies:
-      '@types/node': 18.19.33
+      '@types/node': 20.12.13
 
   '@types/minimist@1.2.5': {}
 

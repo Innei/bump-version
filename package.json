@@ -47,7 +47,7 @@
   "devDependencies": {
     "@innei/eslint-config-ts": "0.12.6",
     "@innei/prettier": "0.12.6",
-    "@types/conventional-changelog": "3.1.5",
+    "@types/conventional-changelog": "6.0.0",
     "@types/inquirer": "9.0.7",
     "@types/semver": "7.5.8",
     "@vercel/ncc": "0.38.3",
