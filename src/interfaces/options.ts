@@ -1,7 +1,7 @@
 import type conventionalChangelog from 'conventional-changelog'
 
 export interface BumpConfig {
-  tag: string
+  tag: boolean
   leading: string[]
   /**
    * @deprecated
