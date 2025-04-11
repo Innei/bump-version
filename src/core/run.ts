@@ -38,17 +38,15 @@ export async function execCmd(cmds: string[], context: CmdContext) {
 }
 
 export async function cutsomVersionRun() {
-  const answers = await inquirer.prompt({
+  const answer = await inquirer.prompt({
+    type: 'input',
     name: 'customVersion',
     message: 'Enter a custom version',
     validate(input) {
-      if (!input) {
-        return 'Please enter a custom version'
-      }
       return valid(input) ? true : 'Please enter a valid version'
     },
   })
-  const nextVersion = answers.customVersion.replace(/^v/, '').trim()
+  const nextVersion = answer.customVersion.replace(/^v/, '').trim()
 
   const currentVersion = memoedPackageJson.json.version
 

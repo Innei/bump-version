@@ -1,11 +1,7 @@
 import inquirer from 'inquirer'
 import semver from 'semver'
 import { chalk } from 'zx'
-import type {
-  AsyncDynamicQuestionProperty,
-  DistinctChoice,
-  ListChoiceMap,
-} from 'inquirer'
+
 import type { ReleaseType } from 'semver'
 
 import {
@@ -73,15 +69,12 @@ export const promptMain = async () => {
     }
   }
 
-  const selectItems: AsyncDynamicQuestionProperty<
-    DistinctChoice<any, ListChoiceMap<any>>[],
-    any
-  > = await generateReleaseTypes(
+  const selectItems = (await generateReleaseTypes(
     currentVersion,
     undefined,
     identifier,
     Array.from(nextReleaseType) as any[],
-  )
+  )) as any[]
 
   if (identifier) {
     const nextIdentifier = nextIdentifierMap[identifier]
@@ -105,8 +98,9 @@ export const promptMain = async () => {
   }
 
   if (!(await isMainBranch())) {
-    const { branchVersion, slugifyTagName } =
-      await getBranchVersion(currentVersion)
+    const { branchVersion, slugifyTagName } = await getBranchVersion(
+      currentVersion,
+    )
     selectItems.push({
       name: `branch version - ${branchVersion}`,
       value: branchVersion,

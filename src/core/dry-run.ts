@@ -23,6 +23,7 @@ export const dryRun = async (pieces: TemplateStringsArray, ...args: any[]) => {
       kind: 'cmd',
       cmd,
       verbose: true,
+      id: 'dry-run',
     })
     return
   }
