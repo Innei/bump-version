@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { chalk } from 'zx'
+import colors from 'picocolors'
 
 import { ROOT_WORKSPACE_DIR, WORKSPACE_DIR } from './constants/path.js'
 import { precheck } from './core/pre-check.js'
@@ -14,8 +14,8 @@ globalThis.__DEV__ = process.env.NODE_ENV === 'development'
 
 // precheck
 precheck().then(() => {
-  console.log(`Workspace dir: ${chalk.yellow(WORKSPACE_DIR)}`)
-  console.log(`Root workspace dir: ${chalk.yellow(ROOT_WORKSPACE_DIR)}`)
+  console.log(`Workspace dir: ${colors.yellow(WORKSPACE_DIR)}`)
+  console.log(`Root workspace dir: ${colors.yellow(ROOT_WORKSPACE_DIR)}`)
 
   promptMain()
 })

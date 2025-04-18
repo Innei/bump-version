@@ -1,4 +1,5 @@
-import { fs, path } from 'zx'
+import fs from 'node:fs'
+import path from 'node:path'
 
 /**
  * Find the nearest package.json file path

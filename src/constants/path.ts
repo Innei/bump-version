@@ -1,5 +1,4 @@
-import { path } from 'zx'
-
+import path from 'node:path'
 import { resolveArgs } from '../core/resolve-args.js'
 import { findPackageJSONPath } from '../utils/find-package.js'
 

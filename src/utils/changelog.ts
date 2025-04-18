@@ -1,5 +1,6 @@
 import conventionalChangelog from 'conventional-changelog'
-import { fs, path } from 'zx'
+import fs from 'node:fs'
+import path from 'node:path'
 
 import { WORKSPACE_DIR } from '../constants/path.js'
 

@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import inquirer from 'inquirer'
-import { $, chalk } from 'zx'
+import colors from 'picocolors'
 import type { ReleaseType } from 'semver'
 
 import {
@@ -21,6 +21,7 @@ import { context } from './context.js'
 import { resolveArgs } from './resolve-args.js'
 import { resolveConfig } from './resolve-config.js'
 import { runBump } from './run.js'
+import { $ } from 'execa'
 
 export const precheck = async () => {
   const args = resolveArgs()
@@ -38,9 +39,9 @@ export const precheck = async () => {
   // check git tree is clean
   if (!config.allowDirty) {
     {
-      const result = await $`git status --porcelain`.quiet()
+      const result = await $`git status --porcelain`
       if (result.stdout && !__DEV__) {
-        console.error(chalk.red('The git tree is not clean'))
+        console.error(colors.red('The git tree is not clean'))
         process.exit(-1)
       }
     }
@@ -71,7 +72,7 @@ export const precheck = async () => {
 
   if (!currentVersion) {
     console.error(
-      chalk.red(`Not a valid package.json file, can't find version.`),
+      colors.red(`Not a valid package.json file, can't find version.`),
     )
     process.exit(-1)
   }
@@ -79,7 +80,7 @@ export const precheck = async () => {
   context.currentVersion = currentVersion
 
   if (args.dryRun) {
-    console.warn(chalk.yellow(`Dry run mode. Will not exec commands.`))
+    console.warn(colors.yellow(`Dry run mode. Will not exec commands.`))
     __DEV__ && console.log(args)
   }
 
@@ -91,13 +92,15 @@ export const precheck = async () => {
     }
     if (args.filter) {
       console.error(
-        chalk.red(`\`-f\` \`--filter\` argv can't used in monorepo mode.`),
+        colors.red(`\`-f\` \`--filter\` argv can't used in monorepo mode.`),
       )
       process.exit(3)
     }
 
     console.warn(
-      chalk.yellow(`You are in monorepo mode, only root version will be read.`),
+      colors.yellow(
+        `You are in monorepo mode, only root version will be read.`,
+      ),
     )
   }
 
@@ -117,12 +120,12 @@ export const precheck = async () => {
       (releaseType as any) === 'branch'
         ? branchVersion
         : config.withTags
-          ? getNextVersionWithTags({
-              currentVersion,
-              releaseType,
-              tags: await getGitSemVerTags(),
-            })
-          : getNextVersion(currentVersion, releaseType)
+        ? getNextVersionWithTags({
+            currentVersion,
+            releaseType,
+            tags: await getGitSemVerTags(),
+          })
+        : getNextVersion(currentVersion, releaseType)
 
     console.log(
       `Current version: ${currentVersion}, New version: ${nextVersion}`,

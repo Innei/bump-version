@@ -1,5 +1,6 @@
 import { loadConfig } from 'c12'
-import { fs, path } from 'zx'
+import fs from 'node:fs'
+import path from 'node:path'
 import type { BumpConfig, ChangelogOptions } from '../interfaces/options.js'
 
 import { ROOT_WORKSPACE_DIR, WORKSPACE_DIR } from '../constants/path.js'

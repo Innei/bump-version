@@ -1,8 +1,10 @@
-import { writeFileSync } from 'fs'
+import fs, { writeFileSync } from 'fs'
 import { join as pathJoin } from 'path'
 import inquirer from 'inquirer'
 import semver from 'semver'
-import { $, cd, chalk, fs } from 'zx'
+import { $, cd } from 'zx'
+
+import colors from 'picocolors'
 
 import { ROOT_WORKSPACE_DIR, WORKSPACE_DIR } from '../constants/path.js'
 import { generateChangeLog, isExistChangelogFile } from '../utils/changelog.js'
@@ -52,7 +54,7 @@ export async function cutsomVersionRun() {
 
   if (lte(nextVersion, currentVersion)) {
     console.log(
-      chalk.red(
+      colors.red(
         `The version you entered is less than or equal to the current version`,
       ),
     )
@@ -60,7 +62,7 @@ export async function cutsomVersionRun() {
   }
   const confirm = await inquirer.prompt({
     type: 'confirm',
-    message: `${currentVersion} -> ${chalk.green(nextVersion)}, confirm?`,
+    message: `${currentVersion} -> ${colors.green(nextVersion)}, confirm?`,
     default: true,
     name: 'confirm',
   })
@@ -123,7 +125,7 @@ export async function runBump(newVersion: string) {
 
             if (isDisallowed) {
               console.error(
-                chalk.red(
+                colors.red(
                   `The version you entered is not allowed to be released on the current branch, selected release type is ${
                     context.selectedReleaseType
                   }, disallow types: ${disallowTypes.join(',')}`,
@@ -141,10 +143,10 @@ export async function runBump(newVersion: string) {
 
             if (!isAllowed) {
               console.log(
-                chalk.red(
+                colors.red(
                   `The version you entered is not allowed to be released on the current branch, selected release type is ${context.selectedReleaseType},`,
-                  `allowed types: ${allowTypes.join(', ')}`,
                 ),
+                colors.red(`allowed types: ${allowTypes.join(', ')}`),
               )
 
               process.exit(-2)
@@ -161,18 +163,18 @@ export async function runBump(newVersion: string) {
 
   if (noVerify) {
     console.log(
-      chalk.yellow(
+      colors.yellow(
         'You are running in no-verify mode. Skip verify which branch can bump.',
       ),
     )
   } else if (!isAllowedBranch) {
     console.log(
-      chalk.red(
+      colors.red(
         `Current branch ${currentBranch} is not allowed to release. ${(
           allowedBranches.map((br) => (typeof br == 'string' ? br : br.name)) ||
           defaultAllowedBranches
         )
-          .map((b) => chalk.green(b))
+          .map((b) => colors.green(b))
           .join(', ')} is allowed.`,
       ),
     )
@@ -180,7 +182,7 @@ export async function runBump(newVersion: string) {
     process.exit(-2)
   }
 
-  console.log(chalk.green('Running leading hooks.'))
+  console.log(colors.green('Running leading hooks.'))
 
   const cmdContext: CmdContext = {
     nextVersion: newVersion,
@@ -192,12 +194,12 @@ export async function runBump(newVersion: string) {
   const { path } = memoedPackageJson
   await updatePackageJsonVersion(newVersion)
 
-  console.log(chalk.green('Running tailding hooks.'))
+  console.log(colors.green('Running tailding hooks.'))
 
   try {
     await execCmd(taildingHooks, cmdContext)
   } catch (e) {
-    console.error(chalk.yellow('Hook running failed, rollback.'))
+    console.error(colors.yellow('Hook running failed, rollback.'))
 
     writeFileSync(path, originFile)
 
@@ -213,7 +215,7 @@ export async function runBump(newVersion: string) {
   }
 
   if (createGitTag && commit) {
-    console.log(chalk.green('Creating git tag.'))
+    console.log(colors.green('Creating git tag.'))
     await $`git tag -a ${nextTagPrefix + newVersion} -m "Release ${
       nextTagPrefix + newVersion
     }"`
@@ -244,7 +246,7 @@ export async function runBump(newVersion: string) {
     } else {
       // TODO custom changelog filename
 
-      console.log(chalk.green('Generating changelog.'))
+      console.log(colors.green('Generating changelog.'))
       writeFileSync(changelogPath, changelog)
       if (commit) {
         await dryRun`git add ${changelogPath}`
@@ -264,7 +266,7 @@ export async function runBump(newVersion: string) {
   }
 
   if (doGitPush) {
-    console.log(chalk.green('Pushing to remote.'))
+    console.log(colors.green('Pushing to remote.'))
     await gitPushWithUpstream()
     createGitTag &&
       (await dryRun`git push origin ${nextTagPrefix + newVersion}`)
@@ -281,7 +283,7 @@ export async function runBump(newVersion: string) {
     if (packageManager === 'pnpm' && isMonorepo) {
       publishCommand += ' -r'
     }
-    console.log(chalk.green('Publishing to npm.'))
+    console.log(colors.green('Publishing to npm.'))
     // @ts-ignore
     await dryRun([publishCommand])
   }

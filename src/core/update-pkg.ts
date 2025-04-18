@@ -1,6 +1,8 @@
 import inquirer from 'inquirer'
-import { chalk, fs, globby, path } from 'zx'
-
+import { globby } from 'zx'
+import fs from 'fs-extra'
+import path from 'node:path'
+import colors from 'picocolors'
 import { ROOT_WORKSPACE_DIR } from '../constants/path.js'
 import { getPackageJson, getRootPackageJson } from '../utils/pkg.js'
 import { resolveArgs } from './resolve-args.js'
@@ -39,7 +41,7 @@ export const updatePackageJsonVersion = async (newVersion: string) => {
       )
 
       console.log(
-        `${chalk.cyan(json.name)}  ${rootVersion} -> ${chalk.green(
+        `${colors.cyan(json.name)}  ${rootVersion} -> ${colors.green(
           newVersion,
         )}`,
       )
@@ -64,7 +66,7 @@ export const updatePackageJsonVersion = async (newVersion: string) => {
           console.log(
             `${' '.repeat(4)}${monorepoName.padEnd(15, ' ')} ${
               monorepoPkg.version
-            } -> ${chalk.yellow(newVersion)}`,
+            } -> ${colors.yellow(newVersion)}`,
           )
 
           bumpFnRefs.push(async () => {

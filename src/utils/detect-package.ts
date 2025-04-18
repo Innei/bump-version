@@ -1,7 +1,9 @@
-import { $, fs, path } from 'zx'
+import fs from 'fs-extra'
+import path from 'node:path'
 
 import { ROOT_WORKSPACE_DIR } from '../constants/path.js'
 import { memoReturnValueAsyncFunction } from './memo.js'
+import { $, execa } from 'execa'
 
 export type PackageManager = 'pnpm' | 'yarn' | 'npm'
 const LOCKS: Record<string, PackageManager> = {
@@ -23,7 +25,7 @@ export const detectPackage = memoReturnValueAsyncFunction(async () => {
 
   if (!manager) {
     for (const managerName of Object.values(LOCKS)) {
-      const res = await $`${managerName} --version`.nothrow()
+      const res = await execa({ reject: false })`${managerName} --version`
       if (res.exitCode === 0) {
         manager = managerName
         break
@@ -32,9 +34,13 @@ export const detectPackage = memoReturnValueAsyncFunction(async () => {
   }
   if (!manager) {
     // fallback to npm
-    const npmVersion = await $`npm -v`.nothrow()
-    if (npmVersion.exitCode === 0) {
-      manager = 'npm'
+    try {
+      const npmVersion = await $`npm -v`
+      if (npmVersion.exitCode === 0) {
+        manager = 'npm'
+      }
+    } catch (e) {
+      // no npm
     }
   }
 

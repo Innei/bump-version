@@ -1,6 +1,6 @@
 import inquirer from 'inquirer'
 import semver from 'semver'
-import { chalk } from 'zx'
+import colors from 'picocolors'
 
 import type { ReleaseType } from 'semver'
 
@@ -133,7 +133,7 @@ export const promptMain = async () => {
     extra: {},
   })
 
-  console.log(chalk.green(`Which version would you like to bump it?`))
+  console.log(colors.green(`Which version would you like to bump it?`))
   console.log(`Current version: ${currentVersion}`)
 
   const answer = await inquirer.prompt({
