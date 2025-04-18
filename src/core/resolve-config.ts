@@ -64,12 +64,13 @@ export const resolveConfig = memoReturnValueAsyncFunction(async () => {
   const leadingHooks = wrapHookArray(
     bumpOptions.leading || bumpOptions.before || [],
   )
-  const taildingHooks = wrapHookArray(
+  const tailingHooks = wrapHookArray(
     bumpOptions.trailing ||
       (bumpOptions as any).tailing ||
       bumpOptions.after ||
       [],
   )
+  const finallyHooks = wrapHookArray(bumpOptions.finally || [])
 
   // npm
   const doPublish = bumpOptions.publish ?? false
@@ -101,7 +102,8 @@ export const resolveConfig = memoReturnValueAsyncFunction(async () => {
 
   return {
     leadingHooks,
-    taildingHooks,
+    tailingHooks,
+    finallyHooks,
     doPublish,
     createGitTag,
     doGitPush,

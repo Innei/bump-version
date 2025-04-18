@@ -21,6 +21,7 @@ const { valid, lte } = semver
 type CmdContext = {
   nextVersion: string
   newVersion: string
+  prevVersion: string
 }
 
 export async function execCmd(cmds: string[], context: CmdContext) {
@@ -69,10 +70,10 @@ export async function cutsomVersionRun() {
     process.exit(0)
   }
 
-  return runBump(nextVersion)
+  return runBump(nextVersion, currentVersion)
 }
 
-export async function runBump(newVersion: string) {
+export async function runBump(newVersion: string, currentVersion: string) {
   const { originFile } = memoedPackageJson
   const {
     allowedBranches,
@@ -82,7 +83,8 @@ export async function runBump(newVersion: string) {
     doPublish,
     leadingHooks,
     shouldGenerateChangeLog,
-    taildingHooks,
+    tailingHooks,
+    finallyHooks,
     tagPrefix,
     mode,
     commit,
@@ -185,6 +187,7 @@ export async function runBump(newVersion: string) {
   const cmdContext: CmdContext = {
     nextVersion: newVersion,
     newVersion,
+    prevVersion: currentVersion,
   }
 
   await execCmd(leadingHooks, cmdContext)
@@ -195,7 +198,7 @@ export async function runBump(newVersion: string) {
   console.log(chalk.green('Running tailding hooks.'))
 
   try {
-    await execCmd(taildingHooks, cmdContext)
+    await execCmd(tailingHooks, cmdContext)
   } catch (e) {
     console.error(chalk.yellow('Hook running failed, rollback.'))
 
@@ -285,6 +288,8 @@ export async function runBump(newVersion: string) {
     // @ts-ignore
     await dryRun([publishCommand])
   }
+
+  if (finallyHooks.length) await execCmd(finallyHooks, cmdContext)
 
   process.exit(0)
 }

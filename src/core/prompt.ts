@@ -167,6 +167,6 @@ export const promptMain = async () => {
   if (answer.nextVersion === 'Custom Version') {
     cutsomVersionRun()
   } else {
-    runBump(answer.nextVersion)
+    runBump(answer.nextVersion, currentVersion)
   }
 }

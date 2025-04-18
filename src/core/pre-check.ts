@@ -117,12 +117,12 @@ export const precheck = async () => {
       (releaseType as any) === 'branch'
         ? branchVersion
         : config.withTags
-          ? getNextVersionWithTags({
-              currentVersion,
-              releaseType,
-              tags: await getGitSemVerTags(),
-            })
-          : getNextVersion(currentVersion, releaseType)
+        ? getNextVersionWithTags({
+            currentVersion,
+            releaseType,
+            tags: await getGitSemVerTags(),
+          })
+        : getNextVersion(currentVersion, releaseType)
 
     console.log(
       `Current version: ${currentVersion}, New version: ${nextVersion}`,
@@ -144,7 +144,7 @@ export const precheck = async () => {
         const result = answer.confirm
 
         if (result) {
-          await runBump(nextVersion)
+          await runBump(nextVersion, currentVersion)
         }
         process.exit(0)
       })

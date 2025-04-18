@@ -140,6 +140,7 @@ This is args passed in cli command. e.g. `vv --dry-run`.
 | ---------------- | --------------------------------------------------------------------------------- | ---------------------------------------------- | -------------------------- |
 | leading          | Run script before change version                                                  | string[]                                       | `[]`                       |
 | trailing         | Run script after change version                                                   | string[]                                       | `[]`                       |
+| finally          | Run script after bump                                                            | string[]                                       | `[]`                       |
 | publish          | Publish package after bump                                                        | boolean                                        | false                      |
 | tag              | Create git tag after bump                                                         | boolean                                        | true                       |
 | push             | Push git commit after bump                                                        | boolean                                        | true                       |

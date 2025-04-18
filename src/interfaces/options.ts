@@ -12,6 +12,7 @@ export interface BumpConfig {
    */
   after: string[]
   trailing: string[]
+  finally: string[]
   push: boolean
   commitMessage: string
   publish: boolean
