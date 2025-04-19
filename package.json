@@ -11,11 +11,11 @@
     }
   },
   "main": "helpers/index.cjs",
-  "module": "helpers/index.mjs",
+  "module": "helpers/index.js",
   "types": "helpers/index.d.ts",
   "bin": {
-    "bump": "dist/index.mjs",
-    "vv": "dist/index.mjs"
+    "bump": "dist/main.js",
+    "vv": "dist/main.js"
   },
   "files": [
     "dist",
