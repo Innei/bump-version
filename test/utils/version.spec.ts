@@ -1,5 +1,5 @@
-import type { ReleaseType } from 'semver'
 import { describe, expect, it } from 'vitest'
+import type { ReleaseType } from 'semver'
 
 import { getNextVersionWithTags } from '../../src/utils/version.js'
 

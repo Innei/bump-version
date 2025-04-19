@@ -57,7 +57,7 @@ export const resolveConfig = memoReturnValueAsyncFunction(async () => {
   }
 
   if (__DEV__) {
-    console.log(bumpOptions)
+    console.info(bumpOptions)
   }
 
   // define options
@@ -78,6 +78,7 @@ export const resolveConfig = memoReturnValueAsyncFunction(async () => {
   // git
   const createGitTag = bumpOptions.tag ?? true
   const doGitPush = bumpOptions.push ?? true
+  // eslint-disable-next-line no-template-curly-in-string
   const commitMessage = bumpOptions.commitMessage || 'release: v${NEW_VERSION}'
   const allowedBranches = bumpOptions.allowedBranches ?? ['main', 'master']
   const tagPrefix = bumpOptions.tagPrefix || 'v'
@@ -88,7 +89,7 @@ export const resolveConfig = memoReturnValueAsyncFunction(async () => {
   const isChangelogOptions = typeof bumpOptions.changelog === 'object'
   const shouldGenerateChangeLog = isChangelogOptions
     ? (bumpOptions.changelog as ChangelogOptions).enable
-    : bumpOptions.changelog ?? false
+    : (bumpOptions.changelog ?? false)
   const overrideChangelogOptions = isChangelogOptions
     ? bumpOptions.changelog
     : {}

@@ -15,7 +15,7 @@ export const resolveArgs = memoReturnValueFunction(() => {
   const configPath: string = argv['c'] || argv['config']
   const noVerify: boolean = argv['no-verify'] || argv['noVerify'] || false
 
-  const _ = argv['_']
+  const { _ } = argv
   const _set = new Set(_)
 
   const getVersionTypeFlag = (type: string): boolean => {

@@ -1,5 +1,5 @@
-import { writeFileSync } from 'fs'
-import { join as pathJoin } from 'path'
+import { writeFileSync } from 'node:fs'
+import { join as pathJoin } from 'node:path'
 import inquirer from 'inquirer'
 import semver from 'semver'
 import { $, cd, chalk, fs } from 'zx'
@@ -52,7 +52,7 @@ export async function cutsomVersionRun() {
   const currentVersion = memoedPackageJson.json.version
 
   if (lte(nextVersion, currentVersion)) {
-    console.log(
+    console.info(
       chalk.red(
         `The version you entered is less than or equal to the current version`,
       ),
@@ -115,13 +115,13 @@ export async function runBump(newVersion: string, currentVersion: string) {
 
           // 0. skip if release type is undefined, custom version
           // eslint-disable-next-line no-empty
-          if (typeof context.selectedReleaseType === 'undefined') {
+          if (context.selectedReleaseType === undefined) {
           }
           // 1. check disallowTypes
           else if (disallowTypes?.length && thisIsCurrentBranchName) {
-            const isDisallowed = disallowTypes.some((type) => {
-              return context.selectedReleaseType === type
-            })
+            const isDisallowed = disallowTypes.includes(
+              context.selectedReleaseType,
+            )
 
             if (isDisallowed) {
               console.error(
@@ -137,12 +137,10 @@ export async function runBump(newVersion: string, currentVersion: string) {
               // 2. then check allowTypes
             }
           } else if (allowTypes?.length && thisIsCurrentBranchName) {
-            const isAllowed = allowTypes.some((type) => {
-              return context.selectedReleaseType === type
-            })
+            const isAllowed = allowTypes.includes(context.selectedReleaseType)
 
             if (!isAllowed) {
-              console.log(
+              console.info(
                 chalk.red(
                   `The version you entered is not allowed to be released on the current branch, selected release type is ${context.selectedReleaseType},`,
                   `allowed types: ${allowTypes.join(', ')}`,
@@ -162,13 +160,13 @@ export async function runBump(newVersion: string, currentVersion: string) {
     : defaultAllowedBranches.includes(currentBranch)
 
   if (noVerify) {
-    console.log(
+    console.info(
       chalk.yellow(
         'You are running in no-verify mode. Skip verify which branch can bump.',
       ),
     )
   } else if (!isAllowedBranch) {
-    console.log(
+    console.info(
       chalk.red(
         `Current branch ${currentBranch} is not allowed to release. ${(
           allowedBranches.map((br) => (typeof br == 'string' ? br : br.name)) ||
@@ -182,7 +180,7 @@ export async function runBump(newVersion: string, currentVersion: string) {
     process.exit(-2)
   }
 
-  console.log(chalk.green('Running leading hooks.'))
+  console.info(chalk.green('Running leading hooks.'))
 
   const cmdContext: CmdContext = {
     nextVersion: newVersion,
@@ -195,11 +193,11 @@ export async function runBump(newVersion: string, currentVersion: string) {
   const { path } = memoedPackageJson
   await updatePackageJsonVersion(newVersion)
 
-  console.log(chalk.green('Running tailding hooks.'))
+  console.info(chalk.green('Running tailding hooks.'))
 
   try {
     await execCmd(tailingHooks, cmdContext)
-  } catch (e) {
+  } catch {
     console.error(chalk.yellow('Hook running failed, rollback.'))
 
     writeFileSync(path, originFile)
@@ -210,13 +208,14 @@ export async function runBump(newVersion: string, currentVersion: string) {
   if (commit) {
     await dryRun`git add package.json`
     await dryRun`git commit -a -m ${commitMessage.replace(
+      // eslint-disable-next-line no-template-curly-in-string
       '${NEW_VERSION}',
       newVersion,
     )} --no-verify`
   }
 
   if (createGitTag && commit) {
-    console.log(chalk.green('Creating git tag.'))
+    console.info(chalk.green('Creating git tag.'))
     await $`git tag -a ${nextTagPrefix + newVersion} -m "Release ${
       nextTagPrefix + newVersion
     }"`
@@ -242,12 +241,12 @@ export async function runBump(newVersion: string, currentVersion: string) {
     }
 
     if (dryMode) {
-      console.log(`changelog generate: \n`, changelog)
-      console.log(`changelog location: \n`, changelogPath)
+      console.info(`changelog generate: \n`, changelog)
+      console.info(`changelog location: \n`, changelogPath)
     } else {
       // TODO custom changelog filename
 
-      console.log(chalk.green('Generating changelog.'))
+      console.info(chalk.green('Generating changelog.'))
       writeFileSync(changelogPath, changelog)
       if (commit) {
         await dryRun`git add ${changelogPath}`
@@ -267,7 +266,7 @@ export async function runBump(newVersion: string, currentVersion: string) {
   }
 
   if (doGitPush) {
-    console.log(chalk.green('Pushing to remote.'))
+    console.info(chalk.green('Pushing to remote.'))
     await gitPushWithUpstream()
     createGitTag &&
       (await dryRun`git push origin ${nextTagPrefix + newVersion}`)
@@ -284,12 +283,12 @@ export async function runBump(newVersion: string, currentVersion: string) {
     if (packageManager === 'pnpm' && isMonorepo) {
       publishCommand += ' -r'
     }
-    console.log(chalk.green('Publishing to npm.'))
+    console.info(chalk.green('Publishing to npm.'))
     // @ts-ignore
     await dryRun([publishCommand])
   }
 
-  if (finallyHooks.length) await execCmd(finallyHooks, cmdContext)
+  if (finallyHooks.length > 0) await execCmd(finallyHooks, cmdContext)
 
   process.exit(0)
 }

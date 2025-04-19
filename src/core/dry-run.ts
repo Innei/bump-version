@@ -31,8 +31,8 @@ export const dryRun = async (pieces: TemplateStringsArray, ...args: any[]) => {
     return await $(pieces, ...args)
   } catch (p: any) {
     const error = p as ProcessOutput
-    console.log(`Exit code: ${error.exitCode}`)
-    console.log(error.stderr)
+    console.info(`Exit code: ${error.exitCode}`)
+    console.info(error.stderr)
     process.exit(error.exitCode)
   }
 }

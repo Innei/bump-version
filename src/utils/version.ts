@@ -1,5 +1,5 @@
-import type { ReleaseType } from 'semver'
 import SemVer from 'semver'
+import type { ReleaseType } from 'semver'
 
 export const nextIdentifierMap = {
   alpha: 'beta',
@@ -24,8 +24,8 @@ export const getNextIdentifier = (
   return identifier
     ? nextIdentifierMap[identifier]
     : releaseType.startsWith('pre')
-    ? 'alpha'
-    : undefined
+      ? 'alpha'
+      : undefined
 }
 
 export const getNextVersionWithTags = ({
@@ -45,7 +45,7 @@ export const getNextVersionWithTags = ({
   const nextVersion = SemVer.inc(currentVersion, releaseType, nextIdentifier)
 
   const getNextVersion = () => {
-    if (!sortedTags.length) {
+    if (sortedTags.length === 0) {
       return nextVersion
     }
     // 0. handle prerelease if own identifier
@@ -152,7 +152,7 @@ export const getNextVersionWithTags = ({
     return result
   }
 
-  const existIndex = sortedTags.findIndex((tag) => tag === nextVersion)
+  const existIndex = sortedTags.indexOf(nextVersion)
   if (existIndex === -1) {
     return nextVersion
   }

@@ -1,7 +1,8 @@
-import { describe, it, expect } from 'vitest'
+import { join } from 'node:path'
+import { URL } from 'node:url'
+import { describe, expect, it } from 'vitest'
+
 import { findPackageJSONPath } from '../../src/utils/find-package.js'
-import { join } from 'path'
-import { URL } from 'url'
 
 // /Users/innei/git/innei-repo/bump-version/test
 const __dirpath = join(new URL(import.meta.url).pathname, '../..')

@@ -38,7 +38,7 @@ export const updatePackageJsonVersion = async (newVersion: string) => {
         },
       )
 
-      console.log(
+      console.info(
         `${chalk.cyan(json.name)}  ${rootVersion} -> ${chalk.green(
           newVersion,
         )}`,
@@ -51,7 +51,7 @@ export const updatePackageJsonVersion = async (newVersion: string) => {
           const monorepoPkgPath = path.resolve(monorepoPath, 'package.json')
           const monorepoPkg = await fs
             .readJson(monorepoPkgPath, 'utf-8')
-            .catch((er) => {})
+            .catch(() => {})
 
           if (!monorepoPkg || !monorepoPkg.version) {
             return
@@ -61,7 +61,7 @@ export const updatePackageJsonVersion = async (newVersion: string) => {
             monorepoPkg.name ||
             monorepoPath.replace(new RegExp(`^${ROOT_WORKSPACE_DIR}`), '')
 
-          console.log(
+          console.info(
             `${' '.repeat(4)}${monorepoName.padEnd(15, ' ')} ${
               monorepoPkg.version
             } -> ${chalk.yellow(newVersion)}`,

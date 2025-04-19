@@ -1,5 +1,5 @@
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 import inquirer from 'inquirer'
 import { $, chalk } from 'zx'
 import type { ReleaseType } from 'semver'
@@ -30,7 +30,7 @@ export const precheck = async () => {
     const pkg = fs.readFileSync(path.resolve(process.cwd(), `./package.json`), {
       encoding: 'utf-8',
     })
-    console.log(JSON.parse(pkg).version)
+    console.info(JSON.parse(pkg).version)
 
     process.exit(0)
   }
@@ -80,11 +80,11 @@ export const precheck = async () => {
 
   if (args.dryRun) {
     console.warn(chalk.yellow(`Dry run mode. Will not exec commands.`))
-    __DEV__ && console.log(args)
+    __DEV__ && console.info(args)
   }
 
   if (config.mode === 'monorepo') {
-    if (!config.packages.length) {
+    if (config.packages.length === 0) {
       throw new ReferenceError(
         'packages is required in monorepo mode, please add packages paths in `packages` filed.',
       )
@@ -117,14 +117,14 @@ export const precheck = async () => {
       (releaseType as any) === 'branch'
         ? branchVersion
         : config.withTags
-        ? getNextVersionWithTags({
-            currentVersion,
-            releaseType,
-            tags: await getGitSemVerTags(),
-          })
-        : getNextVersion(currentVersion, releaseType)
+          ? getNextVersionWithTags({
+              currentVersion,
+              releaseType,
+              tags: await getGitSemVerTags(),
+            })
+          : getNextVersion(currentVersion, releaseType)
 
-    console.log(
+    console.info(
       `Current version: ${currentVersion}, New version: ${nextVersion}`,
     )
 

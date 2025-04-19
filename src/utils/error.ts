@@ -5,7 +5,7 @@ if (process.env.NODE_ENV !== 'development') {
     console.error(chalk.red('Error: ') + err.message)
     process.exit(1)
   })
-  process.on('unhandledRejection', (err: any, promise) => {
+  process.on('unhandledRejection', (err: any) => {
     console.error(chalk.red('Error: ') + err?.message)
     process.exit(1)
   })

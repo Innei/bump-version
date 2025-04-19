@@ -22,7 +22,7 @@ export const getGitHeadShortHash = async () => {
 
 export const getBranchVersion = async (currentVersion: string) => {
   const branchName = await getCurrentGitBranch()
-  const slugifyTagName = slugify.default(branchName.replace(/\//g, '-'))
+  const slugifyTagName = slugify.default(branchName.replaceAll('/', '-'))
 
   const branchVersion = SemVer.inc(currentVersion, 'prerelease', slugifyTagName)
 
@@ -66,7 +66,7 @@ export const getGitSemVerTags = async () => {
 }
 
 export const fetchGitRemoteTags = async () => {
-  console.log(chalk.green(`Fetching git remote tags...`))
+  console.info(chalk.green(`Fetching git remote tags...`))
   await $`git fetch --tags`.quiet()
 }
 

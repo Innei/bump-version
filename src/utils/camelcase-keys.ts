@@ -21,7 +21,7 @@ export const camelcaseKeys = <T = any>(obj: any): T => {
 }
 
 export function camelcase(str: string) {
-  return str.replace(/([-_][a-z])/gi, ($1) => {
+  return str.replaceAll(/([-_][a-z])/gi, ($1) => {
     return $1.toUpperCase().replace('-', '').replace('_', '')
   })
 }

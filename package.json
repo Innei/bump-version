@@ -1,22 +1,22 @@
 {
   "name": "nbump",
   "type": "module",
+  "version": "2.1.0",
   "packageManager": "pnpm@10.6.3",
   "homepage": "https://github.com/Innei/bump-version",
-  "bin": {
-    "bump": "dist/index.mjs",
-    "vv": "dist/index.mjs"
-  },
-  "main": "helpers/index.cjs",
-  "module": "helpers/index.mjs",
-  "types": "helpers/index.d.ts",
   "exports": {
     ".": {
       "import": "./helpers/index.js",
       "require": "./helpers/index.cjs"
     }
   },
-  "version": "2.1.0",
+  "main": "helpers/index.cjs",
+  "module": "helpers/index.mjs",
+  "types": "helpers/index.d.ts",
+  "bin": {
+    "bump": "dist/index.mjs",
+    "vv": "dist/index.mjs"
+  },
   "files": [
     "dist",
     "package.json",
@@ -24,6 +24,37 @@
     "README.md",
     "helpers"
   ],
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsdown",
+    "dev": "NODE_ENV=development tsx --watch src/main.mts --dry-run",
+    "dev:filter": "NODE_ENV=development tsx --watch src/main.mts --dry-run -f test/packages/core",
+    "dev:monorepo": "NODE_ENV=development tsx --watch src/main.mts --dry-run -c bump-monorepo.config.ts",
+    "dev:pkg": "NODE_ENV=development tsx --watch src/main.mts --dry-run -f test/packages/pkg",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "conventional-changelog": "6.0.0"
+  },
+  "devDependencies": {
+    "@innei/prettier": "0.15.0",
+    "@types/conventional-changelog": "6.0.0",
+    "@types/inquirer": "9.0.7",
+    "@types/semver": "7.7.0",
+    "c12": "^3.0.3",
+    "eslint": "9.25.0",
+    "eslint-config-hyoban": "4.0.3",
+    "husky": "9.1.7",
+    "inquirer": "^12.5.2",
+    "lint-staged": "15.5.1",
+    "semver": "^7.7.1",
+    "slugify": "^1.6.6",
+    "tsdown": "0.9.0",
+    "typescript": "5.8.3",
+    "vite": "5.4.18",
+    "vitest": "3.1.1",
+    "zx": "^7.2.3"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -34,36 +65,5 @@
       "eslint --cache --fix",
       "prettier --ignore-path ./.gitignore --write "
     ]
-  },
-  "scripts": {
-    "dev": "NODE_ENV=development tsx --watch src/main.mts --dry-run",
-    "dev:filter": "NODE_ENV=development tsx --watch src/main.mts --dry-run -f test/packages/core",
-    "dev:pkg": "NODE_ENV=development tsx --watch src/main.mts --dry-run -f test/packages/pkg",
-    "dev:monorepo": "NODE_ENV=development tsx --watch src/main.mts --dry-run -c bump-monorepo.config.ts",
-    "prebuild": "rm -rf dist",
-    "build": "tsc && ncc build lib/src/main.mjs -o dist --external conventional-changelog && tsup",
-    "test": "vitest"
-  },
-  "devDependencies": {
-    "@innei/eslint-config-ts": "0.15.0",
-    "@innei/prettier": "0.15.0",
-    "@types/conventional-changelog": "6.0.0",
-    "@types/inquirer": "9.0.7",
-    "@types/semver": "7.7.0",
-    "@vercel/ncc": "0.38.3",
-    "husky": "9.1.7",
-    "inquirer": "^12.5.2",
-    "lint-staged": "15.5.1",
-    "semver": "^7.7.1",
-    "tsup": "^8.4.0",
-    "typescript": "5.8.3",
-    "vite": "5.4.18",
-    "vitest": "3.1.1",
-    "zx": "^7.2.3"
-  },
-  "dependencies": {
-    "c12": "^3.0.3",
-    "conventional-changelog": "6.0.0",
-    "slugify": "^1.6.6"
   }
 }

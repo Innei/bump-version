@@ -1,7 +1,6 @@
 import inquirer from 'inquirer'
 import semver from 'semver'
 import { chalk } from 'zx'
-
 import type { ReleaseType } from 'semver'
 
 import {
@@ -50,17 +49,14 @@ export const promptMain = async () => {
 
         // 1. check allow types
 
-        if (typeof allowTypes != 'undefined' && allowTypes.length) {
+        if (allowTypes !== undefined && allowTypes.length > 0) {
           nextReleaseType.clear()
 
           for (const type of allowTypes) {
             nextReleaseType.add(type)
           }
           // 2. check disallow types
-        } else if (
-          typeof disallowTypes != 'undefined' &&
-          disallowTypes.length
-        ) {
+        } else if (disallowTypes !== undefined && disallowTypes.length > 0) {
           for (const type of disallowTypes) {
             nextReleaseType.delete(type)
           }
@@ -98,9 +94,8 @@ export const promptMain = async () => {
   }
 
   if (!(await isMainBranch())) {
-    const { branchVersion, slugifyTagName } = await getBranchVersion(
-      currentVersion,
-    )
+    const { branchVersion, slugifyTagName } =
+      await getBranchVersion(currentVersion)
     selectItems.push({
       name: `branch version - ${branchVersion}`,
       value: branchVersion,
@@ -133,8 +128,8 @@ export const promptMain = async () => {
     extra: {},
   })
 
-  console.log(chalk.green(`Which version would you like to bump it?`))
-  console.log(`Current version: ${currentVersion}`)
+  console.info(chalk.green(`Which version would you like to bump it?`))
+  console.info(`Current version: ${currentVersion}`)
 
   const answer = await inquirer.prompt({
     name: 'nextVersion',

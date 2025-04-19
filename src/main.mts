@@ -14,8 +14,8 @@ globalThis.__DEV__ = process.env.NODE_ENV === 'development'
 
 // precheck
 precheck().then(() => {
-  console.log(`Workspace dir: ${chalk.yellow(WORKSPACE_DIR)}`)
-  console.log(`Root workspace dir: ${chalk.yellow(ROOT_WORKSPACE_DIR)}`)
+  console.info(`Workspace dir: ${chalk.yellow(WORKSPACE_DIR)}`)
+  console.info(`Root workspace dir: ${chalk.yellow(ROOT_WORKSPACE_DIR)}`)
 
   promptMain()
 })

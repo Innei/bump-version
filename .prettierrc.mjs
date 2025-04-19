@@ -1,2 +1,1 @@
-import config from '@innei/prettier'
-export default config
+export { default } from '@innei/prettier'
