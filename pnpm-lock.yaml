@@ -8,9 +8,15 @@ importers:
 
   .:
     dependencies:
+      c12:
+        specifier: ^3.0.3
+        version: 3.0.3
       conventional-changelog:
         specifier: 6.0.0
         version: 6.0.0(conventional-commits-filter@5.0.0)
+      zx:
+        specifier: ^8.5.3
+        version: 8.5.3
     devDependencies:
       '@innei/prettier':
         specifier: 0.15.0
@@ -24,9 +30,6 @@ importers:
       '@types/semver':
         specifier: 7.7.0
         version: 7.7.0
-      c12:
-        specifier: ^3.0.3
-        version: 3.0.3
       eslint:
         specifier: 9.25.0
         version: 9.25.0(jiti@2.4.2)
@@ -60,9 +63,6 @@ importers:
       vitest:
         specifier: 3.1.1
         version: 3.1.1(@types/node@20.12.13)
-      zx:
-        specifier: ^8.5.3
-        version: 8.5.3
 
 packages:
 
