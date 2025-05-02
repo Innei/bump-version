@@ -2,7 +2,7 @@
   "name": "nbump",
   "type": "module",
   "version": "2.1.2",
-  "packageManager": "pnpm@10.6.3",
+  "packageManager": "pnpm@10.6.5",
   "homepage": "https://github.com/Innei/bump-version",
   "exports": {
     ".": {
@@ -43,17 +43,17 @@
     "@types/conventional-changelog": "6.0.0",
     "@types/inquirer": "9.0.7",
     "@types/semver": "7.7.0",
-    "eslint": "9.25.0",
+    "eslint": "9.25.1",
     "eslint-config-hyoban": "4.0.3",
     "husky": "9.1.7",
     "inquirer": "^12.5.2",
     "lint-staged": "15.5.1",
     "semver": "^7.7.1",
     "slugify": "^1.6.6",
-    "tsdown": "0.10.0",
+    "tsdown": "0.10.2",
     "typescript": "5.8.3",
-    "vite": "5.4.18",
-    "vitest": "3.1.1"
+    "vite": "5.4.19",
+    "vitest": "3.1.2"
   },
   "husky": {
     "hooks": {
