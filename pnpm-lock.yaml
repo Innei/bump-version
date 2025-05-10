@@ -15,8 +15,8 @@ importers:
         specifier: 6.0.0
         version: 6.0.0(conventional-commits-filter@5.0.0)
       zx:
-        specifier: ^8.5.3
-        version: 8.5.3
+        specifier: ^8.5.4
+        version: 8.5.4
     devDependencies:
       '@innei/prettier':
         specifier: 0.15.0
@@ -3418,8 +3418,8 @@ packages:
   zod@3.24.3:
     resolution: {integrity: sha512-HhY1oqzWCQWuUqvBFnsyrtZRhyPeR7SUGv+C4+MsisMuVfSPx8HpwWqH8tRahSlt6M3PiFAcoeFhZAqIXTxoSg==}
 
-  zx@8.5.3:
-    resolution: {integrity: sha512-TsGLAt8Ngr4wDXLZmN9BT+6FWVLFbqdQ0qpXkV3tIfH7F+MgN/WUeSY7W4nNqAntjWunmnRaznpyxtJRPhCbUQ==}
+  zx@8.5.4:
+    resolution: {integrity: sha512-44oKea9Sa8ZnOkTnS6fRJpg3quzgnbB43nLrVfYnqE86J4sxgZMUDLezzKET/FdOAVkF4X+Alm9Bume+W+RW9Q==}
     engines: {node: '>= 12.17.0'}
     hasBin: true
 
@@ -6869,4 +6869,4 @@ snapshots:
 
   zod@3.24.3: {}
 
-  zx@8.5.3: {}
+  zx@8.5.4: {}
