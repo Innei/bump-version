@@ -4,6 +4,7 @@ import inquirer from 'inquirer'
 import { $, chalk } from 'zx'
 import type { ReleaseType } from 'semver'
 
+import { version } from '../../package.json'
 import {
   fetchGitRemoteTags,
   getBranchVersion,
@@ -27,10 +28,7 @@ export const precheck = async () => {
   const config = await resolveConfig()
 
   if (typeof args.v == 'boolean' && args.v) {
-    const pkg = fs.readFileSync(path.resolve(process.cwd(), `./package.json`), {
-      encoding: 'utf-8',
-    })
-    console.info(JSON.parse(pkg).version)
+    console.info(version)
 
     process.exit(0)
   }

@@ -1,13 +1,10 @@
 {
   "compilerOptions": {
-    "lib": [
-      "ES2021"
-    ],
     "jsx": "preserve",
     "target": "esnext",
-    "module": "NodeNext",
+    "module": "ESNext",
     "esModuleInterop": true,
-    "moduleResolution": "NodeNext",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "allowJs": true,
     "outDir": "./lib",
