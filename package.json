@@ -2,7 +2,7 @@
   "name": "nbump",
   "type": "module",
   "version": "2.1.3",
-  "packageManager": "pnpm@10.12.2",
+  "packageManager": "pnpm@10.12.3",
   "homepage": "https://github.com/Innei/bump-version",
   "exports": {
     ".": {
