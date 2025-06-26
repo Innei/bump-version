@@ -39,7 +39,7 @@
     "zx": "^8.6.0"
   },
   "devDependencies": {
-    "@innei/prettier": "0.15.0",
+    "@innei/prettier": "1.0.0",
     "@types/conventional-changelog": "6.0.0",
     "@types/inquirer": "9.0.8",
     "@types/semver": "7.7.0",
