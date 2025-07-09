@@ -36,7 +36,7 @@
   "dependencies": {
     "c12": "^3.0.4",
     "conventional-changelog": "6.0.0",
-    "zx": "^8.6.1"
+    "zx": "^8.6.2"
   },
   "devDependencies": {
     "@innei/prettier": "0.15.0",
