@@ -4,6 +4,7 @@ import { log } from 'zx/core'
 
 import { resolveArgs } from './resolve-args.js'
 
+const $$ = $({ quiet: false, verbose: true })
 export const dryRun = async (pieces: TemplateStringsArray, ...args: any[]) => {
   const { dryRun } = resolveArgs()
   if (dryRun) {
@@ -29,7 +30,7 @@ export const dryRun = async (pieces: TemplateStringsArray, ...args: any[]) => {
   }
 
   try {
-    return await $(pieces, ...args)
+    return await $$(pieces, ...args)
   } catch (p: any) {
     const error = p as ProcessOutput
     console.info(`Exit code: ${error.exitCode}`)
