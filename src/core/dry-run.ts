@@ -1,6 +1,6 @@
 import { $ } from 'zx'
-import { log } from 'zx/core'
 import type { ProcessOutput } from 'zx/core'
+import { log } from 'zx/core'
 
 import { resolveArgs } from './resolve-args.js'
 
@@ -23,6 +23,7 @@ export const dryRun = async (pieces: TemplateStringsArray, ...args: any[]) => {
       kind: 'cmd',
       cmd,
       verbose: true,
+      id: 'dry-run',
     })
     return
   }

@@ -1,5 +1,6 @@
 import { writeFileSync } from 'node:fs'
 import { join as pathJoin } from 'node:path'
+
 import inquirer from 'inquirer'
 import semver from 'semver'
 import { $, cd, chalk, fs } from 'zx'
@@ -288,7 +289,10 @@ export async function runBump(newVersion: string, currentVersion: string) {
     await dryRun([publishCommand])
   }
 
-  if (finallyHooks.length > 0) await execCmd(finallyHooks, cmdContext)
+  if (finallyHooks.length > 0) {
+    console.info(chalk.green('Running finally hooks.'))
+    await execCmd(finallyHooks, cmdContext)
+  }
 
   process.exit(0)
 }

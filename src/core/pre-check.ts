@@ -1,8 +1,6 @@
-import fs from 'node:fs'
-import path from 'node:path'
 import inquirer from 'inquirer'
-import { $, chalk } from 'zx'
 import type { ReleaseType } from 'semver'
+import { $, chalk } from 'zx'
 
 import { version } from '../../package.json'
 import {
@@ -26,12 +24,6 @@ import { runBump } from './run.js'
 export const precheck = async () => {
   const args = resolveArgs()
   const config = await resolveConfig()
-
-  if (typeof args.v == 'boolean' && args.v) {
-    console.info(version)
-
-    process.exit(0)
-  }
 
   // check git tree is clean
   if (!config.allowDirty) {
@@ -100,7 +92,7 @@ export const precheck = async () => {
   }
 
   const keys = Object.keys(args)
-  const releaseType: ReleaseType = keys.find(
+  const releaseType: Exclude<ReleaseType, 'release'> = keys.find(
     (key) =>
       args[key] && [...releaseTypes, 'branch'].includes(key as ReleaseType),
   ) as any
@@ -115,12 +107,12 @@ export const precheck = async () => {
       (releaseType as any) === 'branch'
         ? branchVersion
         : config.withTags
-          ? getNextVersionWithTags({
-              currentVersion,
-              releaseType,
-              tags: await getGitSemVerTags(),
-            })
-          : getNextVersion(currentVersion, releaseType)
+        ? getNextVersionWithTags({
+            currentVersion,
+            releaseType,
+            tags: await getGitSemVerTags(),
+          })
+        : getNextVersion(currentVersion, releaseType)
 
     console.info(
       `Current version: ${currentVersion}, New version: ${nextVersion}`,

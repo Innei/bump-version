@@ -42,6 +42,7 @@ type ReleaseType =
   | 'preminor'
   | 'prepatch'
   | 'prerelease'
+  | 'branch'
 
 export interface AllowedBranchesOptions {
   name: string
