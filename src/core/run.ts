@@ -1,10 +1,10 @@
 import { writeFileSync } from 'node:fs'
 import { join as pathJoin } from 'node:path'
-
 import inquirer from 'inquirer'
 import semver from 'semver'
 import { $, cd, chalk, fs } from 'zx'
 
+import { EXIT_CODES } from '../constants/exit-codes.js'
 import { ROOT_WORKSPACE_DIR, WORKSPACE_DIR } from '../constants/path.js'
 import { generateChangeLog, isExistChangelogFile } from '../utils/changelog.js'
 import { detectPackage } from '../utils/detect-package.js'
@@ -26,16 +26,17 @@ type CmdContext = {
 }
 
 export async function execCmd(cmds: string[], context: CmdContext) {
-  const ctxKeys = Object.keys(context)
+  const replacements: Record<string, string> = {}
+  for (const [key, value] of Object.entries(context)) {
+    replacements[`\${${snakecase(key).toUpperCase()}}`] = value
+  }
+
   for (const cmd of cmds) {
-    const handledCmd = ctxKeys.reduce((cmd, nextKey) => {
-      return cmd.replaceAll(
-        `\${${snakecase(nextKey).toUpperCase()}}`,
-        context[nextKey],
-      )
-    }, cmd)
-    // @ts-ignore
-    await dryRun([handledCmd])
+    let handledCmd = cmd
+    for (const [placeholder, value] of Object.entries(replacements)) {
+      handledCmd = handledCmd.replaceAll(placeholder, value)
+    }
+    await dryRun`${handledCmd}`
   }
 }
 
@@ -58,7 +59,7 @@ export async function cutsomVersionRun() {
         `The version you entered is less than or equal to the current version`,
       ),
     )
-    process.exit(-1)
+    process.exit(EXIT_CODES.INVALID_VERSION)
   }
   const confirm = await inquirer.prompt({
     type: 'confirm',
@@ -68,7 +69,7 @@ export async function cutsomVersionRun() {
   })
 
   if (!confirm) {
-    process.exit(0)
+    process.exit(EXIT_CODES.SUCCESS)
   }
 
   return runBump(nextVersion, currentVersion)
@@ -133,7 +134,7 @@ export async function runBump(newVersion: string, currentVersion: string) {
                 ),
               )
 
-              process.exit(-2)
+              process.exit(EXIT_CODES.BRANCH_NOT_ALLOWED)
 
               // 2. then check allowTypes
             }
@@ -148,7 +149,7 @@ export async function runBump(newVersion: string, currentVersion: string) {
                 ),
               )
 
-              process.exit(-2)
+              process.exit(EXIT_CODES.BRANCH_NOT_ALLOWED)
             }
           }
         } else {
@@ -178,7 +179,7 @@ export async function runBump(newVersion: string, currentVersion: string) {
       ),
     )
 
-    process.exit(-2)
+    process.exit(EXIT_CODES.BRANCH_NOT_ALLOWED)
   }
 
   console.info(chalk.green('Running leading hooks.'))
@@ -198,12 +199,16 @@ export async function runBump(newVersion: string, currentVersion: string) {
 
   try {
     await execCmd(tailingHooks, cmdContext)
-  } catch {
+  } catch (error) {
     console.error(chalk.yellow('Hook running failed, rollback.'))
+    console.error(
+      'Error details:',
+      error instanceof Error ? error.message : error,
+    )
 
     writeFileSync(path, originFile)
 
-    process.exit(1)
+    process.exit(EXIT_CODES.GENERAL_ERROR)
   }
 
   if (commit) {
@@ -294,5 +299,5 @@ export async function runBump(newVersion: string, currentVersion: string) {
     await execCmd(finallyHooks, cmdContext)
   }
 
-  process.exit(0)
+  process.exit(EXIT_CODES.SUCCESS)
 }

@@ -9,8 +9,7 @@ import { resolveConfig } from './resolve-config.js'
 export async function generateReleaseTypes(
   currentVersion: string,
   types = releaseTypes,
-  pried = 'alpha',
-
+  preId = 'alpha',
   customReleaseTypes?: ReleaseType[],
 ) {
   const { withTags, remoteTags } = await resolveConfig()
@@ -32,7 +31,7 @@ export async function generateReleaseTypes(
           tags,
         })
       } else {
-        version = SemVer.inc(currentVersion, releaseType, pried)
+        version = SemVer.inc(currentVersion, releaseType, preId)
       }
       return {
         name: `${releaseType} - ${version}`,
@@ -40,7 +39,7 @@ export async function generateReleaseTypes(
 
         extra: {
           releaseType,
-          pried,
+          preId,
         },
       }
     }),

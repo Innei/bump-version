@@ -1,8 +1,8 @@
 import inquirer from 'inquirer'
-import type { ReleaseType } from 'semver'
 import { $, chalk } from 'zx'
+import type { ReleaseType } from 'semver'
 
-import { version } from '../../package.json'
+import { EXIT_CODES } from '../constants/exit-codes.js'
 import {
   fetchGitRemoteTags,
   getBranchVersion,
@@ -31,7 +31,7 @@ export const precheck = async () => {
       const result = await $`git status --porcelain`.quiet()
       if (result.stdout && !__DEV__) {
         console.error(chalk.red('The git tree is not clean'))
-        process.exit(-1)
+        process.exit(EXIT_CODES.INVALID_VERSION)
       }
     }
   }
@@ -63,7 +63,7 @@ export const precheck = async () => {
     console.error(
       chalk.red(`Not a valid package.json file, can't find version.`),
     )
-    process.exit(-1)
+    process.exit(EXIT_CODES.INVALID_VERSION)
   }
 
   context.currentVersion = currentVersion
@@ -83,7 +83,7 @@ export const precheck = async () => {
       console.error(
         chalk.red(`\`-f\` \`--filter\` argv can't used in monorepo mode.`),
       )
-      process.exit(3)
+      process.exit(EXIT_CODES.MONOREPO_FILTER_ERROR)
     }
 
     console.warn(
@@ -107,19 +107,19 @@ export const precheck = async () => {
       (releaseType as any) === 'branch'
         ? branchVersion
         : config.withTags
-        ? getNextVersionWithTags({
-            currentVersion,
-            releaseType,
-            tags: await getGitSemVerTags(),
-          })
-        : getNextVersion(currentVersion, releaseType)
+          ? getNextVersionWithTags({
+              currentVersion,
+              releaseType,
+              tags: await getGitSemVerTags(),
+            })
+          : getNextVersion(currentVersion, releaseType)
 
     console.info(
       `Current version: ${currentVersion}, New version: ${nextVersion}`,
     )
 
     // TODO
-    context.selectedPried = 'alpha'
+    context.selectedPreid = 'alpha'
     context.selectedReleaseType = releaseType
     context.selectedVersion = nextVersion
 
@@ -136,7 +136,7 @@ export const precheck = async () => {
         if (result) {
           await runBump(nextVersion, currentVersion)
         }
-        process.exit(0)
+        process.exit(EXIT_CODES.SUCCESS)
       })
   }
 }

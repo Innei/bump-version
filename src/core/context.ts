@@ -4,5 +4,5 @@ export const context = {
   currentVersion: '',
   selectedVersion: '',
   selectedReleaseType: '' as Exclude<ReleaseType, 'release'> | 'branch',
-  selectedPried: '',
+  selectedPreid: '',
 }

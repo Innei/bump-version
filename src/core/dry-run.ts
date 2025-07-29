@@ -1,6 +1,6 @@
 import { $ } from 'zx'
-import type { ProcessOutput } from 'zx/core'
 import { log } from 'zx/core'
+import type { ProcessOutput } from 'zx/core'
 
 import { resolveArgs } from './resolve-args.js'
 
@@ -38,7 +38,7 @@ export const dryRun = async (pieces: TemplateStringsArray, ...args: any[]) => {
   }
 }
 
-function substitute(arg) {
+function substitute(arg: any): string {
   if (arg?.stdout) {
     return arg.stdout.replace(/\n$/, '')
   }
