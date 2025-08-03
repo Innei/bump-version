@@ -31,6 +31,7 @@ ${chalk.bold('VERSION TYPES:')}
 ${chalk.bold('OPTIONS:')}
   ${chalk.yellow('-h, --help')}        Show this help message
   ${chalk.yellow('--info')}            Show version and configuration info
+  ${chalk.yellow('--init')}            Initialize bump configuration file
   ${chalk.yellow('-v, --version')}     Show version number
   ${chalk.yellow('-f, --filter')} <pkg>     Filter packages by name/path
   ${chalk.yellow('-c, --config')} <path>    Path to config file
@@ -39,6 +40,7 @@ ${chalk.bold('OPTIONS:')}
   ${chalk.yellow('--no-verify')}      Skip git pre-commit hooks
 
 ${chalk.bold('EXAMPLES:')}
+  ${chalk.cyan('bump --init')}                   Initialize configuration file
   ${chalk.cyan('bump patch')}                    Bump patch version
   ${chalk.cyan('bump minor --dry-run')}         Preview minor version bump
   ${chalk.cyan(

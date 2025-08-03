@@ -16,6 +16,7 @@ export const resolveArgs = memoReturnValueFunction(() => {
   const noVerify: boolean = argv['no-verify'] || argv['noVerify'] || false
   const help: boolean = argv['help'] || argv['h'] || false
   const info: boolean = argv['info'] || false
+  const init: boolean = argv['init'] || false
 
   const { _ } = argv
   const _set = new Set(_)
@@ -29,6 +30,7 @@ export const resolveArgs = memoReturnValueFunction(() => {
     configPath,
     help,
     info,
+    init,
 
     // argv
     filter,

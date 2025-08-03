@@ -3,6 +3,7 @@ import { chalk } from 'zx'
 
 import { version } from '../package.json'
 import { ROOT_WORKSPACE_DIR, WORKSPACE_DIR } from './constants/path.js'
+import { initConfig } from './core/init.js'
 import { precheck } from './core/pre-check.js'
 import { promptMain } from './core/prompt.js'
 import { resolveArgs } from './core/resolve-args.js'
@@ -28,6 +29,8 @@ if (args.v) {
 }
 if (args.info) {
   showInfo().then(() => process.exit(0))
+} else if (args.init) {
+  initConfig().then(() => process.exit(0))
 } else {
   // precheck
   precheck().then(() => {
