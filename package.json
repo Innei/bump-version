@@ -44,7 +44,7 @@
     "@types/inquirer": "9.0.9",
     "@types/semver": "7.7.1",
     "eslint": "9.29.0",
-    "eslint-config-hyoban": "4.0.9",
+    "eslint-config-hyoban": "4.0.10",
     "husky": "9.1.7",
     "inquirer": "^12.6.3",
     "lint-staged": "15.5.2",
