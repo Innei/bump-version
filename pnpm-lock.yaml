@@ -22,8 +22,8 @@ importers:
         specifier: 0.15.0
         version: 0.15.0
       '@types/conventional-changelog':
-        specifier: 6.0.0
-        version: 6.0.0
+        specifier: 6.0.1
+        version: 6.0.1
       '@types/inquirer':
         specifier: 9.0.9
         version: 9.0.9
@@ -1024,8 +1024,8 @@ packages:
   '@types/conventional-changelog-writer@4.0.10':
     resolution: {integrity: sha512-EK654IW1SBqTZSzN9+PlB6SKSYlDhsrCv1olfeEXvt/FHcmd7kvFWW0cFvMtnWalR/D7baYzY3FJ2TSt7UUySg==}
 
-  '@types/conventional-changelog@6.0.0':
-    resolution: {integrity: sha512-7mCc+WlxXs7Wmm/1FdYyWwjUmX4mOGM5zOys4p/xZAMQ12x074IQVSiX2/AU+0924lIkZmhEAkvPMDS2XnCZaw==}
+  '@types/conventional-changelog@6.0.1':
+    resolution: {integrity: sha512-GLIHdve+MlJUe6ur9alLTXUBL7L2p6+/J9KFEvL/pR4iZ6ctgnpXnuNo50sCYtjj0utNkHoEQS+SBpZ+7frkvQ==}
 
   '@types/conventional-commits-parser@5.0.0':
     resolution: {integrity: sha512-loB369iXNmAZglwWATL+WRe+CRMmmBPtpolYzIebFaX4YA3x+BEfLqhUAV9WanycKI3TG1IMr5bMJDajDKLlUQ==}
@@ -4452,7 +4452,7 @@ snapshots:
       '@types/conventional-commits-parser': 5.0.0
       '@types/node': 20.12.13
 
-  '@types/conventional-changelog@6.0.0':
+  '@types/conventional-changelog@6.0.1':
     dependencies:
       '@types/conventional-changelog-core': 4.2.8
       '@types/conventional-changelog-writer': 4.0.10
