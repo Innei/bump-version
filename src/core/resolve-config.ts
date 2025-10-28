@@ -1,8 +1,8 @@
 import { loadConfig } from 'c12'
 import { fs, path } from 'zx'
-import type { BumpConfig, ChangelogOptions } from '../interfaces/options.js'
 
 import { ROOT_WORKSPACE_DIR, WORKSPACE_DIR } from '../constants/path.js'
+import type { BumpConfig, ChangelogOptions } from '../interfaces/options.js'
 import { camelcaseKeys } from '../utils/camelcase-keys.js'
 import { memoReturnValueAsyncFunction } from '../utils/memo.js'
 import { resolveArgs } from './resolve-args.js'
@@ -77,7 +77,8 @@ export const resolveConfig = memoReturnValueAsyncFunction(async () => {
 
   // git
   const createGitTag = bumpOptions.tag ?? true
-  const doGitPush = bumpOptions.push ?? true
+  const commit = bumpOptions.commit ?? true
+  const doGitPush = bumpOptions.push ?? commit
   // eslint-disable-next-line no-template-curly-in-string
   const commitMessage = bumpOptions.commitMessage || 'release: v${NEW_VERSION}'
   const allowedBranches = bumpOptions.allowedBranches ?? ['main', 'master']
@@ -89,7 +90,7 @@ export const resolveConfig = memoReturnValueAsyncFunction(async () => {
   const isChangelogOptions = typeof bumpOptions.changelog === 'object'
   const shouldGenerateChangeLog = isChangelogOptions
     ? (bumpOptions.changelog as ChangelogOptions).enable
-    : (bumpOptions.changelog ?? false)
+    : bumpOptions.changelog ?? false
   const overrideChangelogOptions = isChangelogOptions
     ? bumpOptions.changelog
     : {}
@@ -99,7 +100,6 @@ export const resolveConfig = memoReturnValueAsyncFunction(async () => {
   const packages = bumpOptions.packages || []
 
   const allowDirty = bumpOptions.allowDirty ?? false
-  const commit = bumpOptions.commit ?? true
 
   return {
     leadingHooks,

@@ -2,6 +2,7 @@ import { writeFileSync } from 'node:fs'
 import { join as pathJoin } from 'node:path'
 
 import inquirer from 'inquirer'
+import { detect } from 'package-manager-detector/detect'
 import semver from 'semver'
 import { $, cd, chalk, fs } from 'zx'
 
@@ -279,7 +280,7 @@ export async function runBump(newVersion: string, currentVersion: string) {
       cd(WORKSPACE_DIR)
     }
 
-    const packageManager = await detectPackage()
+    const packageManager = await detect().then((res) => res.name)
     let publishCommand = `${packageManager} publish --access public`
     if (packageManager === 'pnpm' && isMonorepo) {
       publishCommand += ' -r'
