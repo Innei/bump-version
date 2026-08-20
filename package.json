@@ -42,19 +42,19 @@
   "devDependencies": {
     "@innei/prettier": "0.15.0",
     "@types/conventional-changelog": "6.0.1",
-    "@types/inquirer": "9.0.9",
+    "@types/inquirer": "9.0.10",
     "@types/semver": "7.7.1",
     "eslint": "9.29.0",
     "eslint-config-hyoban": "4.0.10",
     "husky": "9.1.7",
     "inquirer": "^12.6.3",
     "lint-staged": "15.5.2",
-    "semver": "^7.7.3",
-    "slugify": "^1.6.6",
+    "semver": "^7.7.4",
+    "slugify": "^1.6.9",
     "tsdown": "0.10.2",
     "typescript": "5.8.3",
     "vite": "5.4.21",
-    "vitest": "3.2.6"
+    "vitest": "3.2.7"
   },
   "husky": {
     "hooks": {
